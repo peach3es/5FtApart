@@ -18,14 +18,16 @@ Search for brokers
 Mortgage Calculator: The system can include a mortgage calculator to help homebuyers estimate monthly payments based on loan amount and interest rate
 Property renter
 Similar features as Homebuyer except mortgage calculator
-Broker
+
+### Broker
 Submit Offers: Brokers can submit offers for buying properties on behalf of their clients, and track the status of their offers.
 Request a visit to a property on behalf of their clients
 CRUD operations on property listings
 Matching Properties: Brokers can use the system to match properties with potential buyers based on their preferences and requirements.
 Offer Management: Brokers can review and manage offers submitted by homebuyers for properties they represent.
 Manage visits ((re)Schedule, cancel). 
-System administrator
+
+#System administrator
 CRUD operations on brokers
 
 ## Team Members and Role
