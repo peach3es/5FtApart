@@ -11,32 +11,33 @@ The system administrator is responsible for adding/removing brokers.  The broker
 List of main use cases organized by user type.
 
 ### Homebuyer
-Search for a property: The homebuyer can search for properties based on specific criteria such as location, price range, number of bedrooms, and amenities.
-Save favorites: Homebuyers can save properties they are interested in, creating a list of favorites for easy access and comparison. 
-Request a visit to a property: Once interested in a property, the homebuyer can request a viewing appointment through the system
-Search for brokers
-Mortgage Calculator: The system can include a mortgage calculator to help homebuyers estimate monthly payments based on loan amount and interest rate
-Property renter
-Similar features as Homebuyer except mortgage calculator
+- Search for a property: The homebuyer can search for properties based on specific criteria such as location, price range, number of bedrooms, and amenities.
+- Save favorites: Homebuyers can save properties they are interested in, creating a list of favorites for easy access and comparison. 
+- Request a visit to a property: Once interested in a property, the homebuyer can request a viewing appointment through the system
+- Search for brokers
+- Mortgage Calculator: The system can include a mortgage calculator to help homebuyers estimate monthly payments based on loan amount and interest rate
+
+### Property renter
+- Similar features as Homebuyer except mortgage calculator
 
 ### Broker
-Submit Offers: Brokers can submit offers for buying properties on behalf of their clients, and track the status of their offers.
-Request a visit to a property on behalf of their clients
-CRUD operations on property listings
-Matching Properties: Brokers can use the system to match properties with potential buyers based on their preferences and requirements.
-Offer Management: Brokers can review and manage offers submitted by homebuyers for properties they represent.
-Manage visits ((re)Schedule, cancel). 
+- Submit Offers: Brokers can submit offers for buying properties on behalf of their clients, and track the status of their offers.
+- Request a visit to a property on behalf of their clients
+- CRUD operations on property listings
+- Matching Properties: Brokers can use the system to match properties with potential buyers based on their preferences and requirements.
+- Offer Management: Brokers can review and manage offers submitted by homebuyers for properties they represent.
+- Manage visits ((re)Schedule, cancel). 
 
 ### System administrator
-CRUD operations on brokers
+- CRUD operations on brokers
 
 ## Team Members and Role
-Alexander Smagorinski: Back-End Developer
-Patrick Cimpean: Back-End Developer
-Charles Atanacio: Back-End Developer
+- Alexander Smagorinski: Back-End Developer
+- Patrick Cimpean: Back-End Developer
+- Charles Atanacio: Back-End Developer
 
-Thomas Kamil Brochet: Front-End Developer
-Peizhe Tian: Front-End Developer
-Zhan Jun Cheung: Front-End Developer
+- Thomas Kamil Brochet: Front-End Developer
+- Peizhe Tian: Front-End Developer
+- Zhan Jun Cheung: Front-End Developer
 
 
