@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           Home Hub
         </a>
         <button
