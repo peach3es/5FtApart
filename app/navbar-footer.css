@@ -5,4 +5,7 @@
 .footer {
   width: 100%;
   background: #3e5570;
+  .text {
+    color: #dfdfdf;
+  }
 }
