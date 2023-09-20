@@ -1,11 +1,25 @@
 .navbar {
-  background: #3e5570;
+  background: rgba(62, 85, 112, 0.85);
+  border-radius: 0 0 10px 10px;
+  backdrop-filter: blur(10px);
+
+  .dropdown-menu {
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+  }
 }
 
 .footer {
   width: 100%;
-  background: #3e5570;
+  background: rgba(62, 85, 112, 0.85);
   .text {
     color: #dfdfdf;
   }
+
+  border-radius: 10px 10px 0 0;
 }
