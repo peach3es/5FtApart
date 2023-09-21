@@ -34,7 +34,7 @@ List of main use cases organized by user type.
 ## Team Members and Role
 | Name                  | Role      | ID |
 |-----------------------|-----------|----|
-| Alexander Smagorinski | Back-end Developer |   40190986  |
+| Alexander Smagorinski | Full-Stack Developer |   40190986  |
 | Patrick Cimpean       | Back-end Developer|  40211106  |
 | Charles Atanacio      | Back-end Developer|  40176314  |
 | Thomas Kamil Brochet  | Front-end Developer|  40121143  |
