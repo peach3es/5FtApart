@@ -38,7 +38,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" href="/my-broker">
+              <Link class="nav-link" href="/mybroker">
                 My Broker
               </Link>
             </li>
@@ -53,7 +53,7 @@ const Navbar = () => {
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <Link class="dropdown-item" href="/calculator">
+                  <Link class="dropdown-item" href="/dropdown/calculator">
                     Calculator
                   </Link>
                 </li>
