@@ -39,6 +39,6 @@ List of main use cases organized by user type.
 | Charles Atanacio      | Back-end Developer|  40176314  |
 | Thomas Kamil Brochet  | Front-end Developer|  40121143  |
 | Peizhe Tian           | Front-end Developer|  40191463  |
-| Zhan Jun Cheung       | Front-end Developer|    |
+| Zhan Jun Cheung       | Front-end Developer|  40212301  |
 
 
