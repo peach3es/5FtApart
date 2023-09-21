@@ -1,5 +1,5 @@
 import React from "react";
-import "./navbar-footer.css";
+import "styles/navbar-footer.css";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -53,7 +53,7 @@ const Navbar = () => {
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <Link class="dropdown-item" href="/dropdown/calculator">
+                  <Link class="dropdown-item" href="/calculator">
                     Calculator
                   </Link>
                 </li>
