@@ -18,7 +18,7 @@ List of main use cases organized by user type.
 - Mortgage Calculator: The system can include a mortgage calculator to help homebuyers estimate monthly payments based on loan amount and interest rate
 
 ### Property renter
-- Similar features as Homebuyer except mortgage calculator
+- Similar features as Homebuyer except has an additional mortgage calculator
 
 ### Broker
 - Submit Offers: Brokers can submit offers for buying properties on behalf of their clients, and track the status of their offers.
@@ -32,12 +32,13 @@ List of main use cases organized by user type.
 - CRUD operations on brokers
 
 ## Team Members and Role
-- Alexander Smagorinski: Back-End Developer
-- Patrick Cimpean: Back-End Developer
-- Charles Atanacio: Back-End Developer
-
-- Thomas Kamil Brochet: Front-End Developer
-- Peizhe Tian: Front-End Developer
-- Zhan Jun Cheung: Front-End Developer
+| Name                  | Role      | ID |
+|-----------------------|-----------|----|
+| Alexander Smagorinski | Full-Stack Developer |   40190986  |
+| Patrick Cimpean       | Back-end Developer|  40211106  |
+| Charles Atanacio      | Back-end Developer|  40176314  |
+| Thomas Kamil Brochet  | Front-end Developer|  40121143  |
+| Peizhe Tian           | Front-end Developer|  40191463  |
+| Zhan Jun Cheung       | Front-end Developer|  40212301  |
 
 
