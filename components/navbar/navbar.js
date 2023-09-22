@@ -1,6 +1,8 @@
 import React from "react";
 import "styles/navbar-footer.css";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   return (
@@ -68,6 +70,19 @@ const Navbar = () => {
                   </a>
                 </li>
               </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">
+                <FontAwesomeIcon icon={faUser} /> Sign Up
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">
+                <FontAwesomeIcon icon={faRightToBracket} /> Login
+              </a>
             </li>
           </ul>
         </div>
