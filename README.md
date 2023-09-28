@@ -38,6 +38,9 @@ List of main use cases organized by user type.
 - Express.js Backend
 - RDBMS - MSSQL for database
 
+## Methodologies
+- Agile methodologies such as Scrum and CI/CD
+
 ## Team Members and Role 
 | Name                  | Role      | ID |
 |-----------------------|-----------|----|
