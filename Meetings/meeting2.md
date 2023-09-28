@@ -9,3 +9,11 @@ Everyone finished adding to user stories.
 Task Breakdown is created and tasks are divided among members.
 
 Wikipage is discussed in regards to the planning of Sprint 2
+
+Zhan Jun Working on formatting the WikiPage
+
+Our Backend team is working on the CRUD operations for properties, to associate images to the propreties, potentially using rest APIs.
+
+Peizhe, Thomas and Zhan Jun will work on issues for the user stories.
+
+
