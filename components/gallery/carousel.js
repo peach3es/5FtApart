@@ -1,6 +1,6 @@
 import React from "react";
 import "styles/carousel.css";
-// import pic1 from "..../pictures/homepage/pic1.jpg";
+import Image from "next/image";
 
 const Carousel = () => {
   return (
@@ -30,11 +30,12 @@ const Carousel = () => {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img
-              src="pictures/homepage/pic1.jpg"
-              class="d-block w-100"
-              alt="..."
-            ></img>
+            <Image
+              src="/pic1.jpg"
+              width={1920}
+              height={1280}
+              alt="pictures of houses neighbourhoods"
+            />
           </div>
           <div class="carousel-item">
             <img src="..." class="d-block w-100" alt="..."></img>
