@@ -31,7 +31,13 @@ List of main use cases organized by user type.
 ### System administrator
 - CRUD operations on brokers
 
-## Team Members and Role
+## Technologies
+- REACTJS
+- Next.js Framework
+- Express.js Backend
+- RDBMS - MSSQL for database
+
+## Team Members and Role 
 | Name                  | Role      | ID |
 |-----------------------|-----------|----|
 | Alexander Smagorinski | Full-Stack Developer |   40190986  |
