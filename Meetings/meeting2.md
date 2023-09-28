@@ -1,4 +1,4 @@
-# Meeting 2 
+# Meeting Session 2 
 
 Patrick and Charles said that they are researching the necessary information on doing backend development. They are also practicing. 
 
