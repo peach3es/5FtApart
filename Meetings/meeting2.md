@@ -1,6 +1,6 @@
 # Meeting Session 2 
 
-Patrick and Charles said that they are researching the necessary information on doing backend development. They are also practicing. 
+Patrick and Charles said that they are researching the necessary information on how to do backend development (includes practicing). 
 
 Patrick, Charles and Alex decided on MSSQL as a database management system. 
 
