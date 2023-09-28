@@ -32,6 +32,7 @@ List of main use cases organized by user type.
 - CRUD operations on brokers
 
 ## Technologies
+- Bootstrap
 - REACTJS
 - Next.js Framework
 - Express.js Backend
