@@ -31,12 +31,12 @@ List of main use cases organized by user type.
 ### System administrator
 - CRUD operations on brokers
 
-## Technologies
-- Bootstrap
-- REACTJS
-- Next.js Framework
+## Technologies & Approach
+- Bootstrap: CSS library that helps styling the website
+- REACTJS: Frontend library to facilitate the creation of the website
+- Next.js Framework: Framework that helps organizing the project and support APIs
 - Express.js Backend
-- RDBMS - MSSQL for database
+- RDBMS - MSSQL for database: database to hold all accounts
 
 ## Methodologies
 - Agile methodologies such as Scrum and CI/CD
