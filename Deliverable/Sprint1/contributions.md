@@ -7,4 +7,4 @@
 | Wiki Planning Page                           | Zhan Jun Cheung	                                               | 25 mins      |
 | Task Breakdown                               | All                                                             | 25 mins      |
 | Detailed Logs                                | Charles Atanacio                                                | 30 mins      | {Took long because I erased everything..}
-| Meeting Minute Files                         |  Patrick Cimpean                                                | 10 mins each |
+| Meeting Minute Files                         |  Patrick Cimpean                                                | 5 mins each |
