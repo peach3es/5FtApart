@@ -4,65 +4,58 @@ import Image from "next/image";
 
 const Carousel = () => {
   return (
-    <div className="container">
-      <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
+    <div
+      id="carouselExampleAutoplaying"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <Image
+            src="/pictures/homepage/pic1.jpg"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+            layout="responsive"
+          />
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <Image
-              src="/pic1.jpg"
-              width={1920}
-              height={1280}
-              alt="pictures of houses neighbourhoods"
-            />
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="..."></img>
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="..."></img>
-          </div>
+        <div class="carousel-item">
+          <Image
+            src="/pictures/homepage/pic2.jpg"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+            layout="responsive"
+          />
         </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <div class="carousel-item">
+          <Image
+            src="/pictures/homepage/pic3.jpg"
+            alt="Picture of the author"
+            width={500}
+            height={500}
+            layout="responsive"
+          />
+        </div>
       </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   );
 };
