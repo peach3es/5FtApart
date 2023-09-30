@@ -10,20 +10,28 @@
 | 2023/09/21  |All                        | Added to user stories backlog              | 20 minutes | 
 | 2023/09/21  |Alexander Smagorinski      | Planned for Sprint 2                      |10 minutes  |
 | 2023/09/21  |Peizhe Tian                | Planned for Sprint 2                      |10 minutes  |
+| 2023/09/21  |Zhan Jun Cheung              | Planned for Sprint 2                      |10 minutes  |
 | 2023/09/21  |All                         | Task Assignment (Roles)                   |10 minutes  |
 | 2023/09/21  | Charles Atanacio            | Took Notes for Detailed Logs               | 5 minutes  | 
 | 2023/09/28  |Patrick Cimpean             | Created Meeting Minutes (Meeting Session 1)                   |10 minutes  |
-| 2023/09/28  | Thomas Kamil Brochet     | Appended to the Wiki Page (Sprint 2)               |10 minutes  |
-| 2023/09/28  | Zhan Jun Cheung	            | Appended to the Wiki Page (Sprint 2)                 |10 minutes  |
-| 2023/09/28  | Peizhe Tian            | Appended to the Wiki Page (Sprint 2)                  |10 minutes  |
-| 2023/09/28  | Charles Atanacio            | Took Notes for Detailed Logs               | 8 minutes  | 
+| 2023/09/28  | Thomas Kamil Brochet     | Appended to the Wiki Page (Sprint 2)               |20 minutes  |
+| 2023/09/28  | Zhan Jun Cheung	            | Appended to the Wiki Page (Sprint 2)                 |30 minutes  |
+| 2023/09/28  | Peizhe Tian            | Appended to the Wiki Page (Sprint 2)                  |20 minutes  |
+| 2023/09/28  | Patrick Simpean            | Took Notes for Detailed Logs               | 8 minutes  | 
 | 2023/09/28  |Charles Atanacio          | Created Meeting Minutes (Meeting Session 2)                   |10 minutes  |
 
 
 
 
-
-
+|Member| Total Time Spent(hours)|
+|---|---|
+|Alexander Smagorinski	|1.25 hours|
+|Patrick Cimpean	| 1.05 hours|
+|Charles Atanacio	|1.25 hours|
+|Thomas Kamil Brochet	| 1.42 hours|
+|Peizhe Tian	|1.92 hours|
+|Zhan Jun Cheung	|1.5 hours|
+|Total |8.39 hours|
 
 
 
