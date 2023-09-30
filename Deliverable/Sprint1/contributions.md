@@ -2,7 +2,7 @@
 ## Sprint 1
 | Date        | Contributor| Activity Description  | Time Spent (minutes)|
 |-------------|----|----------------------------------------------------------------- |--------------|
-| 2023/09/14  | Peizhe Tian               |  Set up GitHub Repository                                     | 20 mins    |
+| 2023/09/14  | Peizhe Tian               |  Set up GitHub Repository                                     | 20 minutes    |
 | 2023/09/14  | Charles Atanacio          | Created Meeting Minutes (Creation of Members File)            | 5 minutes  |   
 | 2023/09/14  | Charles Atanacio          | Took Notes for Detailed Logs           | 5 minutes  | 
 | 2023/09/18  | Peizhe Tian               | Started creating home page & the other pages linked to it as a basic template| 120 minutes
@@ -27,7 +27,7 @@
 
 
 ## Total
-|Member| Total Time Spent(hours)|
+|Member| Total Time Spent (hours)|
 |---|---|
 |Alexander Smagorinski	|1.25 hours|
 |Patrick Cimpean	| 1.05 hours|
