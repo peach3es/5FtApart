@@ -1,4 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import dynamic from "next/dynamic";
+
+const DynamicBootstrap = dynamic(
+  () => require("bootstrap/dist/js/bootstrap.min.js"),
+  { ssr: false }
+);
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";

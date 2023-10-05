@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import Footer from "../components/footer/footer";
 import Navbar from "../components/navbar/navbar";
 
-export default function Home() {
+const Home = () => {
   return (
     <div className="main-page">
       <Navbar />
@@ -11,4 +11,6 @@ export default function Home() {
       <Footer />
     </div>
   );
-}
+};
+
+export default Home;
