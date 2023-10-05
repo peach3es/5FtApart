@@ -1,6 +1,6 @@
 import React from "react";
 import "styles/carousel.css";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const Carousel = () => {
   return (
@@ -17,7 +17,11 @@ const Carousel = () => {
             width={500}
             height={500}
             loading="lazy"
-            layout="responsive"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
           />
         </div>
         <div className="carousel-item">
@@ -27,7 +31,11 @@ const Carousel = () => {
             width={500}
             height={500}
             loading="lazy"
-            layout="responsive"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
           />
         </div>
         <div className="carousel-item">
@@ -37,7 +45,11 @@ const Carousel = () => {
             width={500}
             height={500}
             loading="lazy"
-            layout="responsive"
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
           />
         </div>
       </div>
