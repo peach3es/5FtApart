@@ -1,6 +1,6 @@
 import React from "react";
 import "styles/carousel.css";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 const Carousel = () => {
   return (
