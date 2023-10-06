@@ -5,71 +5,74 @@ import Image from "next/image";
 const Carousel = () => {
   return (
     <div
-      id="carouselExampleAutoplaying"
-      className="carousel slide"
+      id="carouselExampleIndicators"
+      class="carousel slide carousel-fade"
       data-bs-ride="carousel"
     >
-      <div className="carousel-inner">
-        <div className="carousel-item active">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" style={{ height: "50vh" }}>
           <Image
             src="/pictures/homepage/pic1.jpg"
             alt="Picture of the author"
+            quality={100}
             width={500}
             height={500}
-            loading="lazy"
             sizes="100vw"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
+            style={{ width: "100%", height: "auto" }}
           />
         </div>
-        <div className="carousel-item">
+        <div class="carousel-item">
           <Image
             src="/pictures/homepage/pic2.jpg"
             alt="Picture of the author"
             width={500}
             height={500}
-            loading="lazy"
             sizes="100vw"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
           />
         </div>
-        <div className="carousel-item">
-          <Image
-            src="/pictures/homepage/pic3.jpg"
-            alt="Picture of the author"
-            width={500}
-            height={500}
-            loading="lazy"
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
-          />
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="..." />
         </div>
       </div>
       <button
-        className="carousel-control-prev"
+        class="carousel-control-prev"
         type="button"
-        data-bs-target="#carouselExampleAutoplaying"
+        data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev"
       >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
       </button>
       <button
-        className="carousel-control-next"
+        class="carousel-control-next"
         type="button"
-        data-bs-target="#carouselExampleAutoplaying"
+        data-bs-target="#carouselExampleIndicators"
         data-bs-slide="next"
       >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
       </button>
     </div>
   );
