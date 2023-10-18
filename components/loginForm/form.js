@@ -16,7 +16,7 @@ const Forms = () => {
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" className="form-text">
-            We'll share your email with Papa John's.
+            Well share your email with Papa Johns.
           </div>
         </div>
         <div className="mb-3">
@@ -42,6 +42,16 @@ const Forms = () => {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+
+        <button type="submit" className="btn btn-secondary">
+          Sign up
+        </button>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+        </div>
+        
       </form>
     </div>
   );

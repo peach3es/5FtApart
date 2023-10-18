@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../../components/navbar/navbar";
 import Footer from "../../../components/footer/footer";
-import Forms from "../../../components/form/form";
+import Forms from "../../../components/loginForm/form";
 import styles from "../../page.module.css";
 
 export default function Login() {
