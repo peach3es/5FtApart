@@ -36,22 +36,17 @@ const Forms = () => {
             id="exampleCheck1"
           />
           <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
+            Remember me Pookie
           </label>
         </div>
         <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-
-        <button type="submit" className="btn btn-secondary">
-          Sign up
+          Log In
         </button>
 
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={switchUP()}/>
+            <label class="form-check-label" for="flexSwitchCheckDefault">Sign Up</label>
         </div>
-        
       </form>
     </div>
   );
