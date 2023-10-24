@@ -1,6 +1,7 @@
 import React from "react";
 import "styles/carousel.css";
 import Image from "next/image";
+import SearchBar from "../searchbar/searchbar";
 
 const Carousel = () => {
   return (
@@ -31,8 +32,9 @@ const Carousel = () => {
           aria-label="Slide 3"
         ></button>
       </div>
+      <SearchBar />
       <div className="carousel-inner">
-        <div className="carousel-item active" style={{ height: "50vh" }}>
+        <div className="carousel-item active" style={{ height: "70vh" }}>
           <Image
             src="/pictures/homepage/pic1.jpg"
             alt="Picture of the author"
