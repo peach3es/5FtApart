@@ -1,0 +1,24 @@
+.searchcontainer {
+  background: #47474789;
+  border-radius: 10px;
+  width: fit-content;
+  /* border: solid 1px #3a3a3add; */
+}
+
+.search {
+  margin: 1rem;
+  padding: 1rem;
+  background: #7c7c7cca;
+  border-radius: 10px;
+  border: solid 1px #a3a3a3dd;
+}
+
+input {
+  all: unset;
+  width: 30vw;
+  color: rgb(222, 229, 236);
+}
+
+input::placeholder {
+  color: rgb(222, 229, 236);
+}

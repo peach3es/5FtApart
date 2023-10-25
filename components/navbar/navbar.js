@@ -66,7 +66,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Click for Kanye nudes
+                    Another one
                   </a>
                 </li>
               </ul>
