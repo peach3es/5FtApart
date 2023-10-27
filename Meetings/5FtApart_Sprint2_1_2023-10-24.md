@@ -1,6 +1,6 @@
-Meeting Minutes
+# Meeting Minutes
 
-Attendees: Peizhe, Patrick,Thomas, Zhan Jun, Charles, Alex
+## Attendees: Peizhe, Patrick,Thomas, Zhan Jun, Charles, Alex
 
 Team talks about the rubrik and are assessing the situation the team is currently in
 
