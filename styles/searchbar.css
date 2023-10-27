@@ -21,29 +21,33 @@ input::placeholder {
   background: #7c7c7cca;
   border-radius: 10px;
   border: solid 1px #a3a3a3dd;
-  flex-basis: 50%; /* Use flex-basis instead of width */
+  /* flex-basis: 40%; Use flex-basis instead of width */
   flex-grow: 1; /* This allows it to grow if there's available space */
-  box-sizing: border-box;
 }
 
 .result-search {
   background: #929292ca;
 }
 
-.sale-type,
+.sale-type {
+  /* width: clamp(8vw, 10vw, 12vw); */
+  /* Adjust this value as per your design requirements */
+  /* width: 10vw; */
+}
+
 .property-types,
 .price-range {
-  min-width: 50px; /* Adjust this value as per your design requirements */
+  /* width: clamp(10vw, 12vw, 15vw); */
 }
 
 .sale-type {
-  flex-basis: 12%;
+  /* flex-basis: 12%; */
 }
 
 .property-types {
-  flex-basis: 15%;
+  /* flex-basis: 15%; */
 }
 
 .price-range {
-  flex-basis: 14%;
+  /* flex-basis: 14%; */
 }

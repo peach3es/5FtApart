@@ -13,8 +13,8 @@ export default function SearchBar() {
     }
   };
   return (
-    <div className="searchcontainer flex flex-wrap gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-3 justify-center items-center">
-      <div className="search relative">
+    <div className="searchcontainer flex flex-wrap gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-3 justify-center items-center ">
+      <div className="search relative w-full md:w-full lg:w-2/3 xl:w-1/4">
         <input
           type="text"
           className="property-search pl-8"
@@ -22,7 +22,7 @@ export default function SearchBar() {
           onKeyDown={handleKeyPress}
         />
       </div>
-      <div className="sale-type">
+      <div className="sale-type w-4/12 md:w-1/6 lg:w-1/6 xl:w-1/6">
         <Select label="Sale Type" className="sale-select" radius="sm">
           {saletypes.map((saletype) => (
             <SelectItem key={saletype.value} value={saletype.value}>
@@ -31,7 +31,7 @@ export default function SearchBar() {
           ))}
         </Select>
       </div>
-      <div className="property-types">
+      <div className="property-types w-5/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
         <Select label="Property Type" radius="sm">
           {propertytypes.map((propertytype) => (
             <SelectItem key={propertytype.value} value={propertytype.value}>
@@ -40,7 +40,7 @@ export default function SearchBar() {
           ))}
         </Select>
       </div>
-      <div className="price-range">
+      <div className="price-range w-4/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
         <Select label="Price Range" radius="sm">
           {priceranges.map((pricerange) => (
             <SelectItem key={pricerange.value} value={pricerange.value}>
