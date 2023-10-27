@@ -165,7 +165,10 @@ const MyProperty = () => {
                       labelPlacement="outside"
                       placeholder="Enter the description of your property"
                       className={`max-w-xl px-20 mb-5 description`}
-                      classNames={{ input: "border-none" }}
+                      data-focus="false"
+                      classNames={{
+                        input: "border-none focus:ring-0",
+                      }}
                     />
                     <div className="addimage px-20 flex flex-col gap-3 max-w-xl">
                       <input type="file" className="add-img" />
