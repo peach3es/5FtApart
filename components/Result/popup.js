@@ -67,7 +67,7 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={() => setPopupOpen(true)}>Open Popup</button>
+      <button onClick={() => setPopupOpen(true)} class="btn btn-primary">Request visit</button>
       <FullscreenPopup
         isOpen={isPopupOpen}
         onClose={() => setPopupOpen(false)}
