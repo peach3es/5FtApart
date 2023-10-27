@@ -1,0 +1,13 @@
+.property-cards {
+  padding: 2rem;
+  background: #eeeeee;
+}
+
+.add-img {
+  border-radius: 10px;
+  background: #f4f4f5;
+}
+
+.description {
+  border: 0 solid #e5e7eb;
+}

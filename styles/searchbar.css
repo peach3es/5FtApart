@@ -1,0 +1,49 @@
+.searchcontainer {
+  background: #47474789;
+  border-radius: 10px;
+  width: 70vw;
+  padding: 1rem;
+  border: solid 1px #a3a3a3dd;
+}
+
+input::placeholder {
+  color: rgb(222, 229, 236);
+}
+
+.property-search {
+  all: unset;
+  color: rgb(222, 229, 236);
+  width: 100%;
+}
+
+.search {
+  padding: 1rem;
+  background: #7c7c7cca;
+  border-radius: 10px;
+  border: solid 1px #a3a3a3dd;
+  flex-basis: 50%; /* Use flex-basis instead of width */
+  flex-grow: 1; /* This allows it to grow if there's available space */
+  box-sizing: border-box;
+}
+
+.result-search {
+  background: #929292ca;
+}
+
+.sale-type,
+.property-types,
+.price-range {
+  min-width: 50px; /* Adjust this value as per your design requirements */
+}
+
+.sale-type {
+  flex-basis: 12%;
+}
+
+.property-types {
+  flex-basis: 15%;
+}
+
+.price-range {
+  flex-basis: 14%;
+}

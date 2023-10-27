@@ -1,0 +1,49 @@
+/* Style the login form container */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Style the login form */
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgba(62, 85, 112, 0.85);
+  max-width: 400px;
+  width: 100%;
+  height :fit-content;
+}
+
+/* Style the login form inputs */
+.login-form form input[type="text"],
+.login-form form input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style the login form button */
+.login-form form button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style the login form button on hover */
+.login-form form button:hover {
+  background-color: #0069d9;
+}

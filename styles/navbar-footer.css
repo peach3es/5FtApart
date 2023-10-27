@@ -1,0 +1,40 @@
+.navbar {
+  background: #eeeeee;
+  border-radius: 0 0 10px 10px;
+  backdrop-filter: blur(10px);
+  color: #222222;
+}
+
+.navbar-menu {
+  background: #c3c3c3df;
+  border-radius: 10px;
+  padding-top: 20px;
+  transform: translateY(5px);
+  height: min-content;
+}
+
+.dropdown-menu {
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+}
+
+.footer {
+  width: 100%;
+  background: #eeeeee;
+  overflow-x: hidden;
+
+  border-radius: 10px 10px 0 0;
+}
+
+.text {
+  color: #222222;
+}
+
+.button {
+  font-size: 16px;
+}
