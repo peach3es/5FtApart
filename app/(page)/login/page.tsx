@@ -10,9 +10,9 @@ type LoginProps = {};
 
 const Login: React.FC<LoginProps> = () => {
   return (
-    <div className="main-page">
+    <div className="main-page flex flex-col h-screen">
       <Navbar />
-      <main className={styles.main}>
+      <main className={`${styles.main} flex-grow`}>
         <Forms />
       </main>
       <Footer />

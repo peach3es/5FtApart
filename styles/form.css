@@ -1,4 +1,4 @@
-.Container {
+/* .Container {
   display: flex;
   border-style: solid;
   border-width: 2px;
@@ -31,4 +31,11 @@
 
 .input {
   margin: auto;
+} */
+
+.hide-browser-eye-icon::-ms-reveal,
+.hide-browser-eye-icon::-ms-clear,
+.hide-browser-eye-icon[type="password"]::-ms-reveal,
+.hide-browser-eye-icon[type="password"]::-ms-clear {
+  display: none;
 }

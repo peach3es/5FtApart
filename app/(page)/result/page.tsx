@@ -48,8 +48,8 @@ const ResultPage = () => {
 
   return (
     <main className={`${styles.main} flex-grow`}>
-      <div className="resultsearch flex flex-row justify-center gap-4 m-4 mx-60">
-        <div className="search relative result-search">
+      <div className="resultsearch flex flex-row justify-center gap-4 m-4 mx-48">
+        <div className="search relative result-search w-1/4">
           <input
             type="text"
             className="property-search pl-8"
@@ -57,7 +57,7 @@ const ResultPage = () => {
             onKeyDown={handleKeyPress}
           />
         </div>
-        <div className="sale-type">
+        <div className="sale-type w-1/6">
           <Select label="Sale Type" className="sale-select" radius="sm">
             {saletypes.map((saletype) => (
               <SelectItem key={saletype.value} value={saletype.value}>
@@ -66,7 +66,7 @@ const ResultPage = () => {
             ))}
           </Select>
         </div>
-        <div className="property-types">
+        <div className="property-types w-1/6">
           <Select label="Property Type" radius="sm">
             {propertytypes.map((propertytype) => (
               <SelectItem key={propertytype.value} value={propertytype.value}>
@@ -75,7 +75,7 @@ const ResultPage = () => {
             ))}
           </Select>
         </div>
-        <div className="price-range">
+        <div className="price-range w-1/6">
           <Select label="Price Range" radius="sm">
             {priceranges.map((pricerange) => (
               <SelectItem key={pricerange.value} value={pricerange.value}>

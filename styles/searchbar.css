@@ -28,26 +28,3 @@ input::placeholder {
 .result-search {
   background: #929292ca;
 }
-
-.sale-type {
-  /* width: clamp(8vw, 10vw, 12vw); */
-  /* Adjust this value as per your design requirements */
-  /* width: 10vw; */
-}
-
-.property-types,
-.price-range {
-  /* width: clamp(10vw, 12vw, 15vw); */
-}
-
-.sale-type {
-  /* flex-basis: 12%; */
-}
-
-.property-types {
-  /* flex-basis: 15%; */
-}
-
-.price-range {
-  /* flex-basis: 14%; */
-}
