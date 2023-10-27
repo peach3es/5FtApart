@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="main-page flex flex-col h-screen">
       <NavBar />
-      <main className={`${styles.main} flex-start flex-grow overflow-auto`}>
+      <main className={`${styles.main} flex-grow`}>
         <HomepagePic />
       </main>
       <Footer />

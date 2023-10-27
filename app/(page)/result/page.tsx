@@ -47,7 +47,7 @@ const ResultPage = () => {
   };
 
   return (
-    <main className={`${styles.main} flex-start flex-grow overflow-auto`}>
+    <main className={`${styles.main} flex-grow`}>
       <div className="resultsearch flex flex-row justify-center gap-4 m-4 mx-60">
         <div className="search relative result-search">
           <input

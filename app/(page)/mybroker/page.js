@@ -39,7 +39,7 @@ function MyBroker() {
   return (
     <section className="flex flex-col h-screen">
       <NavBar />
-      <main className={`${styles.main} flex-grow overflow-auto`}>
+      <main className={`${styles.main} flex-grow`}>
         <h1 className="text-xl md:text-5xl text-center font-bold py-10">
           Broker Management (CRUD)
         </h1>

@@ -6,7 +6,7 @@ import PropertyInfo from "../../../../components/Result/propertypage";
 
 export default function Signup() {
   return (
-    <main className={`${styles.main} flex-start flex-grow overflow-auto`}>
+    <main className={`${styles.main} flex-grow`}>
       <PropertyInfo />
     </main>
   );
