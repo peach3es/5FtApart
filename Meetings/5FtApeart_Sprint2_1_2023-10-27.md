@@ -1,6 +1,6 @@
-Meeting Minutes
+# Meeting Minutes
 
-Attendees: Peizhe, Patrick, Thomas, Zhan Jun, Charles, Alex
+## Attendees: Peizhe, Patrick, Thomas, Zhan Jun, Charles, Alex
 
 Peizhe styled the login page, fixed the search bar on the homepage and result page. The formatting was off and he fixed the placement of it and linked the databases to the search bar.
 Peizhe created the footer and made it sticky at the body since it was missing.
