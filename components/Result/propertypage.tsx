@@ -1,5 +1,9 @@
 "uses client";
 import React from "react";
+import FormData from "../../components/Myproperty/AddProperty";
+import { useQuery } from "react-query";
+import{getProperties} from "../../backend/lib/helper";
+import { useEffect } from 'react';
 import {
   Image,
   Modal,
@@ -12,7 +16,10 @@ import {
   Input,
 } from "@nextui-org/react";
 
-const PropertyInfo = () => {
+function PropertyInfo () {
+
+  const {isLoading, isError, data, error} = useQuery('property', getProperties);
+ console.log(data);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
@@ -26,10 +33,16 @@ const PropertyInfo = () => {
         />
       </div>
 
+  
+
       <div className="w-1/2 flex flex-col gap-2">
-        <h2 className="text-4xl font-bold ">Kanye Mansion</h2>
+        {/* <h2 className="text-4xl font-bold ">{FormData.propertyType}</h2>
         <h3 className="text-2xl font-bold">Description</h3>
-        <p className="text-lg"># of rooms # of bathrooms</p>
+        <p className="text-lg">{FormData.address}</p>
+        <p className="text-lg">{FormData.city}</p>
+        <p className="text-lg">{FormData.postalCode}</p>
+        <p className="text-lg">{FormData.saleType}</p>
+        <p className="text-lg">{FormData.price}</p> */}
         <h3 className="text-2xl font-bold">Want to visit the Estate?</h3>
         <Button className="w-1/3" onPress={onOpen}>
           Request Visit
@@ -40,7 +53,7 @@ const PropertyInfo = () => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                We'll need some basic informations
+                We will need some basic informations
               </ModalHeader>
               <ModalBody>
                 <p className="mb-2">
