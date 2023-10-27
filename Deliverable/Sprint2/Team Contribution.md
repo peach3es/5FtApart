@@ -51,4 +51,4 @@
 |Thomas Kamil Brochet	| 31 hours|
 |Peizhe Tian	| 35 hours|
 |Zhan Jun Cheung	|19 hours|
-|Total |10.89 hours|
+|Total |171.5 hours|
