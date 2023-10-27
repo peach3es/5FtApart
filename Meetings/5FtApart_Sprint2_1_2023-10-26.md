@@ -1,6 +1,6 @@
-Meeting Minutes
+# Meeting Minutes
 
-Attendees: Peizhe, Patrick, Thomas, Zhan Jun, Charles, Alex
+## Attendees: Peizhe, Patrick, Thomas, Zhan Jun, Charles, Alex
 
 The team has a meeting with the TA to assess our current situation
 
