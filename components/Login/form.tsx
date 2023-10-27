@@ -67,7 +67,7 @@ function LogInForm() {
                   className=""
                 />
                 <p className="text-center text-small">
-                  Don't have an account?{" "}
+                  Don&apos;t have an account?{" "}
                   <Link size="sm" onPress={() => setSelected("signup")}>
                     Signup
                   </Link>
