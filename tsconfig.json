@@ -30,7 +30,9 @@
     ".next/types/**/*.ts",
     "app/(page)/mybroker/page.js",
     "components/Navbar/navbar.jsx",
-    "components/Search/searchoptions.js"
-, "backend/database/conn.js"  ],
+    "components/Search/searchoptions.js",
+    "backend/database/conn.js",
+    "app/model/property.js"
+  ],
   "exclude": ["node_modules"]
 }

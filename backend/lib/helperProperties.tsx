@@ -30,7 +30,7 @@ export async function addProperty(formData: any) {
 
     return json;
   } catch (error) {
-    return error;
+    return "ERROR FOUND";
   }
 }
 

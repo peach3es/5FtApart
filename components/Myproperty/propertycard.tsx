@@ -23,7 +23,7 @@ interface Property {
   addimg: string;
   address: string;
   postalcode: string;
-  pricetag: string;
+  pricetag: number;
   description: string;
   saletype: string;
   city: string;
@@ -117,6 +117,11 @@ function CardProperty({
   isEditable,
   properties: data = [],
 }: CardPropertyProps) {
+  let CADDollar = new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+  });
+
   return (
     <div className={`${cardContainerClass} grid grid-rows-1 p-5`}>
       {data.map((obj, index) => (
@@ -169,7 +174,7 @@ function CardProperty({
             {/* //card footer, so like the price and all */}
             <b>{obj.propertytype}</b>
             <p className="text-default-500">
-              {obj.pricetag || "Unknown Price"}
+              {`${CADDollar.format(obj.pricetag)}` || "Unknown Price $"}
             </p>
           </CardFooter>
         </Card>

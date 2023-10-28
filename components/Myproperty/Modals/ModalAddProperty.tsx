@@ -41,6 +41,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
   const handleSubmit = () => {
     if (Object.keys(formData).length == 0) {
       console.log("Please fill out the form");
+      setIsEmpty(true); // Set isEmpty to true when data is empty
       return setIsErrorModalOpen(true);
     } else {
       console.log(formData);

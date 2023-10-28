@@ -125,10 +125,10 @@ async function postProperty(req, res) {
     if (!formData)
       return res.status(404).json({ error: "Form Data Not Provided" });
 
-    const newProperty = await Property.create(formData);
+    const newProperty = await Properties.create(formData);
     return res.status(200).json(newProperty);
   } catch (error) {
-    return res.status(404).json({ error });
+    return res.status(404).json({ error: "Nothing was Found" });
   }
 }
 
