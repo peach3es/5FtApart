@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-import { Schema, model, models } from "mongoose";
+const Schema = mongoose.Schema;
+const model = mongoose.model;
+const models = mongoose.models;
 
 const propertySchema = new Schema({
   addimg: String,

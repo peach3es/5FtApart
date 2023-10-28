@@ -87,7 +87,7 @@ async function deleteUser(req, res) {
 
 // get: http://localhost:3000/api/property
 //get the properties currently available
-export async function getProperties(req, res) {
+async function getProperties(req, res) {
   try {
     const property = await Properties.find({});
     if (!property) {
@@ -102,7 +102,7 @@ export async function getProperties(req, res) {
 
 // get: http://localhost:3000/api/property/1
 //search
-export async function getProperty(req, res) {
+async function getProperty(req, res) {
   try {
     const { propertyID } = req.params;
 
@@ -119,7 +119,7 @@ export async function getProperty(req, res) {
 
 // post: http://localhost:3000/api/property
 //Adding properties
-export async function postProperty(req, res) {
+async function postProperty(req, res) {
   try {
     const formData = req.body;
     if (!formData)
@@ -134,7 +134,7 @@ export async function postProperty(req, res) {
 
 // put: http://localhost:3000/api/property/1
 //Updating a specific property based on ID
-export async function putProperty(req, res) {
+async function putProperty(req, res) {
   try {
     const { propertyId } = req.query;
     const formData = req.body;
@@ -152,7 +152,7 @@ export async function putProperty(req, res) {
 }
 
 // delete: http://localhost:3000/api/property/1
-export async function deleteProperty(req, res) {
+async function deleteProperty(req, res) {
   try {
     const { propertyId } = req.query;
 
