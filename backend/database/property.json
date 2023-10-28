@@ -1,0 +1,56 @@
+[
+  {
+    "propertytype": "house",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "1234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$5.50",
+    "description": "This is a description of the property",
+    "saletype": "for-sale"
+  },
+  {
+    "propertytype": "apartment/condo",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "1234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$324,334.00",
+    "description": "This is a description of the property 2",
+    "saletype": "for-rent"
+  },
+  {
+    "propertytype": "house",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "1234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$100,000.00",
+    "description": "This is a description of the property 3",
+    "saletype": "for-sale"
+  },
+  {
+    "propertytype": "duplex/triplex",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "12234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$5.50",
+    "description": "This is a description of the property 4",
+    "saletype": "for-rent"
+  },
+  {
+    "propertytype": "semidetached",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "1234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$5.50",
+    "description": "This is a description of the property 5",
+    "saletype": "for-sale"
+  },
+  {
+    "propertytype": "house",
+    "addimg": "/pictures/myproperty/template.png",
+    "address": "1234 Main St",
+    "postalcode": "V5V 5V5",
+    "pricetag": "$5.50",
+    "description": "This is a description of the property 6",
+    "saletype": "for-sale"
+  }
+]

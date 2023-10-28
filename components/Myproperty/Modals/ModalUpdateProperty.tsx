@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useCallback, useEffect } from "react";
+import React, { useReducer, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -14,10 +14,6 @@ import {
 import { propertytypes, saletypes } from "@/components/Search/searchoptions";
 import Success from "../success";
 import Error from "../error";
-import { useQueryClient, useMutation } from "react-query";
-import { toggleChangeAction } from "../../../backend/redux/reducer";
-import { useDispatch } from "react-redux";
-import { addProperty, getProperty } from "@/backend/lib/helperProperties";
 
 const formReducer = (state: any, event: any) => {
   return {
@@ -26,17 +22,10 @@ const formReducer = (state: any, event: any) => {
   };
 };
 
-export default function ModalAddProperty({ isOpen, onClose }: any) {
+export default function ModalUpdateProperty({ isOpen, onClose }: any) {
   const [formData, setFormData] = useReducer(formReducer, {});
-  const [isEmpty, setIsEmpty] = useState(false); // New state
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const handler = useCallback(() => {
-    dispatch(toggleChangeAction());
-  }, [dispatch]);
 
   const handleSubmit = () => {
     if (Object.keys(formData).length == 0) {
@@ -44,29 +33,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       return setIsErrorModalOpen(true);
     } else {
       console.log(formData);
-      let {
-        addimg,
-        address,
-        pricetag,
-        description,
-        postalcode,
-        city,
-        saletype,
-        propertytype,
-      } = formData;
-
-      const model = {
-        addimg,
-        address,
-        pricetag,
-        description,
-        postalcode,
-        city,
-        saletype,
-        propertytype,
-      };
-
-      addMutation.mutate(model); //addMutation.mutate({}) is the request
       return setIsSuccessModalOpen(true);
     }
   };
@@ -77,56 +43,8 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
   };
 
   const handleCloseErrorModal = () => {
-    setIsErrorModalOpen(false); // Close success modal
-    onClose(); // Close the add property modal
+    setIsErrorModalOpen(false); // Close error modal
   };
-
-  //request
-  const queryClient = useQueryClient();
-  const addMutation = useMutation(addProperty, {
-    onSuccess: () => {
-      queryClient.prefetchQuery("properties", getProperty);
-    },
-  });
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    if (addMutation.isSuccess || isEmpty) {
-      // Check either for mutation success or data empty
-      timeoutId = setTimeout(() => {
-        handler();
-      }, 2500);
-    }
-    // Cleanup the timeout when the component is unmounted
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [addMutation.isSuccess, isEmpty, handler]); // Add isEmpty as a dependency
-
-  if (addMutation.isLoading)
-    return (
-      <div className="w-full flex text-xl text-center justify-center items-center">
-        <div>Loading...</div>
-      </div>
-    );
-
-  if (addMutation.isError)
-    return (
-      <Error
-        message={(addMutation.error as Error).message}
-        isOpen={isErrorModalOpen}
-        onClose={handleCloseErrorModal}
-      />
-    );
-
-  if (addMutation.isSuccess)
-    return (
-      <Success
-        message="Property was added successfully"
-        isOpen={isSuccessModalOpen}
-        onClose={handleCloseSuccessModal}
-      />
-    );
 
   return (
     <>
@@ -135,7 +53,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add Property
+                Update Property
               </ModalHeader>
               <ModalBody>
                 <div className="add-form my-5 px-5 grid grid-cols-3 gap-4 place-items-center mx-auto">
@@ -152,7 +70,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                     type="faded"
                     radius="sm"
                     label="City"
-                    name="city"
+                    name="City"
                     onChange={setFormData}
                   />
                   <Input
@@ -195,15 +113,12 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                   </Select>
                   <Input
                     isRequired
-                    type="number"
+                    type="price"
                     label="Price"
                     radius="sm"
                     className="pricetag"
                     name="pricetag"
                     onChange={setFormData}
-                    classNames={{
-                      input: "border-none focus:ring-0",
-                    }}
                   />
                 </div>
                 <Textarea
@@ -213,14 +128,14 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                   type="faded"
                   labelPlacement="outside"
                   placeholder="Enter the description of your property"
-                  className={`max-w-xl px-11 mb-5 description`}
+                  className={`max-w-xl px-20 mb-5 description`}
                   data-focus="false"
                   classNames={{
                     input: "border-none focus:ring-0",
                   }}
                   onChange={setFormData}
                 />
-                <div className="addimage px-11 flex flex-col gap-3 max-w-xl">
+                <div className="addimage px-20 flex flex-col gap-3 max-w-xl">
                   <input
                     type="file"
                     className="add-img"
@@ -233,8 +148,8 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={handleSubmit}>
-                  Save
+                <Button color="warning" onPress={handleSubmit}>
+                  Update
                 </Button>
               </ModalFooter>
             </>
@@ -248,7 +163,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
         onClose={handleCloseSuccessModal}
       />
       <Error
-        message="Error"
+        message="Update failed. Please try again."
         isOpen={isErrorModalOpen}
         onClose={handleCloseErrorModal}
       />

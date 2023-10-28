@@ -33,6 +33,7 @@ function AddBrokerForm({ formData, setFormData }) {
     }
 
     setError(null);
+    console.log(formData);
     let { firstname, lastname, email, password, date, activeListings } =
       formData;
 

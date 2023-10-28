@@ -13,7 +13,36 @@ import {
   ModalHeader,
   ModalFooter,
 } from "@nextui-org/react";
-import { properties } from "./propertylist";
+import propertyData from "../../backend/database/property.json";
+import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
+import { getProperties } from "@/backend/lib/helperProperties";
+import { useQuery } from "react-query";
+
+interface Property {
+  propertytype: string;
+  addimg: string;
+  address: string;
+  postalcode: string;
+  pricetag: string;
+  description: string;
+  saletype: string;
+  city: string;
+}
+
+interface CardPropertyProps {
+  hoveredIndex: number | null;
+  setHoveredIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  isDeleteOpen: boolean;
+  onDeleteOpen: () => void;
+  onDeleteClose: () => void;
+  isUpdateOpen: boolean;
+  onUpdateOpen: () => void;
+  onUpdateClose: () => void;
+  cardContainerClass: string;
+  isEditable: boolean;
+  isInsideModal?: boolean;
+  properties: Property[];
+}
 
 export default function PropertyCard({
   isEditable = false,
@@ -30,9 +59,67 @@ export default function PropertyCard({
     onClose: onDeleteClose,
   } = useDisclosure();
 
+  const [isUpdateOpen, setUpdateOpen] = useState(false);
+  const onUpdateOpen = () => setUpdateOpen(true);
+  const onUpdateClose = () => setUpdateOpen(false);
+
+  //requests
+  const { isLoading, isError, data, error } = useQuery(
+    "properties",
+    getProperties
+  );
+
+  if (isLoading)
+    return (
+      <div className="w-full flex text-xl text-center justify-center items-center">
+        <div>Loading...</div>
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div className="w-full flex text-xl text-center justify-center items-center">
+        <div>Error: {String(error)}</div>
+      </div>
+    );
+
+  // console.log("Properties data:", data);
+
+  return (
+    <div>
+      <CardProperty
+        hoveredIndex={hoveredIndex}
+        setHoveredIndex={setHoveredIndex}
+        isDeleteOpen={isDeleteOpen}
+        onDeleteOpen={onDeleteOpen}
+        onDeleteClose={onDeleteClose}
+        isUpdateOpen={isUpdateOpen}
+        onUpdateOpen={onUpdateOpen}
+        onUpdateClose={onUpdateClose}
+        cardContainerClass={cardContainerClass}
+        isEditable={isEditable}
+        properties={data}
+      />
+    </div>
+  );
+}
+
+function CardProperty({
+  hoveredIndex,
+  setHoveredIndex,
+  isDeleteOpen,
+  onDeleteOpen,
+  onDeleteClose,
+  isUpdateOpen,
+  onUpdateOpen,
+  onUpdateClose,
+  cardContainerClass,
+  isEditable,
+  properties: data = [],
+}: CardPropertyProps) {
   return (
     <div className={`${cardContainerClass} grid grid-rows-1 p-5`}>
-      {properties.map((item, index) => (
+      {data.map((obj, index) => (
         <Card
           shadow="sm"
           key={index}
@@ -47,9 +134,9 @@ export default function PropertyCard({
               shadow="sm"
               radius="lg"
               width="100%"
-              alt={item.title}
+              alt={obj.propertytype || "Unknown Property"}
               className="w-full object-cover h-[240px]"
-              src={item.img}
+              src={obj.addimg || "#"}
             />
 
             {isEditable && ( // on hover on one of the cards, the edit and delete buttons will appear
@@ -58,7 +145,12 @@ export default function PropertyCard({
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <Button variant="solid" color="primary" size="sm">
+                <Button
+                  variant="solid"
+                  color="primary"
+                  size="sm"
+                  onPress={onUpdateOpen}
+                >
                   Edit
                 </Button>
                 <Button
@@ -75,8 +167,10 @@ export default function PropertyCard({
           <CardFooter className="text-small justify-between">
             {" "}
             {/* //card footer, so like the price and all */}
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
+            <b>{obj.propertytype}</b>
+            <p className="text-default-500">
+              {obj.pricetag || "Unknown Price"}
+            </p>
           </CardFooter>
         </Card>
       ))}
@@ -103,6 +197,7 @@ export default function PropertyCard({
           )}
         </ModalContent>
       </Modal>
+      <ModalUpdateProperty isOpen={isUpdateOpen} onClose={onUpdateClose} />
     </div>
   );
 }
