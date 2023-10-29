@@ -15,10 +15,14 @@ import {
   CircularProgress,
 } from "@nextui-org/react";
 import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
-import { getProperties } from "@/backend/lib/helperProperties";
-import { useQuery } from "react-query";
+import { getProperties, deleteProperty } from "@/backend/lib/helperProperties";
+import { useQuery, useQueryClient } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAction } from "@/backend/redux/reducer";
+import { ObjectId } from "mongoose";
 
 interface Property {
+  _id: ObjectId;
   propertytype: string;
   addimg: string;
   address: string;
@@ -41,6 +45,7 @@ interface CardPropertyProps {
   cardContainerClass: string;
   isEditable: boolean;
   isInsideModal?: boolean;
+  dispatch: any;
   properties: Property[];
 }
 
@@ -58,6 +63,8 @@ export default function PropertyCard({
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure();
+
+  const dispatch = useDispatch();
 
   const [isUpdateOpen, setUpdateOpen] = useState(false);
   const onUpdateOpen = () => setUpdateOpen(true);
@@ -98,11 +105,14 @@ export default function PropertyCard({
         onUpdateClose={onUpdateClose}
         cardContainerClass={cardContainerClass}
         isEditable={isEditable}
+        dispatch={dispatch}
         properties={data}
       />
     </div>
   );
 }
+
+//FUNCTION
 
 function CardProperty({
   hoveredIndex,
@@ -115,6 +125,7 @@ function CardProperty({
   onUpdateClose,
   cardContainerClass,
   isEditable,
+  dispatch,
   properties: data,
 }: CardPropertyProps) {
   let CADDollar = new Intl.NumberFormat("en-CA", {
@@ -126,6 +137,22 @@ function CardProperty({
     key,
     ...value,
   }));
+
+  const queryClient = useQueryClient();
+  const deleteID = useSelector((state) => (state as any).app.client.deleteID);
+
+  const deleteHandler = async () => {
+    if (deleteID) {
+      await deleteProperty(deleteID);
+      console.log("Delete ID:", deleteID);
+      await queryClient.prefetchQuery("properties", getProperties);
+      await dispatch(deleteAction(null));
+    }
+  };
+  const cancelHandler = async () => {
+    console.log("cancel");
+    await dispatch(deleteAction(null));
+  };
   return (
     <div className={`${cardContainerClass} grid grid-rows-1 p-5`}>
       {dataArray.map((obj, index) => (
@@ -166,7 +193,10 @@ function CardProperty({
                   variant="solid"
                   color="danger"
                   size="sm"
-                  onPress={onDeleteOpen}
+                  onPress={() => {
+                    dispatch(deleteAction(obj._id)); // Assuming obj.key is the unique identifier of the property.
+                    onDeleteOpen();
+                  }}
                 >
                   Delete
                 </Button>
@@ -197,10 +227,23 @@ function CardProperty({
                 <p>Your property will forever be deleted</p>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" variant="light" onPress={onDeleteClose}>
+                <Button
+                  color="primary"
+                  variant="light"
+                  onPress={() => {
+                    cancelHandler();
+                    onDeleteClose();
+                  }}
+                >
                   Cancel
                 </Button>
-                <Button color="danger" onPress={onDeleteClose}>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    deleteHandler();
+                    onDeleteClose();
+                  }}
+                >
                   Delete
                 </Button>
               </ModalFooter>

@@ -93,16 +93,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
     onClose(); // Close the modal
   };
 
-  // const handleCloseSuccessModal = () => {
-  //   setIsSuccessModalOpen(false); // Close success modal
-  //   onClose(false); // Close the add property modal
-  // };
-
-  // const handleCloseErrorModal = () => {
-  //   setIsErrorModalOpen(false); // Close Error modal
-  //   onClose(false); // Close the add property modal
-  // };
-
   //request
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

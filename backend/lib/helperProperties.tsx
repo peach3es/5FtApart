@@ -58,7 +58,7 @@ export async function deleteProperty(propertyId: any) {
   };
 
   const response = await fetch(
-    `${BASE_URL}api/property/?propertyID=${propertyId}`,
+    `${BASE_URL}api/property/?propertyId=${propertyId}`,
     Options
   );
   const json = await response.json();
