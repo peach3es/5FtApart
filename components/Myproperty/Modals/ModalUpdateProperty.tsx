@@ -31,6 +31,7 @@ export default function ModalUpdateProperty({
   setFormData,
 }: any) {
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
@@ -64,8 +65,6 @@ export default function ModalUpdateProperty({
     city,
     description,
   } = data;
-
-  const dispatch = useDispatch();
 
   const cancelUpdateHandler = async () => {
     console.log("cancel");

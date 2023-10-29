@@ -2,8 +2,8 @@
 import React from "react";
 import FormData from "../../components/Myproperty/AddProperty";
 import { useQuery } from "react-query";
-import{getProperties} from "../../backend/lib/helper";
-import { useEffect } from 'react';
+import { getProperties } from "../../backend/lib/helperProperties";
+import { useEffect } from "react";
 import {
   Image,
   Modal,
@@ -16,10 +16,12 @@ import {
   Input,
 } from "@nextui-org/react";
 
-function PropertyInfo () {
-
-  const {isLoading, isError, data, error} = useQuery('property', getProperties);
- console.log(data);
+function PropertyInfo() {
+  const { isLoading, isError, data, error } = useQuery(
+    "property",
+    getProperties
+  );
+  console.log(data);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
@@ -32,8 +34,6 @@ function PropertyInfo () {
           alt="House"
         />
       </div>
-
-  
 
       <div className="w-1/2 flex flex-col gap-2">
         {/* <h2 className="text-4xl font-bold ">{FormData.propertyType}</h2>
@@ -83,6 +83,6 @@ function PropertyInfo () {
       </Modal>
     </div>
   );
-};
+}
 
 export default PropertyInfo;
