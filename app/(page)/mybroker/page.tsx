@@ -1,7 +1,7 @@
 "use client";
 import Table from "../../../components/CRUD - Brokers/table";
 import Form from "../../../components/CRUD - Brokers/form";
-import { BiUserPlus, BiX, BiCheck } from "react-icons/bi";
+import { BiUserPlus } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleChangeAction,
@@ -41,22 +41,9 @@ function MyBroker() {
     <section className="flex flex-col h-screen">
       <NavBar />
       <main className={`${styles.main} flex-grow`}>
-        <h1 className="text-xl md:text-5xl text-center font-bold py-10">
-          Broker Management (CRUD)
-        </h1>
-
-        <div className="flex justify-between py-5 border-b">
-          <div className="left flex gap-3">
-            <button
-              onClick={handler}
-              className="flex bg-black text-white px-4 py-2 border rounded-md hover:bg-gray-50 hover:border-black-500 hover:text-gray-800 ml-3"
-            >
-              Add Employee{" "}
-              <span className="px-1">
-                <BiUserPlus size={23}></BiUserPlus>
-              </span>
-            </button>
-          </div>
+      <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">Broker CRUD Dashboard</h1>
+      
+        <div className="flex justify-between py-5 px-unit-8 py-unit-1 ">
           {deleteID ? DeleteComponent({ deleteHandler, cancelHandler }) : <></>}
         </div>
 

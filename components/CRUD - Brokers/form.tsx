@@ -17,7 +17,7 @@ function Form(){
     const formID = useSelector((state: RootState) => state.app.client.formID)
 
     return (
-        <div className=" mx-auto py-3">
+        <div>
             {formID ? UpdateBrokerForm({formID, formData, setFormData}): AddBrokerForm({formData, setFormData})}
         </div>
     )
