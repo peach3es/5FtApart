@@ -12,14 +12,14 @@ import PropertyCard from "../propertycard";
 export default function ModalEditProperty({ isOpen, onClose }: any) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="4xl" isDismissable={false}>
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl" isDismissable={false}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
                 Edit Property
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className="overflow-y-visible">
                 <div>
                   <PropertyCard isEditable isInsideModal={true} />
                 </div>

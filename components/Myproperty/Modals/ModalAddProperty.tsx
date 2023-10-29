@@ -17,16 +17,15 @@ import Error from "../error";
 import { useQueryClient, useMutation } from "react-query";
 import { toggleChangeAction } from "../../../backend/redux/reducer";
 import { useDispatch } from "react-redux";
-import {
-  addProperty,
-  getProperties,
-  getProperty,
-} from "@/backend/lib/helperProperties";
+import { addProperty, getProperties } from "@/backend/lib/helperProperties";
 
 const formReducer = (state: any, event: any) => {
   return {
     ...state,
-    [event.target.name]: event.target.value,
+    // [event.target.name]: event.target.value,
+    ...(event && event.target && event.target.name
+      ? { [event.target.name]: event.target.value }
+      : {}),
   };
 };
 
@@ -40,6 +39,11 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
   const addMutation = useMutation(addProperty, {
     onSuccess: () => {
       queryClient.prefetchQuery("properties", getProperties);
+      setIsSuccessModalOpen(true);
+      onClose();
+    },
+    onError: () => {
+      setIsErrorModalOpen(true);
     },
   });
 
@@ -53,7 +57,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
     if (Object.keys(formData).length == 0) {
       console.log("Please fill out the form");
       setIsEmpty(true); // Set isEmpty to true when data is empty
-      return setIsErrorModalOpen(true);
+      setIsErrorModalOpen(true);
     } else {
       console.log(formData);
       let {
@@ -79,19 +83,25 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       };
 
       addMutation.mutate(model); //addMutation.mutate({}) is the request
-      return setIsSuccessModalOpen(true);
+      // setIsSuccessModalOpen(true);
     }
   };
 
-  const handleCloseSuccessModal = () => {
-    setIsSuccessModalOpen(false); // Close success modal
-    onClose(); // Close the add property modal
+  const handleModalClose = () => {
+    setFormData({}); // Reset form data
+    setIsEmpty(false); // Reset empty state
+    onClose(); // Close the modal
   };
 
-  const handleCloseErrorModal = () => {
-    setIsErrorModalOpen(false); // Close success modal
-    onClose(); // Close the add property modal
-  };
+  // const handleCloseSuccessModal = () => {
+  //   setIsSuccessModalOpen(false); // Close success modal
+  //   onClose(false); // Close the add property modal
+  // };
+
+  // const handleCloseErrorModal = () => {
+  //   setIsErrorModalOpen(false); // Close Error modal
+  //   onClose(false); // Close the add property modal
+  // };
 
   //request
   useEffect(() => {
@@ -115,29 +125,34 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       </div>
     );
 
-  if (addMutation.isError)
-    return (
-      <Error
-        message={(addMutation.error as Error).message}
-        isOpen={isErrorModalOpen}
-        onClose={handleCloseErrorModal}
-      />
-    );
+  // if (addMutation.isError)
+  //   return (
+  //     <Error
+  //       message={(addMutation.error as Error).message}
+  //       isOpen={isErrorModalOpen}
+  //       onClose={handleCloseErrorModal}
+  //     />
+  //   );
 
-  if (addMutation.isSuccess)
-    return (
-      <Success
-        message="Property was added successfully"
-        isOpen={isSuccessModalOpen}
-        onClose={handleCloseSuccessModal}
-      />
-    );
+  // if (addMutation.isSuccess)
+  //   return (
+  //     <Success
+  //       message="Property was added successfully"
+  //       isOpen={isSuccessModalOpen}
+  //       onClose={handleCloseSuccessModal}
+  //     />
+  //   );
 
   return (
     <>
-      <Modal size="4xl" isOpen={isOpen} onClose={onClose} isDismissable={false}>
+      <Modal
+        size="4xl"
+        isOpen={isOpen}
+        onClose={handleModalClose}
+        isDismissable={false}
+      >
         <ModalContent>
-          {(onClose) => (
+          {(handleModalClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
                 Add Property
@@ -235,7 +250,11 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={handleModalClose}
+                >
                   Close
                 </Button>
                 <Button color="primary" onPress={handleSubmit}>
@@ -250,12 +269,12 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       <Success
         message="Property was added successfully"
         isOpen={isSuccessModalOpen}
-        onClose={handleCloseSuccessModal}
+        onClose={() => setIsSuccessModalOpen(false)}
       />
       <Error
         message="Error"
         isOpen={isErrorModalOpen}
-        onClose={handleCloseErrorModal}
+        onClose={() => setIsErrorModalOpen(false)}
       />
     </>
   );

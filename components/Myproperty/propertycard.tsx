@@ -14,7 +14,6 @@ import {
   ModalFooter,
   CircularProgress,
 } from "@nextui-org/react";
-import propertyData from "../../backend/database/property.json";
 import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
 import { getProperties } from "@/backend/lib/helperProperties";
 import { useQuery } from "react-query";
@@ -184,6 +183,8 @@ function CardProperty({
           </CardFooter>
         </Card>
       ))}
+
+      {/*DELETE MODAL*/}
 
       <Modal size="xs" isOpen={isDeleteOpen} onClose={onDeleteClose}>
         <ModalContent>
