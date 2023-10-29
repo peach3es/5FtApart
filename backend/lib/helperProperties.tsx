@@ -1,15 +1,15 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "http://localhost:3000";
 
 // Get all properties
 export const getProperties = async () => {
-  const response = await fetch(`${BASE_URL}api/property`);
+  const response = await fetch(`${BASE_URL}/api/property`);
   const json = await response.json();
 
   return json;
 };
 
 export const getProperty = async (propertyId: any) => {
-  const response = await fetch(`${BASE_URL}api/property/${propertyId}`);
+  const response = await fetch(`${BASE_URL}/api/property/${propertyId}`);
   const json = await response.json();
 
   if (json) return json;
@@ -25,7 +25,7 @@ export async function addProperty(formData: any) {
       body: JSON.stringify(formData),
     };
 
-    const response = await fetch(`${BASE_URL}api/property`, Options);
+    const response = await fetch(`${BASE_URL}/api/property`, Options);
     const json = await response.json();
 
     return json;
@@ -43,7 +43,7 @@ export async function updateProperty(propertyId: any, formData: any) {
   };
 
   const response = await fetch(
-    `${BASE_URL}api/property/?propertyID=${propertyId}`,
+    `${BASE_URL}/api/property/?propertyId=${propertyId}`,
     Options
   );
   const json = await response.json();
@@ -58,7 +58,7 @@ export async function deleteProperty(propertyId: any) {
   };
 
   const response = await fetch(
-    `${BASE_URL}api/property/?propertyId=${propertyId}`,
+    `${BASE_URL}/api/property/?propertyId=${propertyId}`,
     Options
   );
   const json = await response.json();

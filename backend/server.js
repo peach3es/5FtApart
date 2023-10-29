@@ -11,7 +11,7 @@ const {
 const {
   getProperties,
   getProperty,
-  postProperty,
+  addProperty,
   putProperty,
   deleteProperty,
 } = require("./database/controller.js");
@@ -69,7 +69,7 @@ app.prepare().then(() => {
 
   server.post("/api/property", (req, res) => {
     // res.status(200).json({ method: "POST Request" });
-    postProperty(req, res);
+    addProperty(req, res);
   });
 
   server.put("/api/property", (req, res) => {

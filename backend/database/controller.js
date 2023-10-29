@@ -104,31 +104,36 @@ async function getProperties(req, res) {
 //search
 async function getProperty(req, res) {
   try {
-    const { propertyID } = req.params;
+    const { propertyId } = req.params;
 
-    if (propertyID) {
-      const property = await Properties.findById(propertyID);
-      res.status(200).json(property);
+    if (propertyId) {
+      const property = await Properties.findById(propertyId);
+      if (property) {
+        res.status(200).json(property);
+      } else {
+        res.status(404).json({ error: "Property not found" });
+      }
     } else {
-      res.status(404).json({ error: "Property not selected" });
+      res.status(400).json({ error: "Property ID not selected" });
     }
   } catch (error) {
-    res.status(404).json({ error: "Cannot get property" });
+    res.status(500).json({ error: "Cannot get property" });
   }
 }
 
 // post: http://localhost:3000/api/property
 //Adding properties
-async function postProperty(req, res) {
+async function addProperty(req, res) {
   try {
     const formData = req.body;
-    if (!formData)
+    console.log(formData);
+    if (!formData) {
       return res.status(404).json({ error: "Form Data Not Provided" });
-
+    }
     const newProperty = await Properties.create(formData);
     return res.status(200).json(newProperty);
   } catch (error) {
-    return res.status(404).json({ error: "Nothing was Found" });
+    return res.status(404).json({ error: error.message });
   }
 }
 
@@ -175,7 +180,7 @@ module.exports = {
   deleteUser: deleteUser,
   getProperties: getProperties,
   getProperty: getProperty,
-  postProperty: postProperty,
+  addProperty: addProperty,
   putProperty: putProperty,
   deleteProperty: deleteProperty,
 };

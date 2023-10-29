@@ -53,38 +53,38 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
     dispatch(toggleChangeAction());
   }, [dispatch]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    // e.preventDefault();
+
     if (Object.keys(formData).length == 0) {
       console.log("Please fill out the form");
       setIsEmpty(true); // Set isEmpty to true when data is empty
       setIsErrorModalOpen(true);
-    } else {
-      console.log(formData);
-      let {
-        addimg,
-        address,
-        pricetag,
-        description,
-        postalcode,
-        city,
-        saletype,
-        propertytype,
-      } = formData;
-
-      const model = {
-        addimg,
-        address,
-        pricetag,
-        description,
-        postalcode,
-        city,
-        saletype,
-        propertytype,
-      };
-
-      addMutation.mutate(model); //addMutation.mutate({}) is the request
-      // setIsSuccessModalOpen(true);
     }
+    console.log(formData);
+    let {
+      addimg,
+      address,
+      pricetag,
+      description,
+      postalcode,
+      city,
+      saletype,
+      propertytype,
+    } = formData;
+
+    const model = {
+      addimg,
+      address,
+      pricetag,
+      description,
+      postalcode,
+      city,
+      saletype,
+      propertytype,
+    };
+
+    addMutation.mutate(model); //addMutation.mutate({}) is the request
   };
 
   const handleModalClose = () => {
@@ -114,24 +114,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
         <div>Loading...</div>
       </div>
     );
-
-  // if (addMutation.isError)
-  //   return (
-  //     <Error
-  //       message={(addMutation.error as Error).message}
-  //       isOpen={isErrorModalOpen}
-  //       onClose={handleCloseErrorModal}
-  //     />
-  //   );
-
-  // if (addMutation.isSuccess)
-  //   return (
-  //     <Success
-  //       message="Property was added successfully"
-  //       isOpen={isSuccessModalOpen}
-  //       onClose={handleCloseSuccessModal}
-  //     />
-  //   );
 
   return (
     <>

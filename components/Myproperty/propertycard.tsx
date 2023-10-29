@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import {
   Card,
   CardBody,
@@ -18,7 +18,7 @@ import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
 import { getProperties, deleteProperty } from "@/backend/lib/helperProperties";
 import { useQuery, useQueryClient } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAction } from "@/backend/redux/reducer";
+import { deleteAction, updateAction } from "@/backend/redux/reducer";
 import { ObjectId } from "mongoose";
 
 interface Property {
@@ -45,9 +45,15 @@ interface CardPropertyProps {
   cardContainerClass: string;
   isEditable: boolean;
   isInsideModal?: boolean;
-  dispatch: any;
   properties: Property[];
 }
+
+const formReducer = (state: any, event: any) => {
+  return {
+    ...state,
+    [event.target.name]: event.target.value,
+  };
+};
 
 export default function PropertyCard({
   isEditable = false,
@@ -63,8 +69,6 @@ export default function PropertyCard({
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure();
-
-  const dispatch = useDispatch();
 
   const [isUpdateOpen, setUpdateOpen] = useState(false);
   const onUpdateOpen = () => setUpdateOpen(true);
@@ -90,8 +94,6 @@ export default function PropertyCard({
       </div>
     );
 
-  // console.log("Properties data:", data);
-
   return (
     <div>
       <CardProperty
@@ -105,7 +107,7 @@ export default function PropertyCard({
         onUpdateClose={onUpdateClose}
         cardContainerClass={cardContainerClass}
         isEditable={isEditable}
-        dispatch={dispatch}
+        isInsideModal={isInsideModal}
         properties={data}
       />
     </div>
@@ -125,7 +127,7 @@ function CardProperty({
   onUpdateClose,
   cardContainerClass,
   isEditable,
-  dispatch,
+  isInsideModal,
   properties: data,
 }: CardPropertyProps) {
   let CADDollar = new Intl.NumberFormat("en-CA", {
@@ -138,8 +140,13 @@ function CardProperty({
     ...value,
   }));
 
+  const [formData, setFormData] = useReducer(formReducer, {});
+  const formID = useSelector((state) => (state as any).app.client.formID);
+
   const queryClient = useQueryClient();
   const deleteID = useSelector((state) => (state as any).app.client.deleteID);
+
+  const dispatch = useDispatch();
 
   const deleteHandler = async () => {
     if (deleteID) {
@@ -185,7 +192,10 @@ function CardProperty({
                   variant="solid"
                   color="primary"
                   size="sm"
-                  onPress={onUpdateOpen}
+                  onPress={() => {
+                    dispatch(updateAction(obj._id));
+                    onUpdateOpen();
+                  }}
                 >
                   Edit
                 </Button>
@@ -251,7 +261,13 @@ function CardProperty({
           )}
         </ModalContent>
       </Modal>
-      <ModalUpdateProperty isOpen={isUpdateOpen} onClose={onUpdateClose} />
+      <ModalUpdateProperty
+        isOpen={isUpdateOpen}
+        onClose={onUpdateClose}
+        formID={formID}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </div>
   );
 }
