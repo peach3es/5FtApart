@@ -17,7 +17,11 @@ import Error from "../error";
 import { useQueryClient, useMutation } from "react-query";
 import { toggleChangeAction } from "../../../backend/redux/reducer";
 import { useDispatch } from "react-redux";
-import { addProperty, getProperty } from "@/backend/lib/helperProperties";
+import {
+  addProperty,
+  getProperties,
+  getProperty,
+} from "@/backend/lib/helperProperties";
 
 const formReducer = (state: any, event: any) => {
   return {
@@ -31,6 +35,13 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
   const [isEmpty, setIsEmpty] = useState(false); // New state
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+  const addMutation = useMutation(addProperty, {
+    onSuccess: () => {
+      queryClient.prefetchQuery("properties", getProperties);
+    },
+  });
 
   const dispatch = useDispatch();
 
@@ -83,13 +94,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
   };
 
   //request
-  const queryClient = useQueryClient();
-  const addMutation = useMutation(addProperty, {
-    onSuccess: () => {
-      queryClient.prefetchQuery("properties", getProperty);
-    },
-  });
-
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     if (addMutation.isSuccess || isEmpty) {

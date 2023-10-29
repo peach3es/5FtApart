@@ -12,6 +12,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
+  CircularProgress,
 } from "@nextui-org/react";
 import propertyData from "../../backend/database/property.json";
 import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
@@ -72,7 +73,7 @@ export default function PropertyCard({
   if (isLoading)
     return (
       <div className="w-full flex text-xl text-center justify-center items-center">
-        <div>Loading...</div>
+        <CircularProgress label="Loading..." color="primary" />
       </div>
     );
 
@@ -115,16 +116,20 @@ function CardProperty({
   onUpdateClose,
   cardContainerClass,
   isEditable,
-  properties: data = [],
+  properties: data,
 }: CardPropertyProps) {
   let CADDollar = new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency: "CAD",
   });
 
+  const dataArray = Object.entries(data).map(([key, value]) => ({
+    key,
+    ...value,
+  }));
   return (
     <div className={`${cardContainerClass} grid grid-rows-1 p-5`}>
-      {data.map((obj, index) => (
+      {dataArray.map((obj, index) => (
         <Card
           shadow="sm"
           key={index}

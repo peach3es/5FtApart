@@ -63,7 +63,7 @@ app.prepare().then(() => {
     getProperties(req, res);
   });
 
-  server.get("/api/property/:propertyID", (req, res) => {
+  server.get("/api/property/:propertyId", (req, res) => {
     getProperty(req, res);
   });
 
