@@ -8,7 +8,7 @@ export const getUsers = async () => {
 }
 
 
-export const getUser = async(userID) => {
+export const getUser = async(userID: any) => {
     const response  = await fetch(`${BASE_URL}/api/users/${userID}`)
     const json = await response.json();
 
@@ -17,7 +17,7 @@ export const getUser = async(userID) => {
 }
 
 //Posting a new Broker
-export async function addUser(formData){
+export async function addUser(formData: any){
 
     try {
         const Options = {
@@ -39,7 +39,7 @@ export async function addUser(formData){
 }
 
 //Update a new Broker
-export async function updateUser(userID, formData){
+export async function updateUser(userID: any, formData: any){
     const Options = {
         method: 'PUT',
         headers: {'Content-Type': "application/json"},
@@ -52,7 +52,7 @@ export async function updateUser(userID, formData){
 }
 
 //Delete a new Broker
-export async function deleteUser(userID){
+export async function deleteUser(userID: any){
     const Options = {
         method: 'DELETE',
         headers: {'Content-Type': "application/json"},
@@ -73,7 +73,7 @@ export const getProperties = async () => {
     return json;
 }
 
-export const getProperty = async(propertyID) => {
+export const getProperty = async(propertyID: any) => {
     const response  = await fetch(`${BASE_URL}/api/property/${propertyID}`)
     const json = await response.json();
 
@@ -82,7 +82,7 @@ export const getProperty = async(propertyID) => {
 }
 
 //Posting a new Property
-export async function addProperty(formData){
+export async function addProperty(formData: any){
 
     try {
         const Options = {
@@ -104,7 +104,7 @@ export async function addProperty(formData){
 }
 
 //Update a new Property
-export async function updateProperty(propertyID, formData){
+export async function updateProperty(propertyID: any, formData: any){
     const Options = {
         method: 'PUT',
         headers: {'Content-Type': "application/json"},
@@ -117,7 +117,7 @@ export async function updateProperty(propertyID, formData){
 }
 
 //Delete a new Property
-export async function deleteProperty(propertyID){
+export async function deleteProperty(propertyID: any){
     const Options = {
         method: 'DELETE',
         headers: {'Content-Type': "application/json"},

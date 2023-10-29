@@ -1,6 +1,6 @@
 "use client";
-import Table from "./../../../components/CRUD - Brokers/table";
-import Form from "./../../../components/CRUD - Brokers/form";
+import Table from "../../../components/CRUD - Brokers/table";
+import Form from "../../../components/CRUD - Brokers/form";
 import { BiUserPlus, BiX, BiCheck } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,13 +10,14 @@ import {
 import { deleteUser, getUsers } from "@/backend/lib/helper";
 import { useQueryClient } from "react-query";
 import { Button } from "@nextui-org/react";
-import NavBar from "components/Navbar/navbar";
-import Footer from "components/footer";
+import NavBar from "../../../components/Navbar/navbar";
+import Footer from "../../../components/footer";
 import styles from "styles/page.module.css";
+import { RootState } from "@/components/Myproperty/rootstate";
 
 function MyBroker() {
-  const visible = useSelector((state) => state.app.client.toggleForm);
-  const deleteID = useSelector((state) => state.app.client.deleteID);
+  const visible = useSelector((state: RootState) => state.app.client.toggleForm);
+  const deleteID = useSelector((state: RootState) => state.app.client.deleteID);
   const queryclient = useQueryClient();
   const dispatch = useDispatch();
 
@@ -72,7 +73,7 @@ function MyBroker() {
 
 export default MyBroker;
 
-function DeleteComponent({ deleteHandler, cancelHandler }) {
+function DeleteComponent({ deleteHandler, cancelHandler }: {deleteHandler: any, cancelHandler: any}) {
   return (
     <>
       <div className="fixed z-10 inset-0 bg-black opacity-50"></div>

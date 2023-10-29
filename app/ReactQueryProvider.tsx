@@ -3,7 +3,7 @@ import { QueryClientProvider, QueryClient } from "react-query"
 
 const queryClient = new QueryClient();
 
-export const ReactQueryProvider =({children}) => {
+export const ReactQueryProvider =({children}: {children: React.ReactNode}) => {
     return (
         <QueryClientProvider client = {queryClient}>
             {children}

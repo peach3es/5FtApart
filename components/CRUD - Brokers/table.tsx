@@ -8,6 +8,7 @@ import {
   deleteAction,
 } from "../../backend/redux/reducer";
 import Image from "next/image";
+import { RootState } from "../Myproperty/rootstate";
 
 export default function Table() {
   const { isLoading, isError, data, error } = useQuery("users", getUsers);
@@ -43,7 +44,7 @@ export default function Table() {
         </tr>
       </thead>
       <tbody className="bg-gray-200 text-center">
-        {data.map((obj, i) => (
+        {data.map((obj: any, i: any) => (
           <Tr {...obj} key={i} />
         ))}
       </tbody>
@@ -51,8 +52,8 @@ export default function Table() {
   );
 }
 
-function Tr({ _id, name, avatar, email, password, date, activeListings }) {
-  const visible = useSelector((state) => state.app.client.toggleForm);
+function Tr({ _id, name, avatar, email, password, date, activeListings }: {_id: any, name: any, avatar: any, email: any, password: any, date: any, activeListings: any}) {
+  const visible = useSelector((state: RootState) => state.app.client.toggleForm);
   const dispatch = useDispatch();
 
   const onUpdate = () => {

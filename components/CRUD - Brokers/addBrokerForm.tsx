@@ -7,8 +7,8 @@ import { useDispatch } from "react-redux";
 import { toggleChangeAction } from "../../backend/redux/reducer";
 import React, { useEffect, useState, useCallback } from "react";
 
-function AddBrokerForm({ formData, setFormData }) {
-  const [error, setError] = useState(null);
+function AddBrokerForm({ formData, setFormData }: {formData: any, setFormData: any}) {
+  const [error, setError] = useState<string | null>(null);
   const [isEmpty, setIsEmpty] = useState(false); // New state
   const queryClient = useQueryClient();
   const addMutation = useMutation(addUser, {
@@ -23,7 +23,7 @@ function AddBrokerForm({ formData, setFormData }) {
     dispatch(toggleChangeAction());
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     if (Object.keys(formData).length == 0) {
@@ -49,7 +49,7 @@ function AddBrokerForm({ formData, setFormData }) {
   };
 
   useEffect(() => {
-    let timeoutId;
+    let timeoutId: any;
     if (addMutation.isSuccess || isEmpty) {
       // Check either for mutation success or data empty
       timeoutId = setTimeout(() => {
@@ -63,8 +63,13 @@ function AddBrokerForm({ formData, setFormData }) {
   }, [addMutation.isSuccess, isEmpty, handler]); // Add isEmpty as a dependency
 
   if (addMutation.isLoading) return <div>Loading...</div>;
-  if (addMutation.isError)
-    return <Error message={addMutation.error.message}></Error>;
+  if (addMutation.isError) {
+    const errorMessage = addMutation.error && typeof addMutation.error === 'object' && 'message' in addMutation.error 
+      ? addMutation.error.message 
+      : 'An unknown error occurred';
+  
+    return <Error message={errorMessage} />;
+  }  
   if (addMutation.isSuccess)
     return <Success message={"Added Successfully!"}></Success>;
   if (error) return <Error message={error}></Error>;

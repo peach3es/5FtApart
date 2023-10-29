@@ -28,9 +28,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/(page)/mybroker/page.js",
+    "app/(page)/mybroker/page.tsx",
     "components/Navbar/navbar.jsx",
     "components/Search/searchoptions.js"
-, "backend/database/conn.js"  ],
+, "backend/database/conn.js", "backend/database/controller.js", "app/model/property.js", "app/model/user.js"  ],
   "exclude": ["node_modules"]
 }

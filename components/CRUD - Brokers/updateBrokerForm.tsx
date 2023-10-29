@@ -4,7 +4,7 @@ import {BiBrush}  from 'react-icons/bi'
 import {useQuery, useMutation, useQueryClient} from 'react-query'
 import { getUser,getUsers, updateUser } from "../../backend/lib/helper";
 
-function UpdateBrokerForm({formID, formData, setFormData}){
+function UpdateBrokerForm({formID, formData, setFormData}: {formID: any, formData: any, setFormData: any}){
 
     const queryClient = useQueryClient();
     const {isLoading, isError, data, error} = useQuery(['users', formID],() => getUser(formID))
@@ -18,14 +18,18 @@ function UpdateBrokerForm({formID, formData, setFormData}){
     })
     
     if(isLoading) return <div>Loading...</div>
-    if(isError) return <div>Error {error}</div>
+    if (isError) {
+        const errorMessage = (error as any).message || 'An unknown error occurred';
+        return <div>Error {errorMessage}</div>;
+    }
+    
 
     const {name, avatar, password, date, activeListings, email} = data;
     const[firstname, lastname] = name? name.split(' ') : formData
 
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         let userName = `${formData.firstname ?? firstname} ${formData.lastname ?? lastname}`
         let updated = Object.assign({}, data, formData, {name: userName})
