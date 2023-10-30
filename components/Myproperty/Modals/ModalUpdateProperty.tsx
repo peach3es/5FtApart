@@ -122,6 +122,7 @@ export default function ModalUpdateProperty({
                     name="postalcode"
                     onChange={setFormData}
                     defaultValue={postalcode}
+                    value={postalcode}
                   />
                   <Select
                     label="Property Type"
@@ -129,7 +130,7 @@ export default function ModalUpdateProperty({
                     isRequired
                     name="propertytype"
                     onChange={setFormData}
-                    defaultValue={propertytype}
+                    defaultSelectedKeys={[propertytype]}
                   >
                     {propertytypes.map((propertytype) => (
                       <SelectItem
@@ -147,7 +148,7 @@ export default function ModalUpdateProperty({
                     radius="sm"
                     name="saletype"
                     onChange={setFormData}
-                    defaultValue={saletype}
+                    defaultSelectedKeys={[saletype]}
                   >
                     {saletypes.map((saletype) => (
                       <SelectItem key={saletype.value} value={saletype.value}>

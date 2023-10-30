@@ -61,7 +61,7 @@ export default function PropertyCard({
 }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const cardContainerClass = isInsideModal
-    ? "gap-2 grid-cols-3"
+    ? "gap-2 grid-cols-3 overflow-y-auto"
     : "gap-4 grid-cols-5";
 
   const {
