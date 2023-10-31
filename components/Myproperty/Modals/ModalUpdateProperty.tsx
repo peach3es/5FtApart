@@ -212,7 +212,7 @@ export default function ModalUpdateProperty({
       </Modal>
 
       <Success
-        message="Property was added successfully"
+        message="Property was edited successfully."
         isOpen={isSuccessModalOpen}
         onClose={() => setIsSuccessModalOpen(false)}
       />

@@ -16,7 +16,9 @@ import styles from "styles/page.module.css";
 import { RootState } from "@/components/Myproperty/rootstate";
 
 function MyBroker() {
-  const visible = useSelector((state: RootState) => state.app.client.toggleForm);
+  const visible = useSelector(
+    (state: RootState) => state.app.client.toggleForm
+  );
   const deleteID = useSelector((state: RootState) => state.app.client.deleteID);
   const queryclient = useQueryClient();
   const dispatch = useDispatch();
@@ -41,9 +43,11 @@ function MyBroker() {
     <section className="flex flex-col h-screen">
       <NavBar />
       <main className={`${styles.main} flex-grow`}>
-      <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">Broker CRUD Dashboard</h1>
-      
-        <div className="flex justify-between py-5 px-unit-8 py-unit-1 ">
+        <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">
+          Broker CRUD Dashboard
+        </h1>
+
+        <div className="flex justify-between py-5 px-unit-8 ">
           {deleteID ? DeleteComponent({ deleteHandler, cancelHandler }) : <></>}
         </div>
 
@@ -60,7 +64,13 @@ function MyBroker() {
 
 export default MyBroker;
 
-function DeleteComponent({ deleteHandler, cancelHandler }: {deleteHandler: any, cancelHandler: any}) {
+function DeleteComponent({
+  deleteHandler,
+  cancelHandler,
+}: {
+  deleteHandler: any;
+  cancelHandler: any;
+}) {
   return (
     <>
       <div className="fixed z-10 inset-0 bg-black opacity-50"></div>
