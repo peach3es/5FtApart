@@ -7,7 +7,9 @@ import { useEffect } from "react";
 import "../../backend/lib/helper";
 import { getProperty } from "../../backend/lib/helper";
 import { HeartIcon } from "../Navbar/hearticon";
-import {BiBookmarkHeart} from "react-icons/bi";
+import { BiSolidHomeHeart } from "react-icons/bi";
+import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
+import Link from "next/link";
 import {
   Image,
   Modal,
@@ -50,9 +52,20 @@ const PropertyInfo = ({ propertyID }: any) => {
           Request Visit
         </Button>
 
-        <Button isIconOnly color="danger" aria-label="Like">
-          <BiBookmarkHeart />
-        </Button>
+        
+         <Popover placement ="right">
+          <PopoverTrigger>
+          <Button isIconOnly color="danger" aria-label="Like">
+            <BiSolidHomeHeart />
+          </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+          <div className="px-1 py-2">
+          <div className="text-small font-bold">Added to your favorites!</div>
+        </div>
+          </PopoverContent>
+         </Popover>
+        
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="xl">
         <ModalContent>
