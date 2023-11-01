@@ -1,17 +1,40 @@
-import { BiErrorCircle } from 'react-icons/bi'
+import React from "react";
+// import { BiCheck } from 'react-icons/bi';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "@nextui-org/react";
 
 interface ErrorProps {
-    message: string;
+  message: string;
 }
 
-const Error: React.FC<ErrorProps> = ({ message }) => {
-    return (
-        <div className="success container mx-auto">
-            <div className="flex justify-center mx-auto border border-red-200 bg-red-400 w-3/6 text-gray-900 text-md my-4 py-2 text-center bg-opacity-5">
-                {message} <BiErrorCircle className="mx-1" size={25} color={"rgb(248 113 113)"} />
-            </div>
-        </div>
-    );
-}
+const Error: React.FC<
+  ErrorProps & { isOpen: boolean; onClose: () => void }
+> = ({ message, isOpen, onClose }) => {
+  return (
+    <Modal size="xs" isOpen={isOpen} onClose={onClose}>
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">Error</ModalHeader>
+            <ModalBody>
+              <p>{message}</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="light" onPress={onClose}>
+                Retry
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export default Error;

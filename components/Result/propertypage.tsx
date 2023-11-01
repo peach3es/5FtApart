@@ -2,14 +2,15 @@
 import React from "react";
 import FormData from "../../components/Myproperty/AddProperty";
 import { useQuery } from "react-query";
-import { getProperties } from "../../backend/lib/helper";
+import { getProperties } from "../../backend/lib/helperProperties";
 import { useEffect } from "react";
 import "../../backend/lib/helper";
-import { getProperty } from "../../backend/lib/helper";
 import { HeartIcon } from "../Navbar/hearticon";
 import { BiSolidHomeHeart } from "react-icons/bi";
 import {Popover, PopoverTrigger, PopoverContent} from "@nextui-org/react";
 import Link from "next/link";
+
+
 import {
   Image,
   Modal,
@@ -22,9 +23,12 @@ import {
   Input,
 } from "@nextui-org/react";
 
-const PropertyInfo = ({ propertyID }: any) => {
-  // const { data: property, isLoading, isError, error } = useQuery(['property', getProperty().id]);
-
+function PropertyInfo() {
+  const { isLoading, isError, data, error } = useQuery(
+    "property",
+    getProperties
+  );
+  console.log(data);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   // if (isLoading) return <div>Loading...</div>;
@@ -102,6 +106,6 @@ const PropertyInfo = ({ propertyID }: any) => {
       </Modal>
     </div>
   );
-};
+}
 
 export default PropertyInfo;

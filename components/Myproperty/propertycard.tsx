@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import {
   Card,
   CardBody,
@@ -12,8 +12,48 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
+  CircularProgress,
 } from "@nextui-org/react";
-import { properties } from "./propertylist";
+import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
+import { getProperties, deleteProperty } from "@/backend/lib/helperProperties";
+import { useQuery, useQueryClient } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAction, updateAction } from "@/backend/redux/reducer";
+import { ObjectId } from "mongoose";
+
+interface Property {
+  _id: ObjectId;
+  propertytype: string;
+  addimg: string;
+  address: string;
+  postalcode: string;
+  pricetag: number;
+  description: string;
+  saletype: string;
+  city: string;
+}
+
+interface CardPropertyProps {
+  hoveredIndex: number | null;
+  setHoveredIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  isDeleteOpen: boolean;
+  onDeleteOpen: () => void;
+  onDeleteClose: () => void;
+  isUpdateOpen: boolean;
+  onUpdateOpen: () => void;
+  onUpdateClose: () => void;
+  cardContainerClass: string;
+  isEditable: boolean;
+  isInsideModal?: boolean;
+  properties: Property[];
+}
+
+const formReducer = (state: any, event: any) => {
+  return {
+    ...state,
+    [event.target.name]: event.target.value,
+  };
+};
 
 export default function PropertyCard({
   isEditable = false,
@@ -21,7 +61,7 @@ export default function PropertyCard({
 }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const cardContainerClass = isInsideModal
-    ? "gap-2 grid-cols-3"
+    ? "gap-2 grid-cols-3 overflow-y-auto"
     : "gap-4 grid-cols-5";
 
   const {
@@ -30,9 +70,99 @@ export default function PropertyCard({
     onClose: onDeleteClose,
   } = useDisclosure();
 
+  const [isUpdateOpen, setUpdateOpen] = useState(false);
+  const onUpdateOpen = () => setUpdateOpen(true);
+  const onUpdateClose = () => setUpdateOpen(false);
+
+  //requests
+  const { isLoading, isError, data, error } = useQuery(
+    "properties",
+    getProperties
+  );
+
+  if (isLoading)
+    return (
+      <div className="w-full flex text-xl text-center justify-center items-center">
+        <CircularProgress label="Loading..." color="primary" />
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div className="w-full flex text-xl text-center justify-center items-center">
+        <div>Error: {String(error)}</div>
+      </div>
+    );
+
+  return (
+    <div>
+      <CardProperty
+        hoveredIndex={hoveredIndex}
+        setHoveredIndex={setHoveredIndex}
+        isDeleteOpen={isDeleteOpen}
+        onDeleteOpen={onDeleteOpen}
+        onDeleteClose={onDeleteClose}
+        isUpdateOpen={isUpdateOpen}
+        onUpdateOpen={onUpdateOpen}
+        onUpdateClose={onUpdateClose}
+        cardContainerClass={cardContainerClass}
+        isEditable={isEditable}
+        isInsideModal={isInsideModal}
+        properties={data}
+      />
+    </div>
+  );
+}
+
+//FUNCTION
+
+function CardProperty({
+  hoveredIndex,
+  setHoveredIndex,
+  isDeleteOpen,
+  onDeleteOpen,
+  onDeleteClose,
+  isUpdateOpen,
+  onUpdateOpen,
+  onUpdateClose,
+  cardContainerClass,
+  isEditable,
+  isInsideModal,
+  properties: data,
+}: CardPropertyProps) {
+  let CADDollar = new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+  });
+
+  const dataArray = Object.entries(data).map(([key, value]) => ({
+    key,
+    ...value,
+  }));
+
+  const [formData, setFormData] = useReducer(formReducer, {});
+  const formID = useSelector((state) => (state as any).app.client.formID);
+
+  const queryClient = useQueryClient();
+  const deleteID = useSelector((state) => (state as any).app.client.deleteID);
+
+  const dispatch = useDispatch();
+
+  const deleteHandler = async () => {
+    if (deleteID) {
+      await deleteProperty(deleteID);
+      console.log("Delete ID:", deleteID);
+      await queryClient.prefetchQuery("properties", getProperties);
+      await dispatch(deleteAction(null));
+    }
+  };
+  const cancelHandler = async () => {
+    console.log("cancel");
+    await dispatch(deleteAction(null));
+  };
   return (
     <div className={`${cardContainerClass} grid grid-rows-1 p-5`}>
-      {properties.map((item, index) => (
+      {dataArray.map((obj, index) => (
         <Card
           shadow="sm"
           key={index}
@@ -47,9 +177,9 @@ export default function PropertyCard({
               shadow="sm"
               radius="lg"
               width="100%"
-              alt={item.title}
+              alt={obj.propertytype || "Unknown Property"}
               className="w-full object-cover h-[240px]"
-              src={item.img}
+              src={obj.addimg || "#"}
             />
 
             {isEditable && ( // on hover on one of the cards, the edit and delete buttons will appear
@@ -58,14 +188,25 @@ export default function PropertyCard({
                   hoveredIndex === index ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <Button variant="solid" color="primary" size="sm">
+                <Button
+                  variant="solid"
+                  color="primary"
+                  size="sm"
+                  onPress={() => {
+                    dispatch(updateAction(obj._id));
+                    onUpdateOpen();
+                  }}
+                >
                   Edit
                 </Button>
                 <Button
                   variant="solid"
                   color="danger"
                   size="sm"
-                  onPress={onDeleteOpen}
+                  onPress={() => {
+                    dispatch(deleteAction(obj._id)); // Assuming obj.key is the unique identifier of the property.
+                    onDeleteOpen();
+                  }}
                 >
                   Delete
                 </Button>
@@ -75,11 +216,15 @@ export default function PropertyCard({
           <CardFooter className="text-small justify-between">
             {" "}
             {/* //card footer, so like the price and all */}
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
+            <b>{obj.propertytype}</b>
+            <p className="text-default-500">
+              {`${CADDollar.format(obj.pricetag)}` || "Unknown Price $"}
+            </p>
           </CardFooter>
         </Card>
       ))}
+
+      {/*DELETE MODAL*/}
 
       <Modal size="xs" isOpen={isDeleteOpen} onClose={onDeleteClose}>
         <ModalContent>
@@ -92,10 +237,23 @@ export default function PropertyCard({
                 <p>Your property will forever be deleted</p>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" variant="light" onPress={onDeleteClose}>
+                <Button
+                  color="primary"
+                  variant="light"
+                  onPress={() => {
+                    cancelHandler();
+                    onDeleteClose();
+                  }}
+                >
                   Cancel
                 </Button>
-                <Button color="danger" onPress={onDeleteClose}>
+                <Button
+                  color="danger"
+                  onPress={() => {
+                    deleteHandler();
+                    onDeleteClose();
+                  }}
+                >
                   Delete
                 </Button>
               </ModalFooter>
@@ -103,6 +261,13 @@ export default function PropertyCard({
           )}
         </ModalContent>
       </Modal>
+      <ModalUpdateProperty
+        isOpen={isUpdateOpen}
+        onClose={onUpdateClose}
+        formID={formID}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </div>
   );
 }
