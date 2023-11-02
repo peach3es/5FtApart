@@ -13,7 +13,7 @@ const favorite=()=>{
             shadow="sm"
             key={index}
             isPressable
-            // onPress={handlePropertyClick}
+            //onPress={handlePropertyClick}
           >
             <CardBody className="overflow-visible p-0">
               <Image
