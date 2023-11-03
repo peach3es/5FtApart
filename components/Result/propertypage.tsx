@@ -29,8 +29,10 @@ function PropertyInfo() {
     "property",
     getProperties
   );
-  console.log(data);
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const{isOpen: Offer, onOpen: onOffer, onOpenChange: onOfferChange}= useDisclosure();
+  
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {(error as any).message}</div>;
@@ -54,7 +56,11 @@ function PropertyInfo() {
           Request Visit
         </Button>
 
-        <Link href="../../app/(page)/favorite/page.tsx">
+        <Button className="w-1/3" onPress={onOffer}>
+          Submit an Offer
+        </Button>
+
+        <Link href="/favorite">
           <Popover placement="right">
             <PopoverTrigger>
               <Button isIconOnly color="danger" aria-label="Like">
@@ -90,6 +96,42 @@ function PropertyInfo() {
                     label="Email"
                     classNames={{ input: "border-none" }}
                   />
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Submit
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+
+      <Modal isOpen={Offer} onOpenChange={onOfferChange} size="xl">
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                We will need some basic informations
+              </ModalHeader>
+              <ModalBody>
+                <p className="mb-2">
+                  Please put in your full name & email address and a broker will
+                  contact you
+                </p>
+
+                <div className="mb-3 flex flex-row gap-3">
+                  <Input type="faded" label="Full Name" />
+                  <Input
+                    type="email"
+                    label="Email"
+                    classNames={{ input: "border-none" }}
+                  />
+                  <Input type="faded" label="Offer" />
                 </div>
               </ModalBody>
               <ModalFooter>
