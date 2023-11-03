@@ -18,6 +18,7 @@ import { useQueryClient, useMutation } from "react-query";
 import { toggleChangeAction } from "../../../backend/redux/reducer";
 import { useDispatch } from "react-redux";
 import { addProperty, getProperties } from "@/backend/lib/helperProperties";
+import "../../../styles/page.module.css";
 
 const formReducer = (state: any, event: any) => {
   return {
@@ -202,23 +203,37 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                   label="Description"
                   name="description"
                   isRequired
+                  radius="sm"
                   type="faded"
                   labelPlacement="outside"
                   placeholder="Enter the description of your property"
-                  className={`max-w-xl px-11 mb-5 description`}
+                  className={`max-w-xl px-11 mb-3 description mx-12`}
                   data-focus="false"
                   classNames={{
                     input: "border-none focus:ring-0",
                   }}
                   onChange={setFormData}
                 />
-                <div className="addimage px-11 flex flex-col gap-3 max-w-xl">
+                <div className="addimage px-11 flex flex-col gap-3 max-w-xl ml-12 ">
+                  <label
+                    htmlFor="formFile"
+                    className=" inline-block text-neutral-700 dark:text-neutral-200 cursor-pointer"
+                  ></label>
                   <input
+                    className="relative m-0 block w-full min-w-0 flex-auto rounded-lg border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary"
                     type="file"
-                    className="add-img"
+                    id="formFile"
                     name="addimg"
                     onChange={setFormData}
                   />
+                  {/* <label htmlFor="addimg" className=""></label>
+                  <input
+                    type="file"
+                    id="addimg"
+                    className="add-img relative m-0 block w-full min-w-0 flex-auto rounded"
+                    name="addimg"
+                    onChange={setFormData}
+                  /> */}
                 </div>
               </ModalBody>
               <ModalFooter>

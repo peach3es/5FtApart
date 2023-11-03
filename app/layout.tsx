@@ -3,6 +3,7 @@ import { ReactQueryProvider } from "./ReactQueryProvider";
 import "styles/globals.css";
 import { Inter } from "next/font/google";
 import { ReduxProvider } from "./provider";
+// import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
