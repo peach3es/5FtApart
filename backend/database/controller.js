@@ -172,6 +172,31 @@ async function deleteProperty(req, res) {
   }
 }
 
+async function getPropertiesFiltered(req, res, filters = {}) {
+  try {
+    let query = {};
+
+    if (filters.saleType) {
+      query.saletype = filters.saleType;
+    }
+    if (filters.propertyType) {
+      query.propertytype = filters.propertyType;
+    }
+    
+    if (filters.priceRange){
+      const [min, max] = filters.priceRange.split('-').map(Number);
+      query.pricetag = { $gte: min, $lte: max }; 
+    }
+    
+    const property = await Properties.find(query);
+    
+    res.status(200).json(property);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   getUsers: getUsers,
   getUser: getUser,
@@ -183,4 +208,5 @@ module.exports = {
   addProperty: addProperty,
   putProperty: putProperty,
   deleteProperty: deleteProperty,
+  getPropertiesFiltered: getPropertiesFiltered
 };

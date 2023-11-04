@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "styles/page.module.css";
 import "styles/searchbar.css";
 import {
@@ -20,9 +20,43 @@ import {
 } from "@/components/Search/searchoptions";
 import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
-import { properties } from "@/components/Result/propertylistresult";
+import { useSearchParams } from 'next/navigation'
+import {getPropertiesFiltered} from '../../../backend/lib/helperProperties'
+import { filterProps } from "framer-motion";
+import SearchBar from "@/components/Search/searchbar";
 
 const ResultPage = () => {
+  const [props, setProps] = useState([])
+  const searchParams = useSearchParams();
+
+
+const handleSearch = async (filters: any) => {
+  const filteredProps = await getPropertiesFiltered(filters);
+  setProps(filteredProps);
+  
+};
+
+useEffect(() => {
+
+  const getProps = async() => {
+    const response = await fetch('/api/property');
+    const properties = await response.json();
+    const propertyFilters = searchParams.get('propertyselections')
+
+    if (propertyFilters) {
+      const results = JSON.parse(propertyFilters);
+      handleSearch(results)
+  } else {
+      console.error('propertyselections not found in the query parameters.');
+    }
+  
+    setProps(properties);
+  }
+
+  getProps();
+
+}, [searchParams]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
   const handlePageChange = (page: number) => {
@@ -31,10 +65,7 @@ const ResultPage = () => {
 
   const indexOfLastProperty = currentPage * itemsPerPage;
   const indexOfFirstProperty = indexOfLastProperty - itemsPerPage;
-  const currentProperties = properties.slice(
-    indexOfFirstProperty,
-    indexOfLastProperty
-  );
+
 
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
@@ -42,56 +73,13 @@ const ResultPage = () => {
     }
   };
 
-  const handlePropertyClick = (event: any) => {
-    window.location.href = "/result/property";
+  const handlePropertyClick = (id: any) => {
+    window.location.href = `/result/property/?propertyId=${id}`;
   };
 
   return (
     <main className={`${styles.main} flex-grow`}>
-      <div className="resultsearch flex flex-row justify-center gap-4 m-4 mx-48">
-        <div className="search relative result-search w-1/4">
-          <input
-            type="text"
-            className="property-search pl-8"
-            placeholder="Region, City, Street"
-            onKeyDown={handleKeyPress}
-          />
-        </div>
-        <div className="sale-type w-1/6">
-          <Select label="Sale Type" className="sale-select" radius="sm">
-            {saletypes.map((saletype) => (
-              <SelectItem key={saletype.value} value={saletype.value}>
-                {saletype.label}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-        <div className="property-types w-1/6">
-          <Select label="Property Type" radius="sm">
-            {propertytypes.map((propertytype) => (
-              <SelectItem key={propertytype.value} value={propertytype.value}>
-                {propertytype.label}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-        <div className="price-range w-1/6">
-          <Select label="Price Range" radius="sm">
-            {priceranges.map((pricerange) => (
-              <SelectItem key={pricerange.value} value={pricerange.value}>
-                {pricerange.label}
-              </SelectItem>
-            ))}
-          </Select>
-        </div>
-        <Link href="/result">
-          {" "}
-          {/* This is the link to the result page */}
-          <Button radius="sm" isIconOnly className="w-14 h-14 bg-[#f4f4f5]">
-            <BiSearch size={42} className="p-2  text-[#7d7d7f]" />
-          </Button>
-        </Link>
-      </div>
+      <SearchBar/>
       <Divider className="px-5" />
       {/* <div className="flex justify-center mt-5"> pagination aren't in sync yet so we're only using one of them
         <Pagination
@@ -105,26 +93,26 @@ const ResultPage = () => {
       </div> */}
 
       <div className="result-content p-5 grid grid-cols-3 gap-x-4 gap-y-8 mx-72">
-        {currentProperties.map((item, index) => (
+        {props.map((item: any) => (
           <Card
             shadow="sm"
-            key={index}
+            key={item._id}
             isPressable
-            onPress={handlePropertyClick}
+            onPress={() => handlePropertyClick(item._id)}
           >
             <CardBody className="overflow-visible p-0">
               <Image
                 shadow="sm"
                 radius="lg"
                 width="100%"
-                alt={item.title}
                 className="w-full object-cover h-[240px]"
-                src={item.img}
+                src={item.addimg}
+                alt ={"Property Image"}
               />
             </CardBody>
             <CardFooter className="text-small justify-between">
-              <b>{item.title}</b>
-              <p className="text-default-500">{item.price}</p>
+              <b>{item.address}</b>
+              <p className="text-default-500">{item.pricetag}</p>
             </CardFooter>
           </Card>
         ))}
@@ -133,7 +121,7 @@ const ResultPage = () => {
         <Pagination
           isCompact
           showControls
-          total={Math.ceil(properties.length / itemsPerPage)}
+          total={Math.ceil(props.length / itemsPerPage)}
           initialPage={1}
           color="warning"
           onChange={handlePageChange}

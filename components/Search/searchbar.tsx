@@ -4,8 +4,20 @@ import { saletypes, propertytypes, priceranges } from "./searchoptions";
 import "styles/searchbar.css";
 import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
+import {useState} from 'react'
 
 export default function SearchBar() {
+  
+    const [selectedSaleType, setSelectedSaleType] = useState('');
+    const [selectedPropertyType, setSelectedPropertyType] = useState('');
+    const [selectedPriceRange, setSelectedPriceRange] = useState('');
+
+    const propertyselections = {
+      saleType: selectedSaleType,
+      propertyType: selectedPropertyType,
+      priceRange: selectedPriceRange
+  };
+
   // Function to handle redirection on Enter key press
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
@@ -13,7 +25,7 @@ export default function SearchBar() {
     }
   };
   return (
-    <div className="searchcontainer flex flex-wrap gap-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-3 justify-center items-center ">
+    <div className="searchcontainer flex flex-wrap gap-4  ">
       <div className="search relative w-full md:w-full lg:w-2/3 xl:w-1/4">
         <input
           type="text"
@@ -23,7 +35,7 @@ export default function SearchBar() {
         />
       </div>
       <div className="sale-type w-4/12 md:w-1/6 lg:w-1/6 xl:w-1/6">
-        <Select label="Sale Type" className="sale-select" radius="sm">
+        <Select label="Sale Type" className="sale-select" radius="sm" onChange={(e) => setSelectedSaleType(e.target.value)}> 
           {saletypes.map((saletype) => (
             <SelectItem key={saletype.value} value={saletype.value}>
               {saletype.label}
@@ -32,7 +44,7 @@ export default function SearchBar() {
         </Select>
       </div>
       <div className="property-types w-5/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
-        <Select label="Property Type" radius="sm">
+        <Select label="Property Type" radius="sm" onChange={(e) => setSelectedPropertyType(e.target.value)}>
           {propertytypes.map((propertytype) => (
             <SelectItem key={propertytype.value} value={propertytype.value}>
               {propertytype.label}
@@ -41,7 +53,7 @@ export default function SearchBar() {
         </Select>
       </div>
       <div className="price-range w-4/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
-        <Select label="Price Range" radius="sm">
+        <Select label="Price Range" radius="sm" onChange={(e) => setSelectedPriceRange(e.target.value)}>
           {priceranges.map((pricerange) => (
             <SelectItem key={pricerange.value} value={pricerange.value}>
               {pricerange.label}
@@ -49,7 +61,12 @@ export default function SearchBar() {
           ))}
         </Select>
       </div>
-      <Link href="/result">
+      <Link href={{
+        pathname: '/result',
+        query: {
+          propertyselections: JSON.stringify(propertyselections)
+      }
+      }}>
         {" "}
         {/* This is the link to the result page */}
         <Button radius="sm" isIconOnly className="w-14 h-14 bg-[#f4f4f5]">

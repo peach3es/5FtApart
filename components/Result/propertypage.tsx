@@ -21,25 +21,24 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import { propertytypes } from "../Search/searchoptions";
+import {getProperty } from "../../backend/lib/helperProperties";
 import { getPriority } from "os";
 
-function PropertyInfo() {
+function PropertyInfo({propertyId}:{propertyId: any}) {
   const { isLoading, isError, data, error } = useQuery(
-    "property",
-    getProperties
+    ["properties", propertyId],
+    () => getProperty(propertyId) // Modify the getProperties function to accept an ID and fetch a single property
   );
-  console.log(data);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {(error as any).message}</div>;
+  if (isError) return <div>Error...</div>;
+
 
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
       <div className="w-1/2 ml-20">
         <Image
-          src="https://static.timesofisrael.com/www/uploads/2020/12/1L.jpg"
+          src={data.addimg}
           className="card-img-top"
           width="100%"
           height="100%"
@@ -48,7 +47,11 @@ function PropertyInfo() {
       </div>
 
       <div className="w-1/2 flex flex-col gap-2">
-        <h2 className="text-2xl">{}</h2>
+      <h2 className="text-4xl font-bold ">{data.address}</h2>
+        <p className="text-lg">{data.city}</p>
+        <p className="text-lg">{data.postalcode}</p>
+        <p className="text-lg">{data.saletype}</p>
+        <p className="text-lg">{data.pricetag}</p>
         <h3 className="text-2xl font-bold">Want to visit the Estate?</h3>
         <Button className="w-1/3" onPress={onOpen}>
           Request Visit

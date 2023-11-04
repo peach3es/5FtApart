@@ -14,6 +14,7 @@ const {
   addProperty,
   putProperty,
   deleteProperty,
+  getPropertiesFiltered
 } = require("./database/controller.js");
 
 const dev = process.env.NODE_ENV !== "production";
@@ -84,6 +85,20 @@ app.prepare().then(() => {
 
   server.get("/api/data/property", (req, res) => {
     res.json({ message: "Hello from Express!" });
+  });
+  
+  server.get("/api/propertyfilter", (req, res) => {
+    const {
+      saleType,
+      propertyType,
+      priceRange
+    } = req.query;
+
+    getPropertiesFiltered(req, res, {
+      saleType,
+      propertyType,
+      priceRange
+    });
   });
 
   server.all("*", (req, res) => {

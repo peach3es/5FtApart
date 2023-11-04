@@ -64,3 +64,10 @@ export async function deleteProperty(propertyId: any) {
   const json = await response.json();
   return json;
 }
+
+// Get filtered properties
+export const getPropertiesFiltered = async (filters = {}) => {
+  const response = await fetch(`${BASE_URL}/api/propertyfilter?${new URLSearchParams(filters)}`);
+  const json = await response.json();
+  return json;
+};

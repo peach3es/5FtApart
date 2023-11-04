@@ -15,7 +15,7 @@ const HomepagePic = () => {
 
   return (
     <div className="pictures w-full relative p-5">
-      <SearchBar />
+      <SearchBar/>
       <div className="picture rounded-lg">
         <Image
           src={randomImage}
