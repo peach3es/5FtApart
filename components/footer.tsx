@@ -1,5 +1,7 @@
 import React from "react";
 import "styles/navbar-footer.css";
+import LogoDark from "public/5ftapartbw.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -9,13 +11,13 @@ const Footer = () => {
           <a href="/" className="flex items-center mb-4 sm:mb-0">
             {/* logo here */}
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              5FtApart
+              <Image src={LogoDark} alt="5ftApart Logo" height={100} />
             </span>
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="/mybroker" className="mr-4 hover:underline md:mr-6 ">
-                MyBroker
+              <a href="/brokers" className="mr-4 hover:underline md:mr-6 ">
+                Brokers
               </a>
             </li>
             <li>

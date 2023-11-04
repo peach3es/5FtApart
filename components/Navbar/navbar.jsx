@@ -14,7 +14,6 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownTrigger,
-  Image,
 } from "@nextui-org/react";
 import {
   ChevronDown,
@@ -25,6 +24,7 @@ import {
   TagUser,
   Scale,
 } from "./icons.jsx";
+import Image from "next/image";
 import Logo from "public/5ftapart.svg";
 
 export default function App() {
@@ -66,7 +66,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} width={100} height={100} />
+            <Image src={Logo} width={150} height={150} />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -75,7 +75,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} width={100} height={100} className="z-10" />
+            <Image src={Logo} width={100} height={100} className="z-20" />
           </Link>
         </NavbarBrand>
         <NavbarItem>
