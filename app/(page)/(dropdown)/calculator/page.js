@@ -94,9 +94,6 @@ export default function Home() {
             </div>
           ))}
         </form>
-        <button onClick={calculateMonthlyPayment}>
-          Calculate
-        </button>
       </div>
     </div>
   );
