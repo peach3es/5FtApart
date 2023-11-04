@@ -42,7 +42,7 @@ function MyBroker() {
   return (
     <section className="flex flex-col h-screen">
       <NavBar />
-      <main className={`${styles.main} flex-grow`}>
+      <main className={`${styles.main} flex-grow mb-8`}>
         <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">
           Broker CRUD Dashboard
         </h1>
