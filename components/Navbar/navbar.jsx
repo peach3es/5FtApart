@@ -14,6 +14,7 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownTrigger,
+  Image,
 } from "@nextui-org/react";
 import {
   ChevronDown,
@@ -24,6 +25,7 @@ import {
   TagUser,
   Scale,
 } from "./icons.jsx";
+import Logo from "public/5ftapart.svg";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -64,7 +66,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            5FtApart
+            <Image src={Logo} width={100} height={100} />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -73,7 +75,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            5FtApart
+            <Image src={Logo} width={100} height={100} className="z-10" />
           </Link>
         </NavbarBrand>
         <NavbarItem>
@@ -84,6 +86,11 @@ export default function App() {
         <NavbarItem>
           <Link href="/myproperty" className="text">
             MyProperty
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/brokers" aria-current="page" className="text">
+            Brokers
           </Link>
         </NavbarItem>
         <NavbarItem>
