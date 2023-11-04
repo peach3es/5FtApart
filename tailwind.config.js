@@ -7,7 +7,6 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/flowbite-react/**/*.js",
     "./pages/**/*.{ts,tsx}",
     "./public/**/*.html",
   ],
@@ -19,5 +18,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui(), require("flowbite/plugin")],
+  plugins: [nextui()],
 };

@@ -1,11 +1,9 @@
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import { ReactQueryProvider } from "./ReactQueryProvider";
-config.autoAddCss = false;
 
 import "styles/globals.css";
 import { Inter } from "next/font/google";
 import { ReduxProvider } from "./provider";
+// import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
