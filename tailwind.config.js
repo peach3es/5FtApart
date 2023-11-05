@@ -13,7 +13,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sch: "#f4f4f5",
+        w: "#f4f4f5",
+        db: "#293064",
+        b: "#6f87c0",
+        dg: "#7d8e9c",
+        g: "#bfbec0",
+        pr: "#ccb8d6",
+        w2: "#fefbff",
       },
     },
   },

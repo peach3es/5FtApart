@@ -1,6 +1,7 @@
 .property-cards {
   padding: 2rem;
-  background: #eeeeee;
+  /* background: #eeeeee; */
+  box-shadow: 11px 11px 22px #dadada, -11px -11px 22px #ffffff;
 }
 
 .add-img {

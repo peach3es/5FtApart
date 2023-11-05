@@ -11,6 +11,7 @@ import Image from "next/image";
 import { RootState } from "../Myproperty/rootstate";
 import { BiUserPlus } from "react-icons/bi";
 import { Button, CircularProgress } from "@nextui-org/react";
+import "@/styles/propertycard.css";
 
 export default function Table() {
   const { isLoading, isError, data, error } = useQuery("users", getUsers);
@@ -28,12 +29,12 @@ export default function Table() {
   if (isError) return <div>Error FDSAFDASDASSDAS</div>;
 
   return (
-    <div className="property-cards rounded-lg bg-zinc-100 p-10 mx-8">
+    <div className="property-cards rounded-lg bg-w p-10 mx-8">
       <div className="grid lg:grid-cols-2">
         <h2 className="text-2xl font-bold ml-2 mb-2">My Brokers</h2>
         <div className="grid justify-items-end">
           <Button
-            className="bg-black text-white mb-4 w-min"
+            className="bg-pr text-w2 mb-4 w-min"
             size="lg"
             onPress={handler}
           >

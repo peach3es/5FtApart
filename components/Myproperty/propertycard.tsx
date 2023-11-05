@@ -190,7 +190,7 @@ function CardProperty({
               >
                 <Button
                   variant="solid"
-                  color="primary"
+                  className="bg-pr text-w2"
                   size="sm"
                   onPress={() => {
                     dispatch(updateAction(obj._id));

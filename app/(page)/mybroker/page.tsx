@@ -47,7 +47,7 @@ function MyBroker() {
           Broker CRUD Dashboard
         </h1>
 
-        <div className="flex justify-between py-5 px-unit-8 ">
+        <div className="flex justify-between px-unit-8 ">
           {deleteID ? DeleteComponent({ deleteHandler, cancelHandler }) : <></>}
         </div>
 

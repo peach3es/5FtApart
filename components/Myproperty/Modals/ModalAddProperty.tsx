@@ -61,31 +61,32 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       console.log("Please fill out the form");
       setIsEmpty(true); // Set isEmpty to true when data is empty
       setIsErrorModalOpen(true);
+    } else {
+      console.log(formData);
+      let {
+        addimg,
+        address,
+        pricetag,
+        description,
+        postalcode,
+        city,
+        saletype,
+        propertytype,
+      } = formData;
+
+      const model = {
+        addimg,
+        address,
+        pricetag,
+        description,
+        postalcode,
+        city,
+        saletype,
+        propertytype,
+      };
+
+      addMutation.mutate(model); //addMutation.mutate({}) is the request
     }
-    console.log(formData);
-    let {
-      addimg,
-      address,
-      pricetag,
-      description,
-      postalcode,
-      city,
-      saletype,
-      propertytype,
-    } = formData;
-
-    const model = {
-      addimg,
-      address,
-      pricetag,
-      description,
-      postalcode,
-      city,
-      saletype,
-      propertytype,
-    };
-
-    addMutation.mutate(model); //addMutation.mutate({}) is the request
   };
 
   const handleModalClose = () => {
@@ -244,7 +245,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                 >
                   Close
                 </Button>
-                <Button color="primary" onPress={handleSubmit}>
+                <Button className="bg-pr text-w2" onPress={handleSubmit}>
                   Save
                 </Button>
               </ModalFooter>

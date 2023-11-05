@@ -25,7 +25,7 @@ import {
   Scale,
 } from "./icons.jsx";
 import Image from "next/image";
-import Logo from "public/5ftapart.svg";
+import LogoDark from "public/5ftapartbw.png";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -54,7 +54,7 @@ export default function App() {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className="navbar"
+      className="navbar bg-w"
     >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle
@@ -66,7 +66,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} alt="logo image" width={150} height={150} />
+            <Image src={LogoDark} alt="logo image" width={150} height={150} />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -75,7 +75,13 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} alt="logo image" width={100} height={100} className="z-20" />
+            <Image
+              src={LogoDark}
+              alt="logo image"
+              width={100}
+              height={100}
+              className="z-20"
+            />
           </Link>
         </NavbarBrand>
         <NavbarItem>
@@ -161,7 +167,7 @@ export default function App() {
             color="default"
             href="login"
             variant="flat"
-            className="text button"
+            className="text-[#fefbff] button bg-pr"
           >
             Sign Up
           </Button>

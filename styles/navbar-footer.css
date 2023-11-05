@@ -1,5 +1,5 @@
 .navbar {
-  background: #eeeeee;
+  /* background: #eeeeee; */
   border-radius: 0 0 10px 10px;
   backdrop-filter: blur(10px);
   color: #222222;
@@ -25,7 +25,7 @@
 
 .footer {
   width: 100%;
-  background: #eeeeee;
+  /* background: #eeeeee; */
   overflow-x: hidden;
 
   border-radius: 10px 10px 0 0;

@@ -32,7 +32,7 @@ export default function ModalEditProperty({ isOpen, onClose }: any) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button className="bg-pr text-w2" onPress={onClose}>
                   Save
                 </Button>
               </ModalFooter>

@@ -21,19 +21,19 @@ const MyProperty = () => {
   const onAddClose = () => setAddOpen(false);
 
   return (
-    <div className="main-page flex flex-col h-screen">
+    <div className="main-page flex flex-col h-full">
       <NavBar />
       <main className={`${styles.main} flex-grow`}>
         <h1 className="text-3xl font-bold ml-8 mt-5">
           Property CRUD Dashboard
         </h1>
-        <div className="property-cards rounded-lg m-8">
-          <div className="title-row flex flex-row justify-between">
-            <h2 className="text-2xl font-bold ml-2">My Properties</h2>
+        <div className="property-cards rounded-lg m-8 bg-w">
+          <div className="title-row flex flex-row justify-between ">
+            <h2 className="text-2xl font-bold ml-2 ">My Properties</h2>
             <div className="button-list flex flex-row gap-3 mr-5 mb-2">
               <Button
                 variant="solid"
-                color="danger"
+                className="bg-g text-w2 "
                 size="lg"
                 onPress={onEditOpen}
               >
@@ -42,7 +42,7 @@ const MyProperty = () => {
               </Button>
               <Button
                 variant="solid"
-                color="success"
+                className="bg-pr text-w2"
                 size="lg"
                 onPress={onAddOpen}
               >

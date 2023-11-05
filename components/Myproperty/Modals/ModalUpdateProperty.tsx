@@ -213,7 +213,7 @@ export default function ModalUpdateProperty({
                 >
                   Cancel
                 </Button>
-                <Button color="warning" onPress={handleSubmit}>
+                <Button className="text-w2 bg-pr" onPress={handleSubmit}>
                   Update
                 </Button>
               </ModalFooter>

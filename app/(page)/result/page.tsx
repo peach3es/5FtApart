@@ -43,7 +43,7 @@ const ResultPage = () => {
 
   const handleSearch = async (filters: any) => {
     const filteredProps = await getPropertiesFiltered(filters);
-    console.log(filteredProps)
+    console.log(filteredProps);
     setProps(filteredProps);
   };
 
@@ -52,14 +52,14 @@ const ResultPage = () => {
       const response = await fetch("/api/property");
       const properties = await response.json();
       const propertyFilters = searchParams.get("propertyselections");
-      
+
       if (propertyFilters) {
         const results = JSON.parse(propertyFilters);
-        setSelectedSaleType(results.saleType)
-        setSelectedPropertyType(results.propertyType)
-        setSelectedPriceRange(results.priceRange)
-        setSelectedSearchTerm(results.term)
-        
+        setSelectedSaleType(results.saleType);
+        setSelectedPropertyType(results.propertyType);
+        setSelectedPriceRange(results.priceRange);
+        setSelectedSearchTerm(results.term);
+
         handleSearch(results);
       } else {
         console.error("propertyselections not found in the query parameters.");
@@ -92,64 +92,78 @@ const ResultPage = () => {
 
   return (
     <main className={`${styles.main} flex-grow`}>
-      <form onSubmit={handleSearch}>
-    <div className="searchcontainer flex flex-wrap gap-4 ml-72">
-      <div className="search relative w-full md:w-full lg:w-2/3 xl:w-1/4">
-        <input
-          type="text"
-          className="property-search pl-8"
-          placeholder="Region, City, Street"
-          onKeyDown={handleKeyPress}
-          value={searchTerm}
-          onChange={(e) => setSelectedSearchTerm(e.target.value)}
-        />
-      </div>
-      <div className="sale-type w-4/12 md:w-1/6 lg:w-1/6 xl:w-1/6">
-        <Select label="Sale Type" className="sale-select" radius="sm" onChange={(e) => setSelectedSaleType(e.target.value)} selectedKeys={selectedSaleType? [selectedSaleType] : []}>
-          {saletypes.map((saletype) => (
-            <SelectItem key={saletype.value} value={saletype.value}>
-              {saletype.label}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-      <div className="property-types w-5/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
-        <Select label="Property Type" radius="sm"  onChange={(e) => setSelectedPropertyType(e.target.value)} selectedKeys={selectedPropertyType? [selectedPropertyType] : []}>
-          {propertytypes.map((propertytype) => (
-            <SelectItem key={propertytype.value} value={propertytype.value}>
-              {propertytype.label}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-      <div className="price-range w-4/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
-        <Select label="Price Range" radius="sm"  onChange={(e) => setSelectedPriceRange(e.target.value)} selectedKeys={selectedPriceRange? [selectedPriceRange] : []}>
-          {priceranges.map((pricerange) => (
-            <SelectItem key={pricerange.value} value={pricerange.value}>
-              {pricerange.label}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-      
-        {" "}
-        {/* This is the link to the result page */}
-        <Link
-        href={{
-          pathname: "/result",
-          query: {
-            propertyselections: JSON.stringify(propertyselections),
-          },
-        }}
-      >
-        {" "}
-        {/* This is the link to the result page */}
-        <Button radius="sm" isIconOnly className="w-14 h-14 bg-[#f4f4f5]">
-          <BiSearch size={42} className="p-2  text-[#7d7d7f]" />
-        </Button>
-      </Link>
-    </div>
-    </form>
+      <form onSubmit={handleSearch} className="justify-center flex">
+        <div className="p-5 flex flex-wrap gap-4 justify-center w-[70vw]">
+          <div className="search relative w-full md:w-full lg:w-2/3 xl:w-1/4">
+            <input
+              type="text"
+              className="property-search pl-8"
+              placeholder="Region, City, Street"
+              onKeyDown={handleKeyPress}
+              value={searchTerm}
+              onChange={(e) => setSelectedSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className="sale-type w-4/12 md:w-1/6 lg:w-1/6 xl:w-1/6">
+            <Select
+              label="Sale Type"
+              className="sale-select"
+              radius="sm"
+              onChange={(e) => setSelectedSaleType(e.target.value)}
+              selectedKeys={selectedSaleType ? [selectedSaleType] : []}
+            >
+              {saletypes.map((saletype) => (
+                <SelectItem key={saletype.value} value={saletype.value}>
+                  {saletype.label}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="property-types w-5/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
+            <Select
+              label="Property Type"
+              radius="sm"
+              onChange={(e) => setSelectedPropertyType(e.target.value)}
+              selectedKeys={selectedPropertyType ? [selectedPropertyType] : []}
+            >
+              {propertytypes.map((propertytype) => (
+                <SelectItem key={propertytype.value} value={propertytype.value}>
+                  {propertytype.label}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
+          <div className="price-range w-4/12 md:w-3/12 lg:w-3/12 xl:w-1/6">
+            <Select
+              label="Price Range"
+              radius="sm"
+              onChange={(e) => setSelectedPriceRange(e.target.value)}
+              selectedKeys={selectedPriceRange ? [selectedPriceRange] : []}
+            >
+              {priceranges.map((pricerange) => (
+                <SelectItem key={pricerange.value} value={pricerange.value}>
+                  {pricerange.label}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>{" "}
+          {/* This is the link to the result page */}
+          <Link
+            href={{
+              pathname: "/result",
+              query: {
+                propertyselections: JSON.stringify(propertyselections),
+              },
+            }}
+          >
+            {" "}
+            {/* This is the link to the result page */}
+            <Button radius="sm" isIconOnly className="w-14 h-14 bg-pr">
+              <BiSearch size={42} className="p-2  text-[#fefbff]" />
+            </Button>
+          </Link>
+        </div>
+      </form>
       <Divider className="px-5" />
       {/* <div className="flex justify-center mt-5"> pagination aren't in sync yet so we're only using one of them
         <Pagination
@@ -182,7 +196,9 @@ const ResultPage = () => {
             </CardBody>
             <CardFooter className="text-small justify-between">
               <b>{item.address}</b>
-              <p className="text-default-500">${new Intl.NumberFormat('en-US').format(item.pricetag)}</p>
+              <p className="text-default-500">
+                ${new Intl.NumberFormat("en-US").format(item.pricetag)}
+              </p>
             </CardFooter>
           </Card>
         ))}
