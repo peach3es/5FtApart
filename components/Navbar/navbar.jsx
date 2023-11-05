@@ -66,7 +66,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} width={150} height={150} />
+            <Image src={Logo} alt="logo image" width={150} height={150} />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -75,7 +75,7 @@ export default function App() {
         <NavbarBrand>
           {/* logo here */}
           <Link className="font-bold text-inherit" href="/">
-            <Image src={Logo} width={100} height={100} className="z-20" />
+            <Image src={Logo} alt="logo image" width={100} height={100} className="z-20" />
           </Link>
         </NavbarBrand>
         <NavbarItem>
