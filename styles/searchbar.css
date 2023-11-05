@@ -1,9 +1,9 @@
 .searchcontainer {
-  background: #47474789;
+  /* background: #47474789; */
   border-radius: 10px;
   width: 70vw;
   padding: 1rem;
-  border: solid 1px #a3a3a3dd;
+  /* border: solid 1px #a3a3a3dd; */
 }
 
 input::placeholder {

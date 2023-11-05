@@ -20,42 +20,38 @@ import {
 } from "@/components/Search/searchoptions";
 import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
-import { useSearchParams } from 'next/navigation'
-import {getPropertiesFiltered} from '../../../backend/lib/helperProperties'
+import { useSearchParams } from "next/navigation";
+import { getPropertiesFiltered } from "../../../backend/lib/helperProperties";
 import { filterProps } from "framer-motion";
 import SearchBar from "@/components/Search/searchbar";
 
 const ResultPage = () => {
-  const [props, setProps] = useState([])
+  const [props, setProps] = useState([]);
   const searchParams = useSearchParams();
 
+  const handleSearch = async (filters: any) => {
+    const filteredProps = await getPropertiesFiltered(filters);
+    setProps(filteredProps);
+  };
 
-const handleSearch = async (filters: any) => {
-  const filteredProps = await getPropertiesFiltered(filters);
-  setProps(filteredProps);
-  
-};
+  useEffect(() => {
+    const getProps = async () => {
+      const response = await fetch("/api/property");
+      const properties = await response.json();
+      const propertyFilters = searchParams.get("propertyselections");
 
-useEffect(() => {
+      if (propertyFilters) {
+        const results = JSON.parse(propertyFilters);
+        handleSearch(results);
+      } else {
+        console.error("propertyselections not found in the query parameters.");
+      }
 
-  const getProps = async() => {
-    const response = await fetch('/api/property');
-    const properties = await response.json();
-    const propertyFilters = searchParams.get('propertyselections')
+      setProps(properties);
+    };
 
-    if (propertyFilters) {
-      const results = JSON.parse(propertyFilters);
-      handleSearch(results)
-  } else {
-      console.error('propertyselections not found in the query parameters.');
-    }
-  
-    setProps(properties);
-  }
-
-  getProps();
-
-}, [searchParams]);
+    getProps();
+  }, [searchParams]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
@@ -65,7 +61,6 @@ useEffect(() => {
 
   const indexOfLastProperty = currentPage * itemsPerPage;
   const indexOfFirstProperty = indexOfLastProperty - itemsPerPage;
-
 
   const handleKeyPress = (event: any) => {
     if (event.key === "Enter") {
@@ -79,7 +74,7 @@ useEffect(() => {
 
   return (
     <main className={`${styles.main} flex-grow`}>
-      <SearchBar/>
+      <SearchBar className="items-center place-self-center" />
       <Divider className="px-5" />
       {/* <div className="flex justify-center mt-5"> pagination aren't in sync yet so we're only using one of them
         <Pagination
@@ -107,7 +102,7 @@ useEffect(() => {
                 width="100%"
                 className="w-full object-cover h-[240px]"
                 src={item.addimg}
-                alt ={"Property Image"}
+                alt={"Property Image"}
               />
             </CardBody>
             <CardFooter className="text-small justify-between">
