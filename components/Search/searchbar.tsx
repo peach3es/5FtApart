@@ -7,11 +7,13 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function SearchBar({ className }: any) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedSaleType, setSelectedSaleType] = useState("");
   const [selectedPropertyType, setSelectedPropertyType] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
 
   const propertyselections = {
+    term: searchTerm,
     saleType: selectedSaleType,
     propertyType: selectedPropertyType,
     priceRange: selectedPriceRange,
@@ -31,6 +33,8 @@ export default function SearchBar({ className }: any) {
           className="property-search pl-8"
           placeholder="Region, City, Street"
           onKeyDown={handleKeyPress}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
         />
       </div>
       <div className="sale-type w-4/12 md:w-1/6 lg:w-1/6 xl:w-1/6">

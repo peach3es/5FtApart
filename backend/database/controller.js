@@ -175,7 +175,10 @@ async function deleteProperty(req, res) {
 async function getPropertiesFiltered(req, res, filters = {}) {
   try {
     let query = {};
-
+    
+    if (filters.term) {
+      query.address = new RegExp(filters.term, "i"); // Assuming the properties have an address field
+    }
     if (filters.saleType) {
       query.saletype = filters.saleType;
     }

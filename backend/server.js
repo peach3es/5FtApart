@@ -89,12 +89,14 @@ app.prepare().then(() => {
   
   server.get("/api/propertyfilter", (req, res) => {
     const {
+      term,
       saleType,
       propertyType,
       priceRange
     } = req.query;
 
     getPropertiesFiltered(req, res, {
+      term,
       saleType,
       propertyType,
       priceRange
