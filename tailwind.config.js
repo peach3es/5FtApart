@@ -22,6 +22,10 @@ module.exports = {
         dpr: "#B19BBD ",
         w2: "#fefbff",
       },
+      fontFamily: {
+        PPGoshaReg: ["PPGoshaReg", "sans-serif"],
+        PPGoshaBold: ["PPGoshaBold", "sans-serif"],
+      },
     },
   },
   darkMode: "class",

@@ -20,20 +20,32 @@ function LogInForm() {
 
   return (
     <div className="flex flex-row gap-5 my-5 justify-center place-items-center w-full">
-      <div className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full ml-5 rounded-xl">
+      <div
+        className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full ml-5 rounded-xl flex-col relative"
+        style={{
+          backgroundImage: "url(/pictures/login/pic5.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "50% 55%",
+        }}
+      >
         <form
-          className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2"
+          className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2 absolute z-10"
           id="Login"
         >
+          <div className="mt-5 text-4xl bold-2xl bg-[#eeeeee] rounded-xl p-5 cursor-default text-center font-PPGoshaReg">
+            Welcome Back!
+          </div>
           <div className="flex flex-col gap-3 p-5 justify-center">
             <Input
+              isRequired
               type="email"
               label="Username:"
               placeholder="Email"
               classNames={{ input: "border-none focus:ring-0" }}
-              className="max-w-sm"
+              className="max-w-2xl"
             />
             <Input
+              isRequired
               label="Password:"
               placeholder="Enter your password"
               endContent={
@@ -53,7 +65,6 @@ function LogInForm() {
                 input: "border-none focus:ring-0 hide-browser-eye-icon",
               }}
               type={isVisible ? "text" : "password"}
-              className=""
             />
             <p className="text-center text-small">
               Don&apos;t have an account?{" "}

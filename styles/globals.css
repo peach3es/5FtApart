@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: PPGoshaReg;
+  src: url("/fonts/PPGoshaSans-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: PPGoshaBold;
+  src: url("/fonts/PPGoshaSans-Bold.otf") format("opentype");
+}

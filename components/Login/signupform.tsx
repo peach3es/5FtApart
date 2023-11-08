@@ -33,8 +33,18 @@ export default function Signup() {
           }}
         />
       </div>
-      <div className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full mr-5 rounded-xl">
+      <div
+        className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full mr-5 rounded-xl"
+        style={{
+          backgroundImage: "url(/pictures/login/pic5.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "50% 55%",
+        }}
+      >
         <form className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2">
+          <div className="mt-5 text-4xl bold-2xl bg-[#eeeeee] rounded-xl p-5 cursor-default text-center font-PPGoshaReg">
+            Sign Up
+          </div>
           <div className="flex flex-col gap-3 p-5 justify-center">
             <Input
               isRequired
@@ -42,7 +52,7 @@ export default function Signup() {
               placeholder="Enter your name"
               type="text"
               classNames={{ input: "border-none focus:ring-0" }}
-              className="max-w-sm"
+              className="max-w-2xl"
             />
             <Input
               isRequired
@@ -50,9 +60,10 @@ export default function Signup() {
               placeholder="Enter your email"
               type="email"
               classNames={{ input: "border-none focus:ring-0" }}
-              className="max-w-sm"
+              className="max-w-2xl"
             />
             <Input
+              isRequired
               label="Password:"
               placeholder="Enter your password"
               endContent={
