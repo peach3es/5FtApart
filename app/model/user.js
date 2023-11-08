@@ -10,7 +10,9 @@ const userSchema = new Schema({
     email: String,
     password: String,
     date: String,
-    activeListings: Number
+    activeListings: Number,
+    user_type: String,
+    
 })
 
 const Users = models.user || model('user', userSchema)
