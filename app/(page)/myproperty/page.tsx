@@ -21,7 +21,7 @@ const MyProperty = () => {
   const onAddClose = () => setAddOpen(false);
 
   return (
-    <div className="main-page flex flex-col h-full">
+    <div className="main-page flex flex-col h-screen">
       <NavBar />
       <main className={`${styles.main} flex-grow`}>
         <h1 className="text-3xl font-bold ml-8 mt-5">

@@ -87,7 +87,11 @@ export default function SearchBar({ className }: any) {
       >
         {" "}
         {/* This is the link to the result page */}
-        <Button radius="sm" isIconOnly className="w-14 h-14 bg-pr">
+        <Button
+          radius="sm"
+          isIconOnly
+          className="w-14 h-14 bg-pr hover:ring ring-dpr"
+        >
           <BiSearch size={42} className="p-2  text-w" />
         </Button>
       </Link>

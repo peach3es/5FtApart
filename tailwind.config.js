@@ -19,6 +19,7 @@ module.exports = {
         dg: "#7d8e9c",
         g: "#bfbec0",
         pr: "#ccb8d6",
+        dpr: "#B19BBD ",
         w2: "#fefbff",
       },
     },

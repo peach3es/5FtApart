@@ -1,12 +1,14 @@
 "use client";
-
-import React from "react"; // Import useState hook
-import { Image, Input, Button, Link } from "@nextui-org/react";
-import "styles/form.css";
+import { Link } from "@nextui-org/link";
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
+import { Image } from "@nextui-org/image";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { useState } from "react";
+import "styles/form.css";
 
-function LogInForm() {
+export default function Signup() {
   const images = [
     "/pictures/login/pic1.jpg",
     "/pictures/login/pic2.jpg",
@@ -14,22 +16,39 @@ function LogInForm() {
     "/pictures/login/pic4.jpg",
   ];
   const randomImage = images[Math.floor(Math.random() * images.length)];
-  const [isVisible, setIsVisible] = React.useState(false);
-
+  const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-
   return (
     <div className="flex flex-row gap-5 my-5 justify-center place-items-center w-full">
-      <div className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full ml-5 rounded-xl">
-        <form
-          className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2"
-          id="Login"
-        >
+      <div className="w-1/2 ml-5">
+        <Image
+          src={randomImage}
+          alt="5ftapart"
+          width="100%"
+          height="50%"
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+            height: "90vh",
+          }}
+        />
+      </div>
+      <div className="login-container w-1/2 justify-center place-items-center flex bg-slate-300 h-full mr-5 rounded-xl">
+        <form className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2">
           <div className="flex flex-col gap-3 p-5 justify-center">
             <Input
+              isRequired
+              label="Name"
+              placeholder="Enter your name"
+              type="text"
+              classNames={{ input: "border-none focus:ring-0" }}
+              className="max-w-sm"
+            />
+            <Input
+              isRequired
+              label="Email"
+              placeholder="Enter your email"
               type="email"
-              label="Username:"
-              placeholder="Email"
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-sm"
             />
@@ -56,34 +75,19 @@ function LogInForm() {
               className=""
             />
             <p className="text-center text-small">
-              Don&apos;t have an account?{" "}
-              <Link size="sm" href="/signup">
-                Signup
+              Already have an account?{" "}
+              <Link size="sm" href="/login">
+                Login
               </Link>
             </p>
             <div className="flex gap-2 justify-end">
               <Button fullWidth color="primary">
-                Log In
+                Sign up
               </Button>
             </div>
           </div>
         </form>
       </div>
-      <div className="w-1/2 mr-5">
-        <Image
-          src={randomImage}
-          alt="5ftapart"
-          width="100%"
-          height="50%"
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-            height: "90vh",
-          }}
-        />
-      </div>
     </div>
   );
 }
-
-export default LogInForm;

@@ -22,7 +22,7 @@ export default function Table() {
 
   if (isLoading)
     return (
-      <div className="w-full flex text-xl text-center justify-center items-center rounded-lg bg-zinc-100 p-10 mx-8">
+      <div className=" flex text-xl text-center justify-center items-center rounded-lg bg-w p-10 mx-8">
         <CircularProgress label="Loading..." color="primary" />
       </div>
     );
@@ -47,27 +47,27 @@ export default function Table() {
       </div>
       <table className="table-auto w-full">
         <thead>
-          <tr className="bg-gray-800 text-center">
+          <tr className="bg-dg text-center">
             <th className="px-16 py-2 rounded-tl-lg">
-              <span className="text-gray-200">Avatar</span>
+              <span className="text-w">Avatar</span>
             </th>
             <th className="px-16 py-2">
-              <span className="text-gray-200">Name</span>
+              <span className="text-w">Name</span>
             </th>
             <th className="px-16 py-2">
-              <span className="text-gray-200">Email</span>
+              <span className="text-w">Email</span>
             </th>
             <th className="px-16 py-2">
-              <span className="text-gray-200">Password</span>
+              <span className="text-w">Password</span>
             </th>
             <th className="px-16 py-2">
-              <span className="text-gray-200">Birthday</span>
+              <span className="text-w">Birthday</span>
             </th>
             <th className="px-16 py-2">
-              <span className="text-gray-200">Active Listings</span>
+              <span className="text-w">Active Listings</span>
             </th>
             <th className="px-16 py-2 rounded-tr-lg">
-              <span className="text-gray-200">Actions</span>
+              <span className="text-w">Actions</span>
             </th>
           </tr>
         </thead>
@@ -117,7 +117,7 @@ function Tr({
   };
 
   return (
-    <tr className="bg-gray-50 text-center">
+    <tr className="bg-gray-50 text-center rounded-bl-xl">
       <td className="px-16 py-2 flex justify-center items-center">
         <Image
           src={avatar || "#"}
@@ -144,10 +144,10 @@ function Tr({
       </td>
       <td className=" px-16 py-2  gap-5">
         <button className="cursor-pointer pr-2" onClick={onUpdate}>
-          <BiEdit size={25} color={"rgb(34,197,94)"} />
+          <BiEdit size={25} className="text-b" />
         </button>
         <button className="cursor-pointer">
-          <BiTrashAlt size={25} color={"rgb(244,63,94)"} onClick={onDelete} />
+          <BiTrashAlt size={25} className="text-danger" onClick={onDelete} />
         </button>
       </td>
     </tr>
