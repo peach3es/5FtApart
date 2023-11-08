@@ -9,7 +9,7 @@ const Properties = require("../../app/model/property");
 // get: http://localhost:3000/api/users
 async function getUsers(req, res) {
   try {
-    const users = await Users.find({});
+    const users = await Users.find({user_type:'broker'}); 
 
     if (!users) return res.status(404).json({ error: "Data not Found" });
     res.status(200).json(users);

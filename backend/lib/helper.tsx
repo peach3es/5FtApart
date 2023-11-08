@@ -32,7 +32,7 @@ export async function addUser(formData: any) {
 
     return json;
   } catch (error) {
-    return error;
+    return error; 
   }
 }
 

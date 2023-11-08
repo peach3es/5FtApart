@@ -7,6 +7,7 @@ const models = mongoose.models;
 const offerSchema = new Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   
+  
   properties: [propertySchema],
   
 });
