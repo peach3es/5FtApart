@@ -17,13 +17,13 @@ const rows = [
   {
     key: "1",
     name: "Thomas Kamil Brochet",
-    role: "Front End Developper",
+    role: "Front End Developer",
     id: "40121143",
   },
   {
     key: "2",
     name: "Charles Atanacio",
-    role: "Back End Developper",
+    role: "Back End Developer",
     id: "40176314",
   },
   {
@@ -35,19 +35,19 @@ const rows = [
   {
     key: "4",
     name: "Zhan Jun Cheung",
-    role: "Front End Developper",
+    role: "Front End Developer",
     id: "40212301",
   },
   {
     key: "5",
     name: "Peizhe Tian",
-    role: "Front End Developer",
+    role: "Full Stack Devekloper",
     id: "40191463",
   },
   {
     key: "6",
     name: "Patrick Cimpean",
-    role: "Back End Developper",
+    role: "Back End Developer",
     id: "40211106",
   },
 ];
@@ -140,12 +140,15 @@ const HomePage = () => {
         <h2 className="my-4 font-bold text-xl">License</h2>
         <p className="ml-2">
           Licensed under the{" "}
-          <a href="https://github.com/nextui-org/next-app-template/blob/main/LICENSE" className="text-primary">
+          <a
+            href="https://github.com/nextui-org/next-app-template/blob/main/LICENSE"
+            className="text-pastelblue"
+          >
             MIT license
           </a>
           .
         </p>
-        <Button color="primary" className="mt-6">
+        <Button color="secondary" className="mt-6">
           <a
             href="https://github.com/peach3es/Happy_Rainbow_Unicorn-soen341F2023"
             target="_blank"
