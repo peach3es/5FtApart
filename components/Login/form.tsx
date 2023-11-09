@@ -40,7 +40,7 @@ function LogInForm() {
             <Input
               isRequired
               type="email"
-              label="Username:"
+              label="Email:"
               placeholder="Email"
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
@@ -68,7 +68,7 @@ function LogInForm() {
               type={isVisible ? "text" : "password"}
             />
             <p className="text-center text-small">
-              Dont have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 size="sm"
                 href="/signup"
