@@ -23,7 +23,7 @@ export default function Table() {
   if (isLoading)
     return (
       <div className=" flex text-xl text-center justify-center items-center rounded-lg bg-w p-10 mx-8">
-        <CircularProgress label="Loading..." color="primary" />
+        <CircularProgress label="Loading..." color="secondary" />
       </div>
     );
   if (isError) return <div>Error FDSAFDASDASSDAS</div>;
@@ -120,7 +120,7 @@ function Tr({
     <tr className="bg-gray-50 text-center rounded-bl-xl">
       <td className="px-16 py-2 flex justify-center items-center">
         <Image
-          src={avatar || "#"}
+          src={avatar || "/"}
           alt=""
           height={200}
           width={200}
