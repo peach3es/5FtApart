@@ -11,12 +11,18 @@ import "styles/form.css";
 import { addUser } from "@/backend/lib/helper";
 
 const formReducer = (state: any, event: any) => {
+  if (event.target.type === "checkbox") {
+    return {
+      ...state,
+      [event.target.name]: event.target.checked,
+    };
+  }
   return {
     ...state,
     // [event.target.name]: event.target.value,
-    ...(event && event.target.checked && event.target.name
+    ...(event && event.target && event.target.name
       ? { [event.target.name]: event.target.value }
-      : { [event.target.name]: event.target.checked }),
+      : {}),
   };
 };
 

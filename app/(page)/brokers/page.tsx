@@ -38,9 +38,9 @@ export default function ResultPage() {
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">
-                  Broker's Name
+                  Broker&apos;s Name
                 </h4>
-                <p>Broker's Information</p>
+                <p>Broker&apos;s Information</p>
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-1">
                     <p className=" text-default-400 text-small">
