@@ -9,7 +9,7 @@ const Properties = require("../../app/model/property");
 // get: http://localhost:3000/api/users
 async function getUsers(req, res) {
   try {
-    const users = await Users.find();
+    const users = await Users.find({ user_type: "broker" });
     // const users = await Users.find({user_type: "broker"});
 
     if (!users) return res.status(404).json({ error: "Data not Found" });
@@ -79,6 +79,22 @@ async function deleteUser(req, res) {
     }
   } catch (error) {
     res.status(404).json({ error: "Error while deleting user" });
+  }
+}
+async function getUsersFiltered(req, res, filters = {}) {
+  try {
+    let query = {};
+
+    if (filters.term) {
+      query.name = new RegExp(filters.term, "i");
+    }
+
+    const user = await Users.find(query);
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
 
@@ -201,17 +217,16 @@ async function getPropertiesFiltered(req, res, filters = {}) {
   }
 }
 
-async function checkUser(req, res){
+async function checkUser(req, res) {
   try {
-    const {email} = await req.params
-    const user = await Users.findOne({email}).select("_id")
-    console.log(user)
+    const { email } = await req.params;
+    const user = await Users.findOne({ email }).select("_id");
+    console.log(user);
     return res.status(200).json(user);
-  } catch (error){
-    res.status(500).json({ error: error.message});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 }
-
 
 module.exports = {
   getUsers: getUsers,
@@ -225,5 +240,6 @@ module.exports = {
   putProperty: putProperty,
   deleteProperty: deleteProperty,
   getPropertiesFiltered: getPropertiesFiltered,
-  checkUser: checkUser
+  checkUser: checkUser,
+  getUsersFiltered: getUsersFiltered,
 };

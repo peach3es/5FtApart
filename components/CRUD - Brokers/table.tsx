@@ -26,7 +26,12 @@ export default function Table() {
         <CircularProgress label="Loading..." color="secondary" />
       </div>
     );
-  if (isError) return <div>Error FDSAFDASDASSDAS</div>;
+  if (isError)
+    return (
+      <div className=" flex text-xl text-center justify-center items-center rounded-lg bg-w p-10 mx-8">
+        Error: {String(error)}
+      </div>
+    );
 
   return (
     <div className="property-cards rounded-lg bg-w p-10 mx-8">

@@ -165,17 +165,6 @@ const ResultPage = () => {
         </div>
       </form>
       <Divider className="px-5" />
-      {/* <div className="flex justify-center mt-5"> pagination aren't in sync yet so we're only using one of them
-        <Pagination
-          isCompact
-          showControls
-          total={Math.ceil(properties.length / itemsPerPage)}
-          initialPage={1}
-          color="warning"
-          onChange={handlePageChange}
-        />
-      </div> */}
-
       <div className="result-content p-5 grid grid-cols-3 gap-x-4 gap-y-8 mx-72">
         {props.map((item: any) => (
           <Card

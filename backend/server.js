@@ -7,7 +7,8 @@ const {
   postUser,
   putUser,
   deleteUser,
-  checkUser
+  checkUser,
+  getUsersFiltered,
 } = require("./database/controller.js");
 const {
   getProperties,
@@ -15,7 +16,7 @@ const {
   addProperty,
   putProperty,
   deleteProperty,
-  getPropertiesFiltered
+  getPropertiesFiltered,
 } = require("./database/controller.js");
 
 const dev = process.env.NODE_ENV !== "production";
@@ -32,9 +33,9 @@ app.prepare().then(() => {
 
   // Add your Express middleware and routes here
 
-  server.get("/api/userExists/:email" , async (req, res) => {
+  server.get("/api/userExists/:email", async (req, res) => {
     checkUser(req, res);
-  })
+  });
 
   server.get("/api/users", (req, res) => {
     getUsers(req, res);
@@ -59,12 +60,21 @@ app.prepare().then(() => {
     deleteUser(req, res);
   });
 
+  server.get("/api/userfilter", (req, res) => {
+    const { term } = req.query;
+    getUsersFiltered(req, res, {
+      term,
+    });
+  });
+
   server.get("/api/data", (req, res) => {
     res.json({ message: "Hello from Express!" });
   });
 
+  //---------------------------------------------------------------
   // Add your Express middleware and routes here
   //For properties
+  //---------------------------------------------------------------
   server.get("/api/property", (req, res) => {
     getProperties(req, res);
   });
@@ -91,20 +101,15 @@ app.prepare().then(() => {
   server.get("/api/data/property", (req, res) => {
     res.json({ message: "Hello from Express!" });
   });
-  
+
   server.get("/api/propertyfilter", (req, res) => {
-    const {
-      term,
-      saleType,
-      propertyType,
-      priceRange
-    } = req.query;
+    const { term, saleType, propertyType, priceRange } = req.query;
 
     getPropertiesFiltered(req, res, {
       term,
       saleType,
       propertyType,
-      priceRange
+      priceRange,
     });
   });
 

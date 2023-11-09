@@ -32,7 +32,7 @@ export async function addUser(formData: any) {
 
     return json;
   } catch (error) {
-    return error; 
+    return error;
   }
 }
 
@@ -75,3 +75,11 @@ export const getEmailUser = async (email: any) => {
   return {};
 };
 
+// Get filtered properties
+export const getUsersFiltered = async (filters = {}) => {
+  const response = await fetch(
+    `${BASE_URL}/api/userfilter?${new URLSearchParams(filters)}`
+  );
+  const json = await response.json();
+  return json;
+};

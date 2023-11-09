@@ -47,10 +47,10 @@ export default function Signup() {
 
     // set the user_type based on checkbox state
     formData.user_type = formData.isBroker ? "broker" : "user";
-    const userExist = await getEmailUser(formData.email)
+    const userExist = await getEmailUser(formData.email);
 
     if (Object.keys(userExist).length !== 0) {
-      setError("Broker already exists!")
+      setError("User already exists!");
       return;
     }
     //add this info to userData
@@ -141,10 +141,12 @@ export default function Signup() {
               className=""
             />
             {error && (
-                  <div className={`bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2`}>
-                    {error}
-                  </div>
-                )}
+              <div
+                className={`bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2`}
+              >
+                {error}
+              </div>
+            )}
             <div className="flex flex-row justify-evenly">
               <p className="text-center text-small">
                 Already have an account?{" "}
