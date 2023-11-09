@@ -56,7 +56,7 @@ export default function ResultPage() {
             </div>
             <Popover placement="bottom" showArrow={true} size="sm">
               <PopoverTrigger>
-                <Button className="mr-5">Contacts</Button>
+                <Button className="mr-5 bg-pr text-w2"  >Contacts</Button>
               </PopoverTrigger>
               <PopoverContent>
                 <div className="px-1 py-2">
