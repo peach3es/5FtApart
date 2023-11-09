@@ -17,13 +17,13 @@ const rows = [
   {
     key: "1",
     name: "Thomas Kamil Brochet",
-    role: "Front-End",
+    role: "Front End Developper",
     id: "40121143",
   },
   {
     key: "2",
     name: "Charles Atanacio",
-    role: "BackEnd",
+    role: "Back End Developper",
     id: "40176314",
   },
   {
@@ -35,7 +35,7 @@ const rows = [
   {
     key: "4",
     name: "Zhan Jun Cheung",
-    role: "Front End",
+    role: "Front End Developper",
     id: "40212301",
   },
   {
@@ -47,8 +47,8 @@ const rows = [
   {
     key: "6",
     name: "Patrick Cimpean",
-    role: "BackEnd",
-    id: "40212301",
+    role: "Back End Developper",
+    id: "40211106",
   },
 ];
 
@@ -140,7 +140,7 @@ const HomePage = () => {
         <h2 className="my-4 font-bold text-xl">License</h2>
         <p className="ml-2">
           Licensed under the{" "}
-          <a href="LICENSE" className="text-primary">
+          <a href="https://github.com/nextui-org/next-app-template/blob/main/LICENSE" className="text-primary">
             MIT license
           </a>
           .
