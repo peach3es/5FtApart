@@ -5,12 +5,26 @@ import { Input } from "@nextui-org/input";
 import { Image } from "@nextui-org/image";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import "styles/form.css";
+import { redirect } from "next/dist/server/api-utils";
+import { BsWindowSidebar } from "react-icons/bs";
+
+const formReducer = (state: any, event: any) => {
+  return {
+    ...state,
+    // [event.target.name]: event.target.value,
+    ...(event && event.target && event.target.name
+      ? { [event.target.name]: event.target.value }
+      : {}),
+  };
+};
 
 export default function Signup() {
+
+  const [formData, setFormData] = useReducer(formReducer, {});
   const images = [
-    "/pictures/login/pic1.jpg",
+    "/pictures/login/pic1.jpg", 
     "/pictures/login/pic2.jpg",
     "/pictures/login/pic3.jpg",
     "/pictures/login/pic4.jpg",
@@ -18,6 +32,18 @@ export default function Signup() {
   const randomImage = images[Math.floor(Math.random() * images.length)];
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const handleSubmit = async (e:any) =>
+  {
+    if (Object.keys(formData).length == 0) {
+      console.log("Please fill out the form");
+    } else {
+      console.log(formData);
+      window.location.href = "/login";
+    }
+  }
+
+
   return (
     <div className="flex flex-row gap-5 my-5 justify-center place-items-center w-full">
       <div className="w-1/2 ml-5">
@@ -41,7 +67,7 @@ export default function Signup() {
           backgroundPosition: "50% 55%",
         }}
       >
-        <form className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2">
+        <form onSubmit={handleSubmit} className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2">
           <div className="mt-5 text-4xl bold-2xl bg-[#eeeeee] rounded-xl p-5 cursor-default text-center font-PPGoshaReg">
             Sign Up
           </div>
@@ -51,6 +77,8 @@ export default function Signup() {
               label="Name"
               placeholder="Enter your name"
               type="text"
+              name="name"
+              onChange={setFormData}
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
             />
@@ -58,7 +86,9 @@ export default function Signup() {
               isRequired
               label="Email"
               placeholder="Enter your email"
+              name="email"
               type="email"
+              onChange={setFormData}
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
             />
@@ -66,6 +96,8 @@ export default function Signup() {
               isRequired
               label="Password:"
               placeholder="Enter your password"
+              name="password"
+              onChange={setFormData}
               endContent={
                 <button
                   className="focus:outline-none"
@@ -92,7 +124,7 @@ export default function Signup() {
               </Link>
             </p>
             <div className="flex gap-2 justify-end">
-              <Button fullWidth color="primary">
+              <Button fullWidth color="primary" onPress={handleSubmit}>
                 Sign up
               </Button>
             </div>

@@ -11,11 +11,11 @@ const userSchema = new Schema({
     password: String,
     date: String,
     activeListings: Number,
-    user_type:
-    {   type: String,
-        enum:['user', 'broker', 'sysadmin'],
-        required: true, 
-    },
+    // user_type:
+    // {   type: String,
+    //     enum:['user', 'broker', 'sysadmin'],
+    //     required: true, 
+    // },
     
 
 })
