@@ -128,7 +128,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
         </ModalContent>
       </Modal>
 
-      <Modal isOpen={Offer} onOpenChange={onOfferChange} size="xl">
+      <Modal isOpen={Offer} onOpenChange={onOfferChange} size="4xl">
         <ModalContent>
           {(onClose) => (
             <>
@@ -142,13 +142,35 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 </p>
 
                 <div className="mb-3 flex flex-row gap-3">
+                  <Input type="faded" label="Broker Full name" />
+                  <Input
+                    type="license #"
+                    label="license #"
+                    classNames={{ input: "border-none" }}
+                  />
+                  <Input type="faded" label="Agency" />
+                </div>
+
+                <div className="mb-3 flex flex-row gap-3">
                   <Input type="faded" label="Full Name" />
+                  <Input type="faded" label=" Current Address" />
                   <Input
                     type="email"
                     label="Email"
                     classNames={{ input: "border-none" }}
                   />
                   <Input type="faded" label="Offer" />
+                  <p className="text-base">{data.address}</p>
+
+                </div>
+
+                <div className="mb-3 flex flex-row gap-3">
+                  <p>Please put in the Deed of sale and Occupancy of premises date </p>
+                </div>
+
+                <div className="mb-3 flex flex-row gap-3">
+                  <Input type="date"/>
+                  <Input type="date" />
                 </div>
               </ModalBody>
               <ModalFooter>
