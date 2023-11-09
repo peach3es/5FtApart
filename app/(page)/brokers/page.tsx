@@ -63,7 +63,7 @@ export default function ResultPage() {
                   <div className="text-small font-bold">
                     Contact Information
                   </div>
-                  <div className="text-tiny">This is the popover content</div>
+                  <div className="text-tiny"><BiMailSend/>name_surname@mail.com<BiPhone/>Phone Number</div>
                 </div>
               </PopoverContent>
             </Popover>
