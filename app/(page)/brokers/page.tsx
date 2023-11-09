@@ -24,17 +24,16 @@ export default function ResultPage() {
     <main className={`${styles.main} flex-grow mb-8`}>
       <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">All Brokers</h1>
       {/*Search*/}
-      <div className="property-cards rounded-lg m-7 bg-w p-10">
+      <div className="rounded-lg m-7 bg-w p-10">
         <Card className="max-w-xl">
           <CardHeader className="justify-between">
-            <div className="flex gap-5">
+            <div className="flex gap-5 p-5">
               <Avatar
                 isBordered
                 radius="full"
                 size="lg"
                 src="pictures/login/pic2.jpg"
                 className="w-36 h-36 text-large"
-              
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">
@@ -57,7 +56,7 @@ export default function ResultPage() {
             </div>
             <Popover placement="bottom" showArrow={true} size="sm">
               <PopoverTrigger>
-                <Button>Contacts</Button>
+                <Button className="mr-5">Contacts</Button>
               </PopoverTrigger>
               <PopoverContent>
                 <div className="px-1 py-2">

@@ -5,6 +5,7 @@ import { Image, Input, Button, Link } from "@nextui-org/react";
 import "styles/form.css";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { getUser, getUsers } from "@/backend/database/controller";
 
 function LogInForm() {
   const images = [
@@ -67,7 +68,7 @@ function LogInForm() {
               type={isVisible ? "text" : "password"}
             />
             <p className="text-center text-small">
-              Don&apos;t have an account?{" "}
+              Dont have an account?{" "}
               <Link
                 size="sm"
                 href="/signup"

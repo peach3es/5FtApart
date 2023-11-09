@@ -11,6 +11,7 @@ import "styles/form.css";
 import { addUser } from "@/backend/lib/helper";
 
 const formReducer = (state: any, event: any) => {
+  //check event if its from input of type checkbox
   if (event.target.type === "checkbox") {
     return {
       ...state,
@@ -46,6 +47,7 @@ export default function Signup() {
     // set the user_type based on checkbox state
     formData.user_type = formData.isBroker ? "broker" : "user";
 
+    //add this info to userData
     const result = await addUser(formData);
 
     if (result && !result.error) {
@@ -95,6 +97,7 @@ export default function Signup() {
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
               onChange={setFormData}
+              name="email"
             />
             <Input
               isRequired
@@ -104,6 +107,7 @@ export default function Signup() {
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
               onChange={setFormData}
+              name="name"
             />
             <Input
               isRequired

@@ -9,7 +9,7 @@ const Properties = require("../../app/model/property");
 // get: http://localhost:3000/api/users
 async function getUsers(req, res) {
   try {
-    const users = await Users.find({user_type: 'broker'}); 
+    const users = await Users.find({ user_type: "broker" });
 
     if (!users) return res.status(404).json({ error: "Data not Found" });
     res.status(200).json(users);
@@ -175,7 +175,7 @@ async function deleteProperty(req, res) {
 async function getPropertiesFiltered(req, res, filters = {}) {
   try {
     let query = {};
-    
+
     if (filters.term) {
       query.address = new RegExp(filters.term, "i"); // Assuming the properties have an address field
     }
@@ -185,14 +185,14 @@ async function getPropertiesFiltered(req, res, filters = {}) {
     if (filters.propertyType) {
       query.propertytype = filters.propertyType;
     }
-    
-    if (filters.priceRange){
-      const [min, max] = filters.priceRange.split('-').map(Number);
-      query.pricetag = { $gte: min, $lte: max }; 
+
+    if (filters.priceRange) {
+      const [min, max] = filters.priceRange.split("-").map(Number);
+      query.pricetag = { $gte: min, $lte: max };
     }
-    
+
     const property = await Properties.find(query);
-    
+
     res.status(200).json(property);
   } catch (error) {
     console.error(error);
@@ -211,5 +211,5 @@ module.exports = {
   addProperty: addProperty,
   putProperty: putProperty,
   deleteProperty: deleteProperty,
-  getPropertiesFiltered: getPropertiesFiltered
+  getPropertiesFiltered: getPropertiesFiltered,
 };
