@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import styles from "../../../../styles/login.css";
+import styles from "../../../../styles/calculator.css";
 
 export default function Home() {
   const [mortgage, setMortgage] = useState(10000000);
@@ -61,13 +61,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-5 justify-center">
+    <div className="flex flex-col gap-3 p-5 justify-center bg-pr  text-w2 mx-auto border-r-1">
       <div>
-        <h1>5FtApart</h1>
-        <h3>Mortage Calculator</h3>
-        <form action="#">
+        <h1 className="mx-auto ">Mortage Calculator</h1>
+        <form className="mx-auto"action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
-            <div key={key}>
+            <div className="mx-auto flex flex-col mt-4"  key={key}>
               <div>
                 {key.replace(/^\w/, (c) => c.toUpperCase())}
               </div>
@@ -87,7 +86,7 @@ export default function Home() {
                     ? interestTerm
                     : monthlyPayment
                 }
-                className={styles[key]}
+                className={"mx-auto mt-2 appearance-none rounded-md shadow-md px-4 py-3" }
                 ref={ref}
                 onChange={handleInputChange}
               />

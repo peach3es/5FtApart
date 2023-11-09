@@ -69,11 +69,13 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
         <p className="text-lg">{data.saletype}</p>
         <p className="text-lg">{data.pricetag}</p>
         <h3 className="text-2xl font-bold">Want to visit the Estate?</h3>
-        <Button className="w-1/3" onPress={onOpen}>
+       
+       <div className="mb-3 flex flex-row gap-3">
+       <Button className="w-1/3  bg-pr  text-w2 " onPress={onOpen}>
           Request Visit
         </Button>
 
-        <Button className="w-1/3" onPress={onOffer}>
+        <Button className="w-1/3  bg-pr  text-w2 " onPress={onOffer}>
           Submit an Offer
         </Button>
 
@@ -93,6 +95,9 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
             </PopoverContent>
           </Popover>
         </Link>
+       </div>
+
+    
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="xl">
         <ModalContent>
@@ -119,7 +124,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button className="w-1/3  bg-pr  text-w2 " onPress={onClose}>
                   Submit
                 </Button>
               </ModalFooter>
@@ -177,7 +182,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button className="w-1/3  bg-pr  text-w2 " onPress={onClose}>
                   Submit
                 </Button>
               </ModalFooter>
