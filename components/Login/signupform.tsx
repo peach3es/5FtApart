@@ -8,16 +8,15 @@ import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { useState, useReducer } from "react";
 import "styles/form.css";
-import { redirect } from "next/dist/server/api-utils";
-import { BsWindowSidebar } from "react-icons/bs";
+import { addUser } from "@/backend/lib/helper";
 
 const formReducer = (state: any, event: any) => {
   return {
     ...state,
     // [event.target.name]: event.target.value,
-    ...(event && event.target && event.target.name
+    ...(event && event.target.checked && event.target.name
       ? { [event.target.name]: event.target.value }
-      : {}),
+      : { [event.target.name]: event.target.checked }),
   };
 };
 
@@ -36,9 +35,18 @@ export default function Signup() {
   const handleSubmit = async (e: any) => {
     if (Object.keys(formData).length == 0) {
       console.log("Please fill out the form");
+    }
+
+    // set the user_type based on checkbox state
+    formData.user_type = formData.isBroker ? "broker" : "user";
+
+    const result = await addUser(formData);
+
+    if (result && !result.error) {
+      console.log("User created:", result);
+      window.location.href = "/login"; // Redirect on success
     } else {
-      console.log(formData);
-      window.location.href = "/login";
+      console.error("Signup failed:", result.error);
     }
   };
 
@@ -75,19 +83,21 @@ export default function Signup() {
           <div className="flex flex-col gap-3 p-5 justify-center">
             <Input
               isRequired
-              label="Name"
-              placeholder="Enter your name"
-              type="text"
-              classNames={{ input: "border-none focus:ring-0" }}
-              className="max-w-2xl"
-            />
-            <Input
-              isRequired
               label="Email"
               placeholder="Enter your email"
               type="email"
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
+              onChange={setFormData}
+            />
+            <Input
+              isRequired
+              label="Name"
+              placeholder="Enter your name"
+              type="text"
+              classNames={{ input: "border-none focus:ring-0" }}
+              className="max-w-2xl"
+              onChange={setFormData}
             />
             <Input
               isRequired
@@ -126,9 +136,12 @@ export default function Signup() {
                 </Link>
               </p>
               <Checkbox
+                checked={formData.isBroker}
+                onChange={setFormData}
                 radius="sm"
                 classNames={{ label: "text-small" }}
                 color="secondary"
+                name="isBroker"
               >
                 Broker?
               </Checkbox>
