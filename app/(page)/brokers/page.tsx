@@ -24,8 +24,8 @@ export default function ResultPage() {
     <main className={`${styles.main} flex-grow mb-8`}>
       <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">All Brokers</h1>
       {/*Search*/}
-      <div className="property-cards rounded-lg m-8 bg-w p-10">
-        <Card className="max-w-xl">
+      <div className="property-cards rounded-lg m-7 bg-w p-10">
+        <Card className="max-w-l">
           <CardHeader className="justify-between">
             <div className="flex gap-5">
               <Avatar
@@ -33,8 +33,8 @@ export default function ResultPage() {
                 radius="full"
                 size="lg"
                 src="pictures/login/pic2.jpg"
-                className="place-self-center ml-2"
-                classNames={{ icon: "w-72" }}
+                className="w-36 h-36 text-large"
+              
               />
               <div className="flex flex-col gap-1 items-start justify-center">
                 <h4 className="text-small font-semibold leading-none text-default-600">
