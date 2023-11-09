@@ -209,7 +209,7 @@ const ResultPage = () => {
           showControls
           total={Math.ceil(props.length / itemsPerPage)}
           initialPage={1}
-          color="warning"
+          classNames={{ cursor: "bg-pr" }}
           onChange={handlePageChange}
         />
       </div>
