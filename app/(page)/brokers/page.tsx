@@ -25,7 +25,7 @@ export default function ResultPage() {
       <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">All Brokers</h1>
       {/*Search*/}
       <div className="property-cards rounded-lg m-7 bg-w p-10">
-        <Card className="max-w-l">
+        <Card className="max-w-xl">
           <CardHeader className="justify-between">
             <div className="flex gap-5">
               <Avatar
