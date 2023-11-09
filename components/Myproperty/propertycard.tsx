@@ -83,7 +83,7 @@ export default function PropertyCard({
   if (isLoading)
     return (
       <div className="w-full flex text-xl text-center justify-center items-center">
-        <CircularProgress label="Loading..." color="primary" />
+        <CircularProgress label="Loading..." color="secondary" />
       </div>
     );
 
