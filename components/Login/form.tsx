@@ -68,7 +68,11 @@ function LogInForm() {
             />
             <p className="text-center text-small">
               Don&apos;t have an account?{" "}
-              <Link size="sm" href="/signup" className="text-pastelblue">
+              <Link
+                size="sm"
+                href="/signup"
+                className="text-pastelblue font-semibold"
+              >
                 Signup
               </Link>
             </p>

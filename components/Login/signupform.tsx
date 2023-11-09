@@ -117,7 +117,11 @@ export default function Signup() {
             <div className="flex flex-row justify-evenly">
               <p className="text-center text-small">
                 Already have an account?{" "}
-                <Link size="sm" href="/login" className="text-pastelblue">
+                <Link
+                  size="sm"
+                  href="/login"
+                  className="text-pastelblue font-semibold"
+                >
                   Login
                 </Link>
               </p>
