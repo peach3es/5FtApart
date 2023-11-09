@@ -8,7 +8,7 @@ import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { useState, useReducer } from "react";
 import "styles/form.css";
-import { addUser } from "@/backend/lib/helper";
+import { addUser, getEmailUser } from "@/backend/lib/helper";
 
 const formReducer = (state: any, event: any) => {
   //check event if its from input of type checkbox
@@ -29,6 +29,7 @@ const formReducer = (state: any, event: any) => {
 
 export default function Signup() {
   const [formData, setFormData] = useReducer(formReducer, {});
+  const [error, setError] = useState("");
   const images = [
     "/pictures/login/pic1.jpg",
     "/pictures/login/pic2.jpg",
@@ -46,7 +47,12 @@ export default function Signup() {
 
     // set the user_type based on checkbox state
     formData.user_type = formData.isBroker ? "broker" : "user";
+    const userExist = await getEmailUser(formData.email)
 
+    if (Object.keys(userExist).length !== 0) {
+      setError("Broker already exists!")
+      return;
+    }
     //add this info to userData
     const result = await addUser(formData);
 
@@ -134,6 +140,11 @@ export default function Signup() {
               type={isVisible ? "text" : "password"}
               className=""
             />
+            {error && (
+                  <div className={`bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2`}>
+                    {error}
+                  </div>
+                )}
             <div className="flex flex-row justify-evenly">
               <p className="text-center text-small">
                 Already have an account?{" "}

@@ -7,6 +7,7 @@ const {
   postUser,
   putUser,
   deleteUser,
+  checkUser
 } = require("./database/controller.js");
 const {
   getProperties,
@@ -30,6 +31,10 @@ app.prepare().then(() => {
   });
 
   // Add your Express middleware and routes here
+
+  server.get("/api/userExists/:email" , async (req, res) => {
+    checkUser(req, res);
+  })
 
   server.get("/api/users", (req, res) => {
     getUsers(req, res);

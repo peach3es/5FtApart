@@ -6,6 +6,9 @@ import "styles/form.css";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { getUser, getUsers } from "@/backend/database/controller";
+import {signIn, signOut} from "next-auth/react";
+import { useState } from 'react'
+import { useRouter } from "next/navigation"
 
 function LogInForm() {
   const images = [
@@ -14,6 +17,34 @@ function LogInForm() {
     "/pictures/login/pic3.jpg",
     "/pictures/login/pic4.jpg",
   ];
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+
+      if (res?.error){
+        setError("Invalid Credentials");
+        console.log(res?.error)
+        return;
+      }
+
+      router.replace("/")
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+
+  }
   const randomImage = images[Math.floor(Math.random() * images.length)];
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -32,6 +63,7 @@ function LogInForm() {
         <form
           className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2 absolute z-10"
           id="Login"
+          onSubmit={handleSubmit}
         >
           <div className="mt-5 text-4xl bold-2xl bg-[#eeeeee] rounded-xl p-5 cursor-default text-center font-PPGoshaReg">
             Welcome Back!
@@ -44,11 +76,13 @@ function LogInForm() {
               placeholder="Email"
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
+              onChange={e => setEmail(e.target.value)}
             />
             <Input
               isRequired
               label="Password:"
               placeholder="Enter your password"
+              onChange={e => setPassword(e.target.value)}
               endContent={
                 <button
                   className="focus:outline-none"
@@ -67,6 +101,11 @@ function LogInForm() {
               }}
               type={isVisible ? "text" : "password"}
             />
+            {error && (
+                  <div className={`bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2`}>
+                    {error}
+                  </div>
+                )}
             <p className="text-center text-small">
               Don&apos;t have an account?{" "}
               <Link
@@ -78,7 +117,7 @@ function LogInForm() {
               </Link>
             </p>
             <div className="flex gap-2 justify-end">
-              <Button fullWidth color="secondary">
+              <Button fullWidth color="secondary" type="submit">
                 Log In
               </Button>
             </div>

@@ -26,8 +26,12 @@ import {
 } from "./icons.jsx";
 import Image from "next/image";
 import LogoDark from "public/5ftapartbw.png";
+import {signOut, useSession} from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 export default function App() {
+  const {data: session} = useSession();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
@@ -84,16 +88,21 @@ export default function App() {
             />
           </Link>
         </NavbarBrand>
+        {session? (
+          <>
         <NavbarItem>
           <Link href="/mybroker" className="text">
             MyBroker
           </Link>
         </NavbarItem>
-        <NavbarItem>
+         <NavbarItem>
           <Link href="/myproperty" className="text">
             MyProperty
           </Link>
-        </NavbarItem>
+          </NavbarItem>
+          </>
+                 ): (<></>)}
+
         <NavbarItem>
           <Link href="/brokers" aria-current="page" className="text">
             Brokers
@@ -156,7 +165,28 @@ export default function App() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+        {session? (<>
+        <p>Hello, {session.user.name}!</p>
+          <NavbarItem>
+          <Button
+            color="default"
+            variant="flat"
+            className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
+            onPress={() => {
+              signOut({ redirect: false }).then(() => {
+                  router.push("/login"); // Redirect to the dashboard page after signing out
+              });
+          }}
+          >
+            Log out
+          </Button>
+        </NavbarItem>
+        </> 
+      
+
+        ): (<>
+
+          <NavbarItem className="hidden lg:flex">
           <Button
             as={Link}
             href="/login"
@@ -166,17 +196,21 @@ export default function App() {
             Login
           </Button>
         </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            color="default"
-            href="/signup"
-            variant="flat"
-            className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+                <NavbarItem>
+                <Button
+                  as={Link}
+                  color="default"
+                  href="/signup"
+                  variant="flat"
+                  className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
+                >
+                  Sign Up
+                </Button>
+              </NavbarItem>
+              </>
+
+        )}
+       
       </NavbarContent>
 
       <NavbarMenu className="navbar-menu">

@@ -66,3 +66,12 @@ export async function deleteUser(userID: any) {
   const json = await response.json();
   return json;
 }
+
+export const getEmailUser = async (email: any) => {
+  const response = await fetch(`${BASE_URL}/api/userExists/${email}`);
+  const json = await response.json();
+
+  if (json) return json;
+  return {};
+};
+

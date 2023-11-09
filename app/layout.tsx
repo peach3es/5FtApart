@@ -3,7 +3,7 @@ import { ReactQueryProvider } from "./ReactQueryProvider";
 import "styles/globals.css";
 import { Inter } from "next/font/google";
 import { ReduxProvider } from "./provider";
-// import { Providers } from "./providers";
+import { Authprovider } from "./providerAuth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <html lang="en">
+        <Authprovider>
         <body className={`${inter.className}`}>
           <ReduxProvider>{children}</ReduxProvider>
         </body>
+        </Authprovider>
       </html>
     </ReactQueryProvider>
   );
