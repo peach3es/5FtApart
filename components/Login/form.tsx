@@ -5,6 +5,7 @@ import { Image, Input, Button, Link } from "@nextui-org/react";
 import "styles/form.css";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
+import { getUser, getUsers } from "@/backend/database/controller";
 
 function LogInForm() {
   const images = [
@@ -39,7 +40,7 @@ function LogInForm() {
             <Input
               isRequired
               type="email"
-              label="Username:"
+              label="Email:"
               placeholder="Email"
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
@@ -68,12 +69,16 @@ function LogInForm() {
             />
             <p className="text-center text-small">
               Don&apos;t have an account?{" "}
-              <Link size="sm" href="/signup">
+              <Link
+                size="sm"
+                href="/signup"
+                className="text-pastelblue font-semibold"
+              >
                 Signup
               </Link>
             </p>
             <div className="flex gap-2 justify-end">
-              <Button fullWidth color="primary">
+              <Button fullWidth color="secondary">
                 Log In
               </Button>
             </div>

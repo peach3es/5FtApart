@@ -7,7 +7,12 @@ import { useEffect } from "react";
 import "../../backend/lib/helper";
 import { HeartIcon } from "../Navbar/hearticon";
 import { BiSolidHomeHeart } from "react-icons/bi";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  CircularProgress,
+} from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
 
 import {
@@ -21,22 +26,29 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import {getProperty } from "../../backend/lib/helperProperties";
+import { getProperty } from "../../backend/lib/helperProperties";
 import { getPriority } from "os";
 
-function PropertyInfo({propertyId}:{propertyId: any}) {
+function PropertyInfo({ propertyId }: { propertyId: any }) {
   const { isLoading, isError, data, error } = useQuery(
     ["properties", propertyId],
     () => getProperty(propertyId) // Modify the getProperties function to accept an ID and fetch a single property
   );
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const{isOpen: Offer, onOpen: onOffer, onOpenChange: onOfferChange}= useDisclosure();
-  
+  const {
+    isOpen: Offer,
+    onOpen: onOffer,
+    onOpenChange: onOfferChange,
+  } = useDisclosure();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="w-full flex text-xl text-center justify-center items-center h-full">
+        <CircularProgress label="Loading..." color="primary" />
+      </div>
+    );
   if (isError) return <div>Error...</div>;
-
 
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
@@ -51,7 +63,7 @@ function PropertyInfo({propertyId}:{propertyId: any}) {
       </div>
 
       <div className="w-1/2 flex flex-col gap-2">
-      <h2 className="text-4xl font-bold ">{data.address}</h2>
+        <h2 className="text-4xl font-bold ">{data.address}</h2>
         <p className="text-lg">{data.city}</p>
         <p className="text-lg">{data.postalcode}</p>
         <p className="text-lg">{data.saletype}</p>
