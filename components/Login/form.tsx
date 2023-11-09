@@ -68,12 +68,12 @@ function LogInForm() {
             />
             <p className="text-center text-small">
               Don&apos;t have an account?{" "}
-              <Link size="sm" href="/signup">
+              <Link size="sm" href="/signup" className="text-pastelblue">
                 Signup
               </Link>
             </p>
             <div className="flex gap-2 justify-end">
-              <Button fullWidth color="primary">
+              <Button fullWidth color="secondary">
                 Log In
               </Button>
             </div>

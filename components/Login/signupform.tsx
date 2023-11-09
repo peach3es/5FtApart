@@ -3,6 +3,7 @@ import { Link } from "@nextui-org/link";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Image } from "@nextui-org/image";
+import { Checkbox } from "@nextui-org/checkbox";
 import { EyeFilledIcon } from "./EyeFilledIcon";
 import { EyeSlashFilledIcon } from "./EyeSlashFilledIcon";
 import { useState, useReducer } from "react";
@@ -21,10 +22,9 @@ const formReducer = (state: any, event: any) => {
 };
 
 export default function Signup() {
-
   const [formData, setFormData] = useReducer(formReducer, {});
   const images = [
-    "/pictures/login/pic1.jpg", 
+    "/pictures/login/pic1.jpg",
     "/pictures/login/pic2.jpg",
     "/pictures/login/pic3.jpg",
     "/pictures/login/pic4.jpg",
@@ -33,16 +33,14 @@ export default function Signup() {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const handleSubmit = async (e:any) =>
-  {
+  const handleSubmit = async (e: any) => {
     if (Object.keys(formData).length == 0) {
       console.log("Please fill out the form");
     } else {
       console.log(formData);
       window.location.href = "/login";
     }
-  }
-
+  };
 
   return (
     <div className="flex flex-row gap-5 my-5 justify-center place-items-center w-full">
@@ -67,7 +65,10 @@ export default function Signup() {
           backgroundPosition: "50% 55%",
         }}
       >
-        <form onSubmit={handleSubmit} className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#eeeeee] flex flex-col justify-center rounded-xl w-1/2"
+        >
           <div className="mt-5 text-4xl bold-2xl bg-[#eeeeee] rounded-xl p-5 cursor-default text-center font-PPGoshaReg">
             Sign Up
           </div>
@@ -77,8 +78,6 @@ export default function Signup() {
               label="Name"
               placeholder="Enter your name"
               type="text"
-              name="name"
-              onChange={setFormData}
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
             />
@@ -86,9 +85,7 @@ export default function Signup() {
               isRequired
               label="Email"
               placeholder="Enter your email"
-              name="email"
               type="email"
-              onChange={setFormData}
               classNames={{ input: "border-none focus:ring-0" }}
               className="max-w-2xl"
             />
@@ -117,14 +114,23 @@ export default function Signup() {
               type={isVisible ? "text" : "password"}
               className=""
             />
-            <p className="text-center text-small">
-              Already have an account?{" "}
-              <Link size="sm" href="/login">
-                Login
-              </Link>
-            </p>
+            <div className="flex flex-row justify-evenly">
+              <p className="text-center text-small">
+                Already have an account?{" "}
+                <Link size="sm" href="/login" className="text-pastelblue">
+                  Login
+                </Link>
+              </p>
+              <Checkbox
+                radius="sm"
+                classNames={{ label: "text-small" }}
+                color="secondary"
+              >
+                Broker?
+              </Checkbox>
+            </div>
             <div className="flex gap-2 justify-end">
-              <Button fullWidth color="primary" onPress={handleSubmit}>
+              <Button fullWidth color="secondary" onPress={handleSubmit}>
                 Sign up
               </Button>
             </div>
