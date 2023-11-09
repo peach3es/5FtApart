@@ -143,14 +143,11 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
 
                 <div className="mb-3 flex flex-row gap-3">
                   <Input type="faded" label="Full Name" />
-                  <Input type="faded" label="Address"/>
                   <Input
                     type="email"
                     label="Email"
                     classNames={{ input: "border-none" }}
                   />
-                 <p>get property address</p>
-
                   <Input type="faded" label="Offer" />
                 </div>
               </ModalBody>
