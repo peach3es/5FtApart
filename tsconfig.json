@@ -29,12 +29,13 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(page)/mybroker/page.tsx",
+    "cypress.ts", "cypress/**/*",
     "components/Navbar/navbar.jsx",
     "components/Search/searchoptions.js",
     "backend/database/conn.js",
     "backend/database/controller.js",
     "app/model/property.js",
     "app/model/user.js"
-  ],
+, "jest.config.js"  ],
   "exclude": ["node_modules"]
 }
