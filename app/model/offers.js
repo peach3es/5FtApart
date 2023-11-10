@@ -7,8 +7,23 @@ const models = mongoose.models;
 const offerSchema = new Schema({
   // _id: mongoose.Schema.Types.ObjectId,
   
-  
-  properties: [propertySchema],
+  buyer:String, 
+  license: Number,
+  agency: String,
+  address: String,   
+  offer: Number, 
+  deed_of_sale:String, 
+  occupancy:String,
+  property:
+  {
+    type: Schema.Types.ObjectId,
+    ref: 'Properties',
+  },
+  broker:
+  {
+    type:Schema.Types.ObjectId,
+    ref:'User',
+  },
   
 });
 

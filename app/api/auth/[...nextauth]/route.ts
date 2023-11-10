@@ -1,6 +1,6 @@
 import NextAuth, {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
-import User from "../../../../app/model/user"
+import User = require( "../../../../app/model/user");
 
 
 const authOptions: NextAuthOptions = {
@@ -36,8 +36,27 @@ const authOptions: NextAuthOptions = {
     pages: {
         signIn: "/",
         signOut: "/login"
-    }
-};
+    },
+
+    callbacks:{
+        async jwt({token, user})
+        {
+            if(user && user._id)
+            {
+                token.uid = user.id.toString();
+            }
+        },
+        return token;
+    },
+
+    async session({ session, token }) {
+        // If the token has a uid field, add it to the session's user object
+        if (token.uid) {
+          session.user.id = token.uid; // This should be the MongoDB ObjectId as a string
+        }
+        return session;
+      },
+    };
 const handler = NextAuth(authOptions);
 
 export {handler as GET, handler as POST}
