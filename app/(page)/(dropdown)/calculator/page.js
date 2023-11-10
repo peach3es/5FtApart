@@ -3,9 +3,10 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "@nextui-org/react";
 import styles from "../../../../styles/calculator.css";
+import  Logo  from '../../../../public/5ftapartbw.png';
 
 export default function Home() {
-  const [mortgage, setMortgage] = useState(10000000);
+  const [mortgage, setMortgage] = useState(1000000);
   const [amortization, setAmortization] = useState(25);
   const [paymentFrequency, setPaymentFrequency] = useState(12);
   const [interestRate, setInterestRate] = useState(0.0649);
@@ -63,11 +64,12 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-5 p-10 justify-center bg-w mx-auto border-r-3">
+    <div className="flex flex-col gap-3 p-3 justify-center bg-w mx-auto border-r-3">
       <div>
-      <Link className="font-bold text-inherit" href="/">
-            <Image src={LogoDark} alt="logo image" width={150} height={150} />
-          </Link>
+      
+            <Image src={Logo} alt="logo image" width={250} height={325} />
+          
+         
         <form className="mx-auto"action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
             <div className="mx-auto flex flex-col mt-4"  key={key}>
@@ -78,12 +80,12 @@ export default function Home() {
                 type="text"
                 name={key}
                 defaultValue={
-                  key === "Mortage"
-                    ? Mortage
-                    : key === "Amortization"
-                    ? Amortization
-                    : key === "Payment_Frequency"
-                    ? Payment_Frequency
+                  key === "mortgage"
+                    ? mortgage
+                    : key === "amortization"
+                    ? amortization
+                    : key === "paymentFrequency"
+                    ? paymentFrequency
                     : key === "interestRate"
                     ? interestRate
                     : key === "interestTerm"
