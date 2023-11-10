@@ -10,9 +10,9 @@ const userSchema = new Schema({
   password: String,
   date: String,
   activeListings: Number,
-  user_type: {
+  role: {
     type: String,
-    enum: ["user", "broker", "sysadmin"],
+    enum: ["client", "broker", "admin"],
     required: false,
   },
 });

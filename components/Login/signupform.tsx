@@ -45,8 +45,8 @@ export default function Signup() {
       console.log("Please fill out the form");
     }
 
-    // set the user_type based on checkbox state
-    formData.user_type = formData.isBroker ? "broker" : "user";
+    // set the role based on checkbox state
+    formData.role = formData.isBroker ? "broker" : "client";
     const userExist = await getEmailUser(formData.email);
 
     if (Object.keys(userExist).length !== 0) {
