@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import Link from "@nextui-org/react";
 import styles from "../../../../styles/calculator.css";
 
 export default function Home() {
@@ -61,9 +63,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-5 justify-center bg-pr  text-w2 mx-auto border-r-1">
+    <div className="flex flex-col gap-5 p-10 justify-center bg-w mx-auto border-r-3">
       <div>
-        <h1 className="mx-auto ">Mortage Calculator</h1>
+      <Link className="font-bold text-inherit" href="/">
+            <Image src={LogoDark} alt="logo image" width={150} height={150} />
+          </Link>
         <form className="mx-auto"action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
             <div className="mx-auto flex flex-col mt-4"  key={key}>
