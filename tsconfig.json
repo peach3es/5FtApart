@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "http://localhost:3000",
+    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -21,7 +21,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["components/*"],
+      "@/styles/*": ["styles/*"]
     }
   },
   "include": [
