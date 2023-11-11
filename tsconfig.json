@@ -34,7 +34,9 @@
     "backend/database/conn.js",
     "backend/database/controller.js",
     "app/model/property.js",
-    "app/model/user.js"
-, "app/api/auth/[...nextauth]/route.js"  ],
+    "app/model/user.js",
+    "app/api/auth/[...nextauth]/route.js",
+    "app/(page)/(dropdown)/calculator/page.js"
+  ],
   "exclude": ["node_modules"]
 }

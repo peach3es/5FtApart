@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "@nextui-org/react";
 import styles from "../../../../styles/calculator.css";
-import  Logo  from '../../../../public/5ftapartbw.png';
+import Logo from "../../../../public/5ftapartbw.png";
 
 export default function Home() {
   const [mortgage, setMortgage] = useState(1000000);
@@ -22,7 +22,6 @@ export default function Home() {
     monthlyPayment: useRef(),
   };
 
- 
   useEffect(() => {
     calculateMonthlyPayment();
   }, [mortgage, amortization, paymentFrequency, interestRate, interestTerm]);
@@ -51,7 +50,6 @@ export default function Home() {
   };
 
   const calculateMonthlyPayment = () => {
-   
     const monthlyInterestRate = interestRate / 12;
     const n = amortization * paymentFrequency;
 
@@ -66,16 +64,12 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-3 p-3 justify-center bg-w mx-auto border-r-3">
       <div>
-      
-            <Image src={Logo} alt="logo image" width={250} height={325} />
-          
-         
-        <form className="mx-auto"action="#">
+        <Image src={Logo} alt="logo image" width={250} height={325} />
+
+        <form className="mx-auto" action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
-            <div className="mx-auto flex flex-col mt-4"  key={key}>
-              <div>
-                {key.replace(/^\w/, (c) => c.toUpperCase())}
-              </div>
+            <div className="mx-auto flex flex-col mt-4" key={key}>
+              <div>{key.replace(/^\w/, (c) => c.toUpperCase())}</div>
               <input
                 type="text"
                 name={key}
@@ -92,7 +86,9 @@ export default function Home() {
                     ? interestTerm
                     : monthlyPayment
                 }
-                className={"mx-auto mt-2 appearance-none rounded-md shadow-md px-4 py-3" }
+                className={
+                  "mx-auto mt-2 appearance-none rounded-md shadow-md px-4 py-3"
+                }
                 ref={ref}
                 onChange={handleInputChange}
               />
