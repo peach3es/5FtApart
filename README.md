@@ -1,6 +1,6 @@
-# Happy_Rainbow_Unicorn-soen341F2023
+# Real Estate Web Application: 5FtApart
 
-Project Title: Real Estate Web Application
+Project Title: Happy_Rainbow_Unicorn-soen341F2023
 
 ## Technologies Used & Approach
 
