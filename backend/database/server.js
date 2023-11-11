@@ -1,6 +1,6 @@
 const express = require("express");
 const next = require("next");
-const connectMongo = require("./database/conn.js");
+const connectMongo = require("./conn.js");
 const {
   getUsers,
   getUser,
@@ -9,15 +9,15 @@ const {
   deleteUser,
   checkUser,
   getUsersFiltered,
-} = require("./database/controller.js");
+} = require("./controller.js");
 const {
   getProperties,
   getProperty,
   addProperty,
   putProperty,
   deleteProperty,
-  getPropertiesFiltered,
-} = require("./database/controller.js");
+  getPropertiesFiltered
+} = require("./controller.js");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -113,6 +113,10 @@ app.prepare().then(() => {
     });
   });
 
+  server.get('/test', async (req, res) => {
+    res.json({message: 'pass!'})
+  })
+
   server.all("*", (req, res) => {
     return handle(req, res);
   });
@@ -121,4 +125,7 @@ app.prepare().then(() => {
     if (err) throw err;
     console.log("> Ready on http://localhost:3000");
   });
+
 });
+
+module.exports = app;

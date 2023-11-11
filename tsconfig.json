@@ -29,6 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/(page)/mybroker/page.tsx",
+    "cypress.ts",
+    "cypress/**/*",
     "components/Navbar/navbar.jsx",
     "components/Search/searchoptions.js",
     "backend/database/conn.js",
@@ -36,7 +38,8 @@
     "app/model/property.js",
     "app/model/user.js",
     "app/api/auth/[...nextauth]/route.js",
-    "app/(page)/(dropdown)/calculator/page.js"
+    "app/(page)/(dropdown)/calculator/page.js",
+    "jest.config.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,10 @@
-module.exports = {
-  preset: "ts-jest",
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
+/** @type {import('jest').Config} */
+const config = {
+  verbose: true,
+  moduleDirectories: [
+    "node_modules",
+    "src"
+  ]
 };
+
+module.exports = config;

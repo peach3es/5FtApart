@@ -56,7 +56,6 @@ async function putUser(req, res) {
 
     if (userID && formData) {
       const user = await Users.findByIdAndUpdate(userID, formData);
-
       res.status(200).json(user);
     } else {
       res.status(404).json({ error: "User Not Selected" });
@@ -143,7 +142,6 @@ async function getProperty(req, res) {
 async function addProperty(req, res) {
   try {
     const formData = req.body;
-    console.log(formData);
     if (!formData) {
       return res.status(404).json({ error: "Form Data Not Provided" });
     }
@@ -163,7 +161,6 @@ async function putProperty(req, res) {
 
     if (propertyId && formData) {
       const property = await Properties.findByIdAndUpdate(propertyId, formData);
-
       res.status(200).json(property);
     } else {
       res.status(404).json({ error: "Property Not Selected" });
