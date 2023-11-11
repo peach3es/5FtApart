@@ -2,49 +2,57 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  # build:
-  #   runs-on: windows-latest
+  build:
+    runs-on: windows-latest
 
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-  #   - name: Use Node.js 18.x
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 18.x
-  #       cache: 'npm'
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
 
-  #   - run: npm install
-  #   - run: npm run build
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
 
   e2e-tests:
     runs-on: windows-latest
-    # needs: build
+    needs: build
 
     steps:
-    # - name: Checkout
-    #   uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'npm'
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
 
-    - run: npm install
-    - run: npm run build
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
 
-    - name: Start server and wait for it
-      run: npm start & npx wait-on http://localhost:3000
-      timeout-minutes: 5
+      - name: Start server and wait for it
+        run: |
+          npm start & npx wait-on http://localhost:3000
+          echo "Server started successfully!"
 
-    - name: Cypress run
-      uses: cypress-io/github-action@v6
-      with:
-        spec: cypress/e2e/spec.cy.ts
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/spec.cy.ts
+
