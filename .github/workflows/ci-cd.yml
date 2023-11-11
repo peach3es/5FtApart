@@ -23,6 +23,28 @@ jobs:
     - run: npm install
     - run: npm run build
 
+  e2e-tests:
+    runs-on: windows-latest
+    needs: build  # Ensure the build job completes before starting e2e-tests
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+
+    - run: npm install
+    - run: npm start  # Start your application here, adjust the command based on your setup
+
+    - name: Wait for server to start
+      run: |
+        echo "Waiting for server to start..."
+        npm run wait-for-server  # Adjust the command to wait for your server to start
+
     - name: Cypress run
       uses: cypress-io/github-action@v6
       with:
