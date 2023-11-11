@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI with Cypress
 
 on:
   push:
@@ -10,49 +10,47 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Use Node.js 18.x
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'npm'
 
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
 
   e2e-tests:
     runs-on: windows-latest
     needs: build
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Use Node.js 18.x
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-          cache: 'npm'
+          node-version: 14
 
-      - name: Install dependencies and build
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Start Server and Wait
         run: |
-          npm install
-          npm run build
+          npm start &
+          npx wait-on http://localhost:3000
+        timeout-minutes: 5
 
-      - name: Start server and wait for it
-        run: |
-          npm start & npx wait-on http://localhost:3000
-          echo "Server started successfully!"
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v3
         with:
-          spec: cypress/e2e/spec.cy.ts
-
+          browser: chrome
+          spec: cypress/integration/*.spec.ts
