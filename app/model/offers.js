@@ -14,16 +14,16 @@ const offerSchema = new Schema({
   offer: Number, 
   deed_of_sale:String, 
   occupancy:String,
-  property:
-  {
-    type: Schema.Types.ObjectId,
-    ref: 'Properties',
-  },
-  broker:
-  {
-    type:Schema.Types.ObjectId,
-    ref:'User',
-  },
+  // property:
+  // {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Properties',
+  // },
+  // broker:
+  // {
+  //   type:Schema.Types.ObjectId,
+  //   ref:'User',
+  // },
   
 });
 
