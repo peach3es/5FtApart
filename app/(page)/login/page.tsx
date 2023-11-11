@@ -3,12 +3,15 @@ import Navbar from "../../../components/Navbar/navbar";
 import Footer from "../../../components/footer";
 import Forms from "../../../components/Login/form";
 import styles from "styles/page.module.css";
+import { getServerSession } from "next-auth";
+import {redirect} from "next/navigation"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// Define the props type for the component, if any props are passed.
-// If there are no props, you can use an empty object or omit it.
-type LoginProps = {};
 
-const Login: React.FC<LoginProps> = () => {
+export default async function login(){
+  const session = await getServerSession(authOptions);
+  if (session) redirect("/")
+  
   return (
     <div className="main-page flex flex-col h-screen">
       <Navbar />
@@ -19,5 +22,3 @@ const Login: React.FC<LoginProps> = () => {
     </div>
   );
 };
-
-export default Login;

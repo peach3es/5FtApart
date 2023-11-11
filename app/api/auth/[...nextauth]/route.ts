@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import User from "../../../../app/model/user"
 
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     providers:[
         CredentialsProvider({
             name: "credentials",
@@ -32,31 +32,32 @@ const authOptions: NextAuthOptions = {
             },
         }),
     ],
+    callbacks:{
+        jwt(params: any){
+            if(params.user?.role){
+                params.token.role = params.user.role;
+                params.token.id = params.user.id;
+            }
+
+            return params.token;
+
+        },
+        session({session, token}) {
+
+            if (session.user){
+                (session.user as {id: string}).id = token.id as string;
+                (session.user as {role: string}).role = token.role as string;
+            }
+
+            return session
+
+        }
+    },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/",
-        signOut: "/login"
-    },
-
-    // callbacks:{
-    //     async jwt({token, user})
-    //     {
-    //         if(user && user._id)
-    //         {
-    //             token.uid = user.id.toString();
-    //         }
-    //     },
-    //     return token;
-    // },
-    
-    // async session({ session, token }) {
-    //     // If the token has a uid field, add it to the session's user object
-    //     if (token.uid) {
-    //       session.user.id = token.uid; // This should be the MongoDB ObjectId as a string
-    //     }
-    //     return session;
-    //   },
-    };
+    }
+};
 const handler = NextAuth(authOptions);
 
 export {handler as GET, handler as POST}

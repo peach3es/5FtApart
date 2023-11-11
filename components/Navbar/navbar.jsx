@@ -88,20 +88,21 @@ export default function App() {
             />
           </Link>
         </NavbarBrand>
-        {session? (
+        {session?.user?.role === "admin" ? (
           <>
-        <NavbarItem>
-          <Link href="/mybroker" className="text">
-            MyBroker
-          </Link>
-        </NavbarItem>
-         <NavbarItem>
-          <Link href="/myproperty" className="text">
-            MyProperty
-          </Link>
+          <NavbarItem>
+            <Link href="/mybroker" className="text">
+              MyBroker
+            </Link>
           </NavbarItem>
-          </>
-                 ): (<></>)}
+          </>) : 
+          session?.user?.role === "broker" ? 
+            (<NavbarItem>
+                <Link href="/myproperty" className="text">
+                  MyProperty
+                </Link>
+              </NavbarItem>) : (<></>)
+          }
 
         <NavbarItem>
           <Link href="/brokers" aria-current="page" className="text">
@@ -166,7 +167,7 @@ export default function App() {
 
       <NavbarContent justify="end">
         {session? (<>
-        <p>Hello, {session.user.name}!</p>
+        <p>Hello, {session.user.name}! ({session.user.role})</p>
           <NavbarItem>
           <Button
             color="default"
@@ -174,7 +175,7 @@ export default function App() {
             className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
             onPress={() => {
               signOut({ redirect: false }).then(() => {
-                  router.push("/login"); // Redirect to the dashboard page after signing out
+                  router.push("/login"); // Redirect to the login page after signing out
               });
           }}
           >
