@@ -54,4 +54,4 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          spec: cypress/integration/spec.cy.ts
+          spec: cypress/integration/test.cy.ts
