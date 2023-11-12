@@ -46,7 +46,7 @@ jobs:
 
       - name: Start Server and Wait
         run: |
-          npm start &
+          npm run dev &
         timeout-minutes: 5
 
       - name: Run Cypress Tests
