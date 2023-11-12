@@ -9,7 +9,7 @@ export default defineConfig({
     env: {
       baseUrl: "http://localhost:3000" // Replace with your API's base URL
     },
-    specPattern: "cypress/integration/spec.cy.ts",
+    specPattern: 'cypress/**/*.cy.ts',
    
     
 
