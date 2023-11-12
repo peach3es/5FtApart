@@ -39,8 +39,7 @@ jobs:
 
       - name: Start Server and Wait
         run: |
-          npm start > server.log 2>&1 &
-          npx wait-on http://localhost:3000
+          npm start
         timeout-minutes: 5
 
       - name: Run Cypress Tests
