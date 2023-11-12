@@ -39,7 +39,7 @@ jobs:
 
       - name: Start Server and Wait
         run: |
-          npm start &
+          npm start > server.log 2>&1 &
           npx wait-on http://localhost:3000
         timeout-minutes: 5
 
