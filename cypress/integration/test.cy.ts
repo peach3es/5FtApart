@@ -60,16 +60,16 @@ describe('API Tests', () => {
     };
 
     // Send a request to update the user
-    cy.request('PUT', `${Cypress.env("baseUrl")}/api/users?userID=${originalUserId}`, updatedUserData).then((response) => {
+    cy.request('PUT', `${Cypress.env("baseUrl")}/api/users/?userID=${originalUserId}`, updatedUserData).then((response) => {
       expect(response.status).to.eq(200);
       updatedUserId = response.body._id;
       expect(originalUserId).to.equal(updatedUserId);
     });
 
     // Verify if the updated user is not the same as the created user
-    cy.request('GET', `${Cypress.env("baseUrl")}/api/users?userID=${originalUserId}`).then((response) => {
+    cy.request('GET', `${Cypress.env("baseUrl")}/api/users/${originalUserId}`).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.not.deep.equal(createdUser);
+      expect(response.body.password).to.deep.equal(updatedUserData.password);
     });
   });
 
