@@ -52,10 +52,16 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          #config-file: cypress.config.ts
+          config-file: cypress.config.ts
           uses: actions/setup-node@v3
           node-version: "18.x"  # Use Node.js version 18
           build: npm run build
           start: npm start
-          config: baseUrl=http://localhost:3000
+          #config: baseUrl=http://localhost:3000
           spec: cypress/integration/test.cy.ts
+
+      - name: Debug Information
+        run: |
+          echo "Current Directory: $(pwd)"
+          echo "Contents of the current directory: $(ls -la)"
+          echo "Environment Variables: $(env)"
