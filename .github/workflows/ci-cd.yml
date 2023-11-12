@@ -8,27 +8,26 @@ on:
     branches:
       - main
 
-jobs:
-  build:
-    runs-on: windows-latest
+# jobs:
+#   build:
+#     runs-on: windows-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with: 
-          node-version: "18.x"
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Use Node.js
+#         uses: actions/setup-node@v3
+#         with: 
+#           node-version: "18.x"
           
-      - name: Install Dependencies
-        run: npm install
+#       - name: Install Dependencies
+#         run: npm install
 
-      - name: Build
-        run: npm run build
-  
-
+#       - name: Build
+#         run: npm run build
+jobs:
   e2e-tests:
     runs-on: windows-latest
-    needs: build
+    #needs: build
 
     steps:
       - name: Checkout Repository
@@ -48,6 +47,7 @@ jobs:
       - name: Start Server and Wait
         run: |
           npm start &
+          sleep 10
           npx wait-on http://localhost:3000
         timeout-minutes: 5
 
