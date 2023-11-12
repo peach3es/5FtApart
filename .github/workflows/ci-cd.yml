@@ -47,7 +47,6 @@ jobs:
       - name: Start Server and Wait
         run: |
           npm start &
-          sleep 10
         timeout-minutes: 5
 
       - name: Run Cypress Tests
@@ -56,5 +55,5 @@ jobs:
           #config-file: cypress.config.ts
           build: npm run build
           #start: npm start
-          config: baseUrl=http://localhost:3000/api/users
+          config: baseUrl=http://localhost:3000
           spec: cypress/integration/test.cy.ts
