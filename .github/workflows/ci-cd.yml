@@ -26,7 +26,7 @@ on:
 #         run: npm run build
 jobs:
   e2e-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest 
     #needs: build
 
     steps:
@@ -54,4 +54,5 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
+          browser: edge
           spec: cypress/integration/test.cy.ts
