@@ -13,9 +13,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with: 
           node-version: "18.x"
       - name: Install dependencies
@@ -27,10 +27,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "18.x"  # Use Node.js version 18
 
@@ -43,7 +43,7 @@ jobs:
         timeout-minutes: 5
 
       - name: Run Cypress Tests
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v4
         with:
           browser: edge
           spec: cypress/integration/*.spec.ts
