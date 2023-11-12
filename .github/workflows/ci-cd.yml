@@ -54,5 +54,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           #config-file: cypress.config.ts
+          build: npm build
+          start: npm start
           config: baseUrl=http://localhost:3000/api/users
           spec: cypress/integration/test.cy.ts
