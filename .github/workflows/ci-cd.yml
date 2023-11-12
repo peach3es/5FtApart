@@ -41,19 +41,19 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      # - name: Build
+      #   run: npm run build
 
-      - name: Start Server and Wait
-        run: |
-          npm start &
-        timeout-minutes: 5
+      # - name: Start Server and Wait
+      #   run: |
+      #     npm start &
+      #   timeout-minutes: 5
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
           #config-file: cypress.config.ts
           build: npm run build
-          #start: npm start
+          start: npm start
           config: baseUrl=http://localhost:3000
           spec: cypress/integration/test.cy.ts
