@@ -54,5 +54,4 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          browser: edge
-          spec: cypress/integration/*.spec.ts
+          spec: cypress/integration/spec.cy.ts
