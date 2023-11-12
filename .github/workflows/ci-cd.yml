@@ -55,6 +55,6 @@ jobs:
         with:
           #config-file: cypress.config.ts
           build: npm run build
-          start: npm start
+          #start: npm start
           config: baseUrl=http://localhost:3000/api/users
           spec: cypress/integration/test.cy.ts
