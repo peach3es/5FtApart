@@ -7,9 +7,10 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +20,6 @@ jobs:
           node-version: "18.x"
       - name: Install dependencies
         run: npm install
-
 
   e2e-tests:
     runs-on: windows-latest
@@ -32,7 +32,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: "18.x"  # Use Node.js version 18
 
       - name: Install Dependencies
         run: npm install
@@ -46,5 +46,5 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v3
         with:
-          browser: chrome
+          browser: edge
           spec: cypress/integration/*.spec.ts
