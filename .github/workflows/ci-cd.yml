@@ -7,19 +7,24 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with: 
           node-version: "18.x"
-      - name: Install dependencies
+          
+      - name: Install Dependencies
         run: npm install
 
+      - name: Build
+        run: npm run build
+  
 
   e2e-tests:
     runs-on: windows-latest
@@ -27,15 +32,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: "18.x"  # Use Node.js version 18
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Start Server and Wait
         run: |
@@ -44,7 +52,7 @@ jobs:
         timeout-minutes: 5
 
       - name: Run Cypress Tests
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v4
         with:
-          browser: chrome
+          browser: edge
           spec: cypress/integration/*.spec.ts
