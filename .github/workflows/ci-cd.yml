@@ -53,5 +53,6 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          config: baseUrl=http://[::1]:3000
+          headed: true
+          config: baseUrl=http://localhost:3000
           spec: cypress/integration/test.cy.ts
