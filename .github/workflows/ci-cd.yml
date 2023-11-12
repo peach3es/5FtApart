@@ -18,8 +18,13 @@ jobs:
         uses: actions/setup-node@v3
         with: 
           node-version: "18.x"
-      - name: Install dependencies
+          
+      - name: Install Dependencies
         run: npm install
+
+      - name: Build
+        run: npm run build
+  
 
   e2e-tests:
     runs-on: windows-latest
@@ -36,6 +41,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Start Server and Wait
         run: |
