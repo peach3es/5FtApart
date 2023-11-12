@@ -52,6 +52,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
+          command: npx cypress run
           config-file: cypress.config.ts
           # uses: actions/setup-node@v3
           # node-version: "18.x"  # Use Node.js version 18
