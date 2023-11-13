@@ -35,7 +35,11 @@ describe('API Tests', () => {
     // Send a request to get the list of users
     cy.request('GET', `${Cypress.env("baseUrl")}/api/users`).then((response) => {
       expect(response.status).to.eq(200);
-
+      // Check that the response body is an array
+      expect(response.body).to.be.an('array');
+       // Check that each object in the array is defined
+      cy.wrap(response.body).each((user) => {expect(user).to.not.be.undefined});
+      
       // Verify if the retrieved user is present in the array
       const userInArray = response.body.find((user: { _id: string; }) => user._id === originalUserId);
       expect(userInArray).to.exist; // Check if the user is found in the array
@@ -69,7 +73,7 @@ describe('API Tests', () => {
     // Verify if the updated user is not the same as the created user
     cy.request('GET', `${Cypress.env("baseUrl")}/api/users/${originalUserId}`).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body.password).to.deep.equal(updatedUserData.password);
+      expect(response.body.password).to.equal(updatedUserData.password);
     });
   });
 
@@ -80,7 +84,7 @@ describe('API Tests', () => {
     userIdToDelete = originalUserId;
 
     // Send a request to delete the user
-    cy.request('DELETE', `${Cypress.env("baseUrl")}/api/users?userID=${userIdToDelete}`).then((response) => {
+    cy.request('DELETE', `${Cypress.env("baseUrl")}/api/users/?userID=${userIdToDelete}`).then((response) => {
       expect(response.status).to.eq(200);
     });
 
@@ -125,6 +129,7 @@ describe('API Tests', () => {
     // Send a request to get the list of properties
     cy.request('GET', `${Cypress.env("baseUrl")}/api/property`).then((response) => {
       expect(response.status).to.eq(200);
+      expect(response.body).to.be.an('array');
 
       // Verify if the retrieved property is present in the array
       const propertyInArray = response.body.find((property: { _id: string; }) => property._id === originalPropertyId);
@@ -134,41 +139,6 @@ describe('API Tests', () => {
       expect(propertyInArray).to.deep.equal(createdProperty);
     });
   });
-
-  // it('PUT /api/property should update the created property', () => {
-  //   // Ensure originalPropertyId is defined
-  //   expect(originalPropertyId).to.not.be.undefined;
-
-  //   // Update property data
-  //   const updatedPropertyData = {
-  //     addimg: 'updated-image-url',
-  //     address: 'Updated Address',
-  //     pricetag: 9999,
-  //     bedrooms: 3,
-  //     amenities: 'Updated Amenities',
-  //     description: 'Updated Description',
-  //     postalcode: '6789',
-  //     city: 'Updated City',
-  //     saletype: 'Rent',
-  //     propertytype: 'Updated Property Type',
-  //   };
-
-  //   // Send a request to update the property
-  //   cy.request('PUT', `${Cypress.env("baseUrl")}/api/property?propertyId=${originalPropertyId}`, updatedPropertyData).then((response) => {
-  //     expect(response.status).to.eq(200);
-  //     expect(response.body._id).to.be.equal(originalPropertyId)
-  //   });
-
-  //   // Verify if the updated property is not the same as the created property
-  //   cy.request('GET', `${Cypress.env("baseUrl")}/api/property?propertyId=${originalPropertyId}`).then((response) => {
-  //     expect(response.status).to.eq(200);
-  //     expect(response.body).to.not.deep.equal(createdProperty);
-  //     // Add assertion to verify if userId stays the same
-  //     //expect(response.body._id).to.equal(originalPropertyId);
-  //   });
-
-
-  // });
 
   it('PUT /api/property should update the created property', () => {
     // Ensure originalPropertyId and originalUserId are defined
@@ -189,7 +159,7 @@ describe('API Tests', () => {
     };
 
     // Send a request to update the property
-    cy.request('PUT', `${Cypress.env("baseUrl")}/api/property?propertyId=${originalPropertyId}`, updatedPropertyData).then((response) => {
+    cy.request('PUT', `${Cypress.env("baseUrl")}/api/property/?propertyId=${originalPropertyId}`, updatedPropertyData).then((response) => {
       expect(response.status).to.eq(200);
       // Add assertions for the updated property if needed...
       //   expect(response.body).to.have.property('userId');
@@ -197,7 +167,7 @@ describe('API Tests', () => {
     });
 
     // Verify if the updated property is not the same as the created property
-    cy.request('GET', `${Cypress.env("baseUrl")}/api/property?propertyId=${originalPropertyId}`).then((response) => {
+    cy.request('GET', `${Cypress.env("baseUrl")}/api/property/${originalPropertyId}`).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.not.deep.equal(createdProperty);
     });
@@ -209,7 +179,7 @@ describe('API Tests', () => {
     expect(originalPropertyId).to.not.be.undefined;
 
     // Send a request to delete the property
-    cy.request('DELETE', `${Cypress.env("baseUrl")}/api/property?propertyId=${originalPropertyId}`).then((response) => {
+    cy.request('DELETE', `${Cypress.env("baseUrl")}/api/property/?propertyId=${originalPropertyId}`).then((response) => {
       expect(response.status).to.eq(200);
     });
 
