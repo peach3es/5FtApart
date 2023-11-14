@@ -43,7 +43,7 @@ export default function ModalUpdateProperty({
     (newData) => updateProperty(formID, newData),
     {
       onSuccess: () => {
-        queryClient.prefetchQuery("properties", getProperties);
+        queryClient.invalidateQueries('properties');
       },
       onError: () => {
         setIsErrorModalOpen(true);
