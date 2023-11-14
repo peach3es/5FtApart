@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -15,7 +15,7 @@ import {
   CircularProgress,
 } from "@nextui-org/react";
 import ModalUpdateProperty from "./Modals/ModalUpdateProperty";
-import { getProperties, deleteProperty } from "@/backend/lib/helperProperties";
+import { getProperties, deleteProperty, getBrokerProperties } from "@/backend/lib/helperProperties";
 import { useQuery, useQueryClient } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAction, updateAction } from "@/backend/redux/reducer";
@@ -59,6 +59,18 @@ export default function PropertyCard({
   isEditable = false,
   isInsideModal = false,
 }) {
+
+  const [userID, setUserID] = useState('');
+
+  useEffect(() => {
+    const getProps = async () => {
+      const response = await fetch("/api/auth/session");
+      const users = await response.json();
+      setUserID(users.user.id)
+    };
+    getProps();
+  }, []);
+
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const cardContainerClass = isInsideModal
     ? "gap-2 grid-cols-3 overflow-y-auto"
@@ -74,11 +86,11 @@ export default function PropertyCard({
   const onUpdateOpen = () => setUpdateOpen(true);
   const onUpdateClose = () => setUpdateOpen(false);
 
-  //requests
-  const { isLoading, isError, data, error } = useQuery(
-    "properties",
-    getProperties
-  );
+
+
+  const {isLoading, isError, data, error} = useQuery(['properties', userID],() => getBrokerProperties(userID))
+  
+  const hasProperties = data && Array.isArray(data) && data.length > 0;
 
   if (isLoading)
     return (
@@ -96,7 +108,8 @@ export default function PropertyCard({
 
   return (
     <div>
-      <CardProperty
+      {hasProperties ?
+      (<CardProperty
         hoveredIndex={hoveredIndex}
         setHoveredIndex={setHoveredIndex}
         isDeleteOpen={isDeleteOpen}
@@ -109,7 +122,8 @@ export default function PropertyCard({
         isEditable={isEditable}
         isInsideModal={isInsideModal}
         properties={data}
-      />
+      />): (<p>No Properties To Show</p>)
+      }
     </div>
   );
 }
@@ -152,7 +166,7 @@ function CardProperty({
     if (deleteID) {
       await deleteProperty(deleteID);
       console.log("Delete ID:", deleteID);
-      await queryClient.prefetchQuery("properties", getProperties);
+      await queryClient.invalidateQueries('properties');
       await dispatch(deleteAction(null));
     }
   };

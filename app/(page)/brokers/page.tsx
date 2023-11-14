@@ -51,6 +51,7 @@ export default function ResultPage() {
       const response = await fetch("/api/users");
       const users = await response.json();
       const userFilters = searchParams.get("brokerselections");
+      console.log(response)
 
       if (userFilters) {
         const results = JSON.parse(userFilters);

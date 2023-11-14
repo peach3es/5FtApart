@@ -32,14 +32,23 @@ const formReducer = (state: any, event: any) => {
 
 export default function ModalAddProperty({ isOpen, onClose }: any) {
   const [formData, setFormData] = useReducer(formReducer, {});
+  const [userId, setUserID] = useState('');
   const [isEmpty, setIsEmpty] = useState(false); // New state
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
 
+  useEffect(() => {
+    const getProps = async () => {
+      const response = await fetch("/api/auth/session");
+      const users = await response.json();
+      setUserID(users.user.id)
+    };
+    getProps();
+  }, []);
   const queryClient = useQueryClient();
   const addMutation = useMutation(addProperty, {
     onSuccess: () => {
-      queryClient.prefetchQuery("properties", getProperties);
+      queryClient.invalidateQueries('properties');
       setIsSuccessModalOpen(true);
       onClose();
     },
@@ -75,6 +84,7 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
       } = formData;
 
       const model = {
+        userId,
         addimg,
         address,
         pricetag,
@@ -84,7 +94,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
         saletype,
         propertytype,
       };
-
       addMutation.mutate(model); //addMutation.mutate({}) is the request
     }
   };

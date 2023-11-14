@@ -1,6 +1,7 @@
 /**Controller */
 const Users = require("../../app/model/user");
 const Properties = require("../../app/model/property");
+const mongoose = require("mongoose")
 
 //---------------------------------------------------------------------------------------------
 //User database here
@@ -80,6 +81,7 @@ async function deleteUser(req, res) {
     res.status(404).json({ error: "Error while deleting user" });
   }
 }
+
 async function getUsersFiltered(req, res, filters = {}) {
   try {
     let query = {};
@@ -116,6 +118,28 @@ async function getProperties(req, res) {
   }
 }
 
+// get the properties for the broker in session
+async function getBrokerProperties(req, res) {
+  try {
+    const { brokerID } = req.params;
+
+    // Ensure brokerID is a valid ObjectId
+    if (!brokerID || !mongoose.Types.ObjectId.isValid(brokerID)) {
+      return res.status(400).json({ error: "Invalid or missing broker ID" });
+    }
+
+    const properties = await Properties.find({ "userId": brokerID });
+    if (properties.length === 0) {
+      return res.status(404).json({ error: "Data not found" });
+    }
+    res.status(200).json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+
 // get: http://localhost:3000/api/property/1
 //search
 async function getProperty(req, res) {
@@ -145,6 +169,7 @@ async function addProperty(req, res) {
     if (!formData) {
       return res.status(404).json({ error: "Form Data Not Provided" });
     }
+    console.log("here" + formData)
     const newProperty = await Properties.create(formData);
     return res.status(200).json(newProperty);
   } catch (error) {
@@ -238,4 +263,5 @@ module.exports = {
   getPropertiesFiltered: getPropertiesFiltered,
   checkUser: checkUser,
   getUsersFiltered: getUsersFiltered,
+  getBrokerProperties: getBrokerProperties,
 };

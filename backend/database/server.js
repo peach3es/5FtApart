@@ -9,6 +9,7 @@ const {
   deleteUser,
   checkUser,
   getUsersFiltered,
+  getBrokerProperties
 } = require("./controller.js");
 const {
   getProperties,
@@ -79,6 +80,14 @@ app.prepare().then(() => {
     getProperties(req, res);
   });
 
+  server.get("/api/property", (req, res) => {
+    getProperties(req, res);
+  });
+
+  server.get("/api/brokerproperty/:brokerID", (req, res) => {
+    getBrokerProperties(req, res);
+  });
+  
   server.get("/api/property/:propertyId", (req, res) => {
     getProperty(req, res);
   });

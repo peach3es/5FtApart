@@ -8,6 +8,15 @@ export const getProperties = async () => {
   return json;
 };
 
+// Get properties for broker in session
+export const getBrokerProperties = async (brokerID: any) => {
+  const response = await fetch(`${BASE_URL}/api/brokerproperty/${brokerID}`);
+  const json = await response.json();
+
+  return json;
+};
+
+// get property by id
 export const getProperty = async (propertyId: any) => {
   const response = await fetch(`${BASE_URL}/api/property/${propertyId}`);
   const json = await response.json();
@@ -16,7 +25,7 @@ export const getProperty = async (propertyId: any) => {
   return {};
 };
 
-//Adding a new Property
+// Adding a new Property
 export async function addProperty(formData: any) {
   try {
     const Options = {
@@ -34,7 +43,7 @@ export async function addProperty(formData: any) {
   }
 }
 
-//Update a new Property
+// Update a new Property
 export async function updateProperty(propertyId: any, formData: any) {
   const Options = {
     method: "PUT",
@@ -50,7 +59,7 @@ export async function updateProperty(propertyId: any, formData: any) {
   return json;
 }
 
-//Delete a new Property
+// Delete a new Property
 export async function deleteProperty(propertyId: any) {
   const Options = {
     method: "DELETE",
