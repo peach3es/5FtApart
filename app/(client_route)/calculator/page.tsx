@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import Link from "@nextui-org/react";
-import styles from "../../../../styles/calculator.css";
-import Logo from "../../../../public/5ftapartbw.png";
+import Logo from "../../../public/5ftapartbw.png";
 
 export default function Home() {
   const [mortgage, setMortgage] = useState(1000000);
@@ -14,19 +12,19 @@ export default function Home() {
   const [monthlyPayment, setMonthlyPayment] = useState(500);
 
   const inputRefs = {
-    mortgage: useRef(),
-    amortization: useRef(),
-    paymentFrequency: useRef(),
-    interestRate: useRef(),
-    interestTerm: useRef(),
-    monthlyPayment: useRef(),
+    mortgage: useRef<HTMLInputElement>(null),
+    amortization: useRef<HTMLInputElement>(null),
+    paymentFrequency: useRef<HTMLInputElement>(null),
+    interestRate: useRef<HTMLInputElement>(null),
+    interestTerm: useRef<HTMLInputElement>(null),
+    monthlyPayment: useRef<HTMLInputElement>(null),
   };
 
   useEffect(() => {
     calculateMonthlyPayment();
   }, [mortgage, amortization, paymentFrequency, interestRate, interestTerm]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     switch (name) {
       case "mortgage":
@@ -58,7 +56,10 @@ export default function Home() {
       (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -n)));
 
     setMonthlyPayment(payment);
-    inputRefs.monthlyPayment.current.value = payment.toFixed(2);
+
+    if (inputRefs.monthlyPayment.current) {
+      inputRefs.monthlyPayment.current.value = payment.toFixed(2);
+    }
   };
 
   return (

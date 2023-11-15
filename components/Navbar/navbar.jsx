@@ -26,13 +26,11 @@ import {
 } from "./icons.jsx";
 import Image from "next/image";
 import LogoDark from "public/5ftapartbw.png";
-import { CiCalculator2 } from "react-icons/ci";
-import { PiLinkSimple } from "react-icons/pi";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {signOut, useSession} from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 export default function App() {
-  const { data: session } = useSession();
+  const {data: session} = useSession();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -46,6 +44,14 @@ export default function App() {
 
   const icons = {
     chevron: <ChevronDown fill="currentColor" size={16} />,
+    scale: <Scale className="text-warning" fill="currentColor" size={30} />,
+    lock: <Lock className="text-success" fill="currentColor" size={30} />,
+    activity: (
+      <Activity className="text-secondary" fill="currentColor" size={30} />
+    ),
+    flash: <Flash className="text-primary" fill="currentColor" size={30} />,
+    server: <Server className="text-success" fill="currentColor" size={30} />,
+    user: <TagUser className="text-danger" fill="currentColor" size={30} />,
   };
 
   return (
@@ -84,21 +90,19 @@ export default function App() {
         </NavbarBrand>
         {session?.user?.role === "admin" ? (
           <>
-            <NavbarItem>
-              <Link href="/mybroker" className="text">
-                MyBroker
-              </Link>
-            </NavbarItem>
-          </>
-        ) : session?.user?.role === "broker" ? (
           <NavbarItem>
-            <Link href="/myproperty" className="text">
-              MyProperty
+            <Link href="/mybroker" className="text">
+              MyBroker
             </Link>
           </NavbarItem>
-        ) : (
-          <></>
-        )}
+          </>) : 
+          session?.user?.role === "broker" ? 
+            (<NavbarItem>
+                <Link href="/myproperty" className="text">
+                  MyProperty
+                </Link>
+              </NavbarItem>) : (<></>)
+          }
 
         <NavbarItem>
           <Link href="/brokers" aria-current="page" className="text">
@@ -131,76 +135,85 @@ export default function App() {
               base: "gap-4",
             }}
           >
-            <DropdownItem
+            { session?.user?.role === "client" ? 
+            (<DropdownItem
               key="autoscaling"
               description="Calculator to estimate your mortgage."
-              startContent={<CiCalculator2 className="w-8 h-8 text-b" />}
+              startContent={icons.scale}
               href="/calculator"
               as={Link}
               className="text"
             >
               Calculator
-            </DropdownItem>
+            </DropdownItem>):(null)}
+
             <DropdownItem
               key="usage_metrics"
-              description="Useful links for buyers/renters."
-              href="/usefullinks"
-              startContent={<PiLinkSimple className="w-6 h-6 m-1 text-b" />}
+              description="another dropdown menu"
+              startContent={icons.activity}
               as={Link}
-              className="text"
             >
-              Useful Links
+              Another dropdown
+            </DropdownItem>
+            <DropdownItem
+              key="production_ready"
+              description="Last dropdown menu"
+              startContent={icons.flash}
+              as={Link}
+            >
+              Last one
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {session ? (
-          <>
-            <p>
-              Hello, {session.user.name}! ({session.user.role})
-            </p>
-            <NavbarItem>
-              <Button
-                color="default"
-                variant="flat"
-                className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
-                onPress={() => {
-                  signOut({ redirect: false }).then(() => {
-                    router.push("/login"); // Redirect to the login page after signing out
-                  });
-                }}
-              >
-                Log out
-              </Button>
-            </NavbarItem>
-          </>
-        ) : (
-          <>
-            <NavbarItem className="hidden lg:flex">
-              <Button
-                as={Link}
-                href="/login"
-                variant="flat"
-                className="text button hover:ring ring-g bg-w"
-              >
-                Login
-              </Button>
-            </NavbarItem>
-            <NavbarItem>
-              <Button
-                as={Link}
-                color="default"
-                href="/signup"
-                variant="flat"
-                className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
-              >
-                Sign Up
-              </Button>
-            </NavbarItem>
-          </>
+        {session? (<>
+        <p>Hello, {session.user.name}! ({session.user.role})</p>
+          <NavbarItem>
+          <Button
+            color="default"
+            variant="flat"
+            className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
+            onPress={() => {
+              signOut({ redirect: false }).then(() => {
+                  router.push("/login"); // Redirect to the login page after signing out
+              });
+          }}
+          >
+            Log out
+          </Button>
+        </NavbarItem>
+        </> 
+      
+
+        ): (<>
+
+          <NavbarItem className="hidden lg:flex">
+          <Button
+            as={Link}
+            href="/login"
+            variant="flat"
+            className="text button hover:ring ring-g bg-w"
+          >
+            Login
+          </Button>
+        </NavbarItem>
+                <NavbarItem>
+                <Button
+                  as={Link}
+                  color="default"
+                  href="/signup"
+                  variant="flat"
+                  className="text-[#fefbff] button bg-pr hover:ring ring-dpr"
+                >
+                  Sign Up
+                </Button>
+              </NavbarItem>
+              </>
+
         )}
+       
       </NavbarContent>
 
       <NavbarMenu className="navbar-menu">
