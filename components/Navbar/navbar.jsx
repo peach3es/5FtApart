@@ -180,10 +180,14 @@ export default function App() {
                   src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                 />
               </DropdownTrigger>
-              <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownMenu
+                aria-label="Profile Actions"
+                variant="flat"
+                disabledKeys={["profile"]}
+              >
                 <DropdownItem
                   key="profile"
-                  className="h-17 gap-2 cursor-default"
+                  className="h-17 gap-2 cursor-default opacity-100"
                   isReadOnly
                 >
                   <p className="font-semibold text-large">
