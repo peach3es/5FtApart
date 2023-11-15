@@ -153,9 +153,7 @@ export default function App() {
       <NavbarContent justify="end">
         {session ? (
           <>
-            <p>
-              Hello, {session.user.name}! ({session.user.role})
-            </p>
+            <p>Hello, {session.user.name}!</p>
             {/* <NavbarItem>
               <Button
                 color="default"
@@ -185,9 +183,13 @@ export default function App() {
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem
                   key="profile"
-                  className="h-14 gap-2 cursor-default"
+                  className="h-17 gap-2 cursor-default"
                   isReadOnly
                 >
+                  <p className="font-semibold text-large">
+                    {session.user.role.charAt(0).toUpperCase() +
+                      session.user.role.slice(1)}
+                  </p>
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{session.user.email}</p>
                 </DropdownItem>
