@@ -14,16 +14,9 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownTrigger,
+  Avatar,
 } from "@nextui-org/react";
-import {
-  ChevronDown,
-  Lock,
-  Activity,
-  Flash,
-  Server,
-  TagUser,
-  Scale,
-} from "./icons.jsx";
+import { ChevronDown } from "./icons.jsx";
 import Image from "next/image";
 import LogoDark from "public/5ftapartbw.png";
 import { CiCalculator2 } from "react-icons/ci";
@@ -131,17 +124,18 @@ export default function App() {
               base: "gap-4",
             }}
           >
-            {session?.user?.role === "client" ? 
-            (<DropdownItem
-              key="autoscaling"
-              description="Calculator to estimate your mortgage."
-              startContent={<CiCalculator2 className="w-8 h-8 text-b" />}
-              href="/calculator"
-              as={Link}
-              className="text"
-            >
-              Calculator
-            </DropdownItem>):(null)}
+            {session?.user?.role === "client" ? (
+              <DropdownItem
+                key="autoscaling"
+                description="Calculator to estimate your mortgage."
+                startContent={<CiCalculator2 className="w-8 h-8 text-b" />}
+                href="/calculator"
+                as={Link}
+                className="text"
+              >
+                Calculator
+              </DropdownItem>
+            ) : null}
             <DropdownItem
               key="usage_metrics"
               description="Useful links for buyers/renters."
@@ -162,7 +156,7 @@ export default function App() {
             <p>
               Hello, {session.user.name}! ({session.user.role})
             </p>
-            <NavbarItem>
+            {/* <NavbarItem>
               <Button
                 color="default"
                 variant="flat"
@@ -175,7 +169,43 @@ export default function App() {
               >
                 Log out
               </Button>
-            </NavbarItem>
+            </NavbarItem> */}
+            <Dropdown placement="bottom-start">
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="secondary"
+                  name="user"
+                  size="md"
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem
+                  key="profile"
+                  className="h-14 gap-2 cursor-default"
+                  isReadOnly
+                >
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">{session.user.email}</p>
+                </DropdownItem>
+                <DropdownItem key="configurations">Offers</DropdownItem>
+                <DropdownItem key="settings">Settings</DropdownItem>
+                <DropdownItem
+                  key="logout"
+                  color="danger"
+                  onPress={() => {
+                    signOut({ redirect: false }).then(() => {
+                      router.push("/login"); // Redirect to the login page after signing out
+                    });
+                  }}
+                >
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
           </>
         ) : (
           <>
