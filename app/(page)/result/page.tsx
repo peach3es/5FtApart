@@ -59,7 +59,6 @@ const ResultPage = () => {
         setSelectedPropertyType(results.propertyType);
         setSelectedPriceRange(results.priceRange);
         setSelectedSearchTerm(results.term);
-
         handleSearch(results);
       } else {
         console.error("propertyselections not found in the query parameters.");

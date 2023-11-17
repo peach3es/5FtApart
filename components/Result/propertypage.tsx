@@ -104,7 +104,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                We will need some basic informations
+                We will need some basic information
               </ModalHeader>
               <ModalBody>
                 <p className="mb-2">
@@ -138,7 +138,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                We will need some basic informations
+                We will need some basic information
               </ModalHeader>
               <ModalBody>
                 <p className="mb-2">
@@ -146,7 +146,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                   contact you
                 </p>
 
-                <div className="mb-3 flex flex-row gap-3">
+                <div className="mb-3 flex flex-row gap-1 w-25">
                   <Input type="faded" label="Broker Full name" />
                   <Input
                     type="license #"
@@ -156,7 +156,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                   <Input type="faded" label="Agency" />
                 </div>
 
-                <div className="mb-3 flex flex-row gap-3">
+                <div className="mb-3 flex flex-row gap-3 w-25">
                   <Input type="faded" label="Full Name" />
                   <Input type="faded" label=" Current Address" />
                   <Input
@@ -165,11 +165,14 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                     classNames={{ input: "border-none" }}
                   />
                   <Input type="faded" label="Offer" />
-                  <p className="text-base">{data.address}</p>
-
                 </div>
 
                 <div className="mb-3 flex flex-row gap-3">
+                <p className="text-base">Offer For {data.address}</p>
+                </div>
+
+                <div className="mb-3 flex flex-row gap-3">
+                <p className="text-base">{data.address}</p>
                   <p>Please put in the Deed of sale and Occupancy of premises date </p>
                 </div>
 

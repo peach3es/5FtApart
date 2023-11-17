@@ -17,6 +17,7 @@ const propertySchema = new Schema({
   propertytype: String,
   userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 
+
 });
 
 const Properties = models.property || model("property", propertySchema);
