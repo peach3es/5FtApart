@@ -55,18 +55,14 @@ export default function Home() {
       <div className="flex flex-col  justify-center  items-center gap-2 p-3 mx-auto">
         <Image src={Logo} alt="logo image" width={250} height={325} />
         <h1 className="font-bold">Mortage calculator</h1>
-        <form className="grid grid-rows-3 grid-cols-2 gap-2 p-2" action="#">
+        <form className="flex flex-col gap-2 p-2" action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
             <div
               className={`flex flex-col mt-2 text-center${
                 key === "monthlyPayment"
                   ? "row-span-2 col-span-2 text-center mx-auto"
                   : ""
-              }  ${
-                key === "interestRate"
-                  ? "row-span-3 col-span-2 text-center w-1/2 mx-auto"
-                  : ""
-              }`}
+              } `}
               key={key}
             >
               <div>{key.replace(/^\w/, (c) => c.toUpperCase())}</div>
@@ -79,7 +75,9 @@ export default function Home() {
                       ? principal
                       : key === "paymentFrequency"
                       ? paymentFrequency
-                      : ""
+                      : key =="interestRate"
+                      ?interestRate
+                      :""
                   }
                   className="mt-2 appearance-none rounded-md shadow-md px-4 py-3 font-semibold text-center"
                   ref={ref}
