@@ -197,7 +197,7 @@ export default function App() {
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{session.user.email}</p>
                 </DropdownItem>
-                <DropdownItem key="configurations">Offers</DropdownItem>
+                <DropdownItem key="offers" href="offer">Offers</DropdownItem>
                 <DropdownItem key="settings">Settings</DropdownItem>
                 <DropdownItem
                   key="logout"
