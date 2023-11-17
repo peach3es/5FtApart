@@ -20,14 +20,6 @@ const {
   getPropertiesFiltered
 } = require("./controller.js");
 
-const{
-  getOffers,
-  getOffer,
-  addOffer,
-  putOffer,
-  deleteOffer
-} =require("./controller.js");
-
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -129,52 +121,6 @@ app.prepare().then(() => {
       priceRange,
     });
   });
-  
-   //---------------------------------------------------------------
-  // Add your Express middleware and routes here
-  //For Offer
-  //---------------------------------------------------------------
-
-  server.get("/api/offers", (req, res) => {
-
-    console.log("Hello");
-    res.json({message:"Retrieved successfuly"});
-      getOffers(req, res);
-  });
-
-  server.get("/api/offers/:offerId", (req, res) => {
-    getOffer(req, res);
-  });
-
-  server.post("/api/offers", (req, res) => {
-    // res.status(200).json({ method: "POST Request" });
-    addOffer(req, res);
-  });
-
-  server.put("/api/offers", (req, res) => {
-    //res.status(200).json({ method: 'PUT Request' });
-    putOffer(req, res);
-  });
-
-  server.delete("/api/offers", (req, res) => {
-    //res.status(200).json({ method: 'DELETE Request' });
-    deleteOffer(req, res);
-  });
-
-  server.get("/api/data/offers", (req, res) => {
-    res.json({ message: "Hello from Express!" });
-  });
-
-  // server.get("/api/propertyfilter", (req, res) => {
-  //   const { term, saleType, propertyType, priceRange } = req.query;
-
-  //   getPropertiesFiltered(req, res, {
-  //     term,
-  //     saleType,
-  //     propertyType,
-  //     priceRange,
-  //   });
-  // });
 
   server.get('/test', async (req, res) => {
     res.json({message: 'pass!'})
@@ -189,12 +135,6 @@ app.prepare().then(() => {
     console.log("> Ready on http://localhost:3000");
   });
 
-
-
-
 });
-
-
-
 
 module.exports = app;

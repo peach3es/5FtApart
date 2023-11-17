@@ -4,36 +4,34 @@ import Image from "next/image";
 import Logo from "../../../public/5ftapartbw.png";
 
 export default function Home() {
-  const [principal, setPrincipal] = useState(1000000);
+  const [mortgage, setMortgage] = useState(1000000);
+  const [amortization, setAmortization] = useState(25);
   const [paymentFrequency, setPaymentFrequency] = useState(12);
   const [interestRate, setInterestRate] = useState(0.0649);
-  const [monthlyPayment, setMonthlyPayment] = useState(6745.82);
+  const [interestTerm, setInterestTerm] = useState(5);
+  const [monthlyPayment, setMonthlyPayment] = useState(500);
 
   const inputRefs = {
-<<<<<<< Updated upstream:app/(client_route)/calculator/page.tsx
     mortgage: useRef<HTMLInputElement>(null),
     amortization: useRef<HTMLInputElement>(null),
     paymentFrequency: useRef<HTMLInputElement>(null),
     interestRate: useRef<HTMLInputElement>(null),
     interestTerm: useRef<HTMLInputElement>(null),
     monthlyPayment: useRef<HTMLInputElement>(null),
-=======
-    principal: useRef(),
-    paymentFrequency: useRef(),
-    interestRate: useRef(),
-    monthlyPayment: useRef(),
->>>>>>> Stashed changes:app/(page)/(dropdown)/calculator/page.js
   };
 
   useEffect(() => {
     calculateMonthlyPayment();
-  }, [principal, paymentFrequency, interestRate]);
+  }, [mortgage, amortization, paymentFrequency, interestRate, interestTerm]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     switch (name) {
-      case "principal":
-        setPrincipal(parseFloat(value) || 0);
+      case "mortgage":
+        setMortgage(parseFloat(value) || 0);
+        break;
+      case "amortization":
+        setAmortization(parseInt(value) || 0);
         break;
       case "paymentFrequency":
         setPaymentFrequency(parseInt(value) || 0);
@@ -41,15 +39,21 @@ export default function Home() {
       case "interestRate":
         setInterestRate(parseFloat(value) || 0);
         break;
+      case "interestTerm":
+        setInterestTerm(parseFloat(value) || 0);
+        break;
       default:
+        break;
     }
   };
 
   const calculateMonthlyPayment = () => {
-    const numerator = interestRate/12 * (1 + interestRate/12) ** (paymentFrequency*12);
-    const denominator = (1 + interestRate/12) ** (paymentFrequency*12) - 1;
+    const monthlyInterestRate = interestRate / 12;
+    const n = amortization * paymentFrequency;
 
-    const payment = principal * (numerator / denominator);
+    const payment =
+      mortgage *
+      (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -n)));
 
     setMonthlyPayment(payment);
 
@@ -59,48 +63,36 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 justify-center bg-w mx-auto w-1/2 rounded-lg">
-      <div className="flex flex-col  justify-center  items-center gap-2 p-3 mx-auto">
+    <div className="flex flex-col gap-3 p-3 justify-center bg-w mx-auto border-r-3">
+      <div>
         <Image src={Logo} alt="logo image" width={250} height={325} />
-        <h1 className="font-bold">Mortage calculator</h1>
-        <form className="grid grid-rows-3 grid-cols-2 gap-2 p-2" action="#">
+
+        <form className="mx-auto" action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
-            <div
-              className={`flex flex-col mt-2 text-center${
-                key === "monthlyPayment"
-                  ? "row-span-2 col-span-2 text-center"
-                  : ""
-              }  ${
-                key === "interestRate"
-                  ? "row-span-3 col-span-2 text-center w-1/2"
-                  : ""
-              }`}
-              key={key}
-            >
+            <div className="mx-auto flex flex-col mt-4" key={key}>
               <div>{key.replace(/^\w/, (c) => c.toUpperCase())}</div>
-              {key !== "monthlyPayment" ? (
-                <input
-                  type="text"
-                  name={key}
-                  defaultValue={
-                    key === "principal"
-                      ? principal
-                      : key === "paymentFrequency"
-                      ? paymentFrequency
-                      : ""
-                  }
-                  className="mt-2 appearance-none rounded-md shadow-md px-4 py-3 font-semibold text-center"
-                  ref={ref}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <div
-                  className="mt-2 rounded-md bg-transparent px-4 py-3  text-lg font-bold text-center"
-                  ref={ref}
-                >
-                  {monthlyPayment.toFixed(2)}
-                </div>
-              )}
+              <input
+                type="text"
+                name={key}
+                defaultValue={
+                  key === "mortgage"
+                    ? mortgage
+                    : key === "amortization"
+                    ? amortization
+                    : key === "paymentFrequency"
+                    ? paymentFrequency
+                    : key === "interestRate"
+                    ? interestRate
+                    : key === "interestTerm"
+                    ? interestTerm
+                    : monthlyPayment
+                }
+                className={
+                  "mx-auto mt-2 appearance-none rounded-md shadow-md px-4 py-3"
+                }
+                ref={ref}
+                onChange={handleInputChange}
+              />
             </div>
           ))}
         </form>

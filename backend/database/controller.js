@@ -2,7 +2,6 @@
 const Users = require("../../app/model/user");
 const Properties = require("../../app/model/property");
 const mongoose = require("mongoose")
-const Offers = require("../../app/model/offers");
 
 //---------------------------------------------------------------------------------------------
 //User database here
@@ -250,123 +249,6 @@ async function checkUser(req, res) {
   }
 }
 
-//---------------------------------------------------------------------------------------------
-//Offer database here
-//---------------------------------------------------------------------------------------------
-
-// get: http://localhost:3000/api/property
-//get the properties currently available
-async function getOffers(req, res) {
-  try {
-    const offer = await Offers.find({});
-    if (!offer) {
-      return res.status(404).json({ error: "Data not Found" });
-    }
-    res.status(200).json(offer);
-  } catch (error) {
-    console.error(error); // Add this line to log the error
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-}
-
-// get: http://localhost:3000/api/property/1
-//search
-async function getOffer(req, res) {
-  try {
-    const { offerId } = req.params;
-
-    if (offerId) {
-      const offer = await Offers.findById(offerId);
-      if (offer) {
-        res.status(200).json(offer);
-      } else {
-        res.status(404).json({ error: "offer" });
-      }
-    } else {
-      res.status(400).json({ error: "Property ID not selected" });
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Cannot get property" });
-  }
-}
-
-// post: http://localhost:3000/api/property
-//Adding offers
-async function addOffer(req, res) {
-  try {
-    const formData = req.body;
-    if (!formData) {
-      return res.status(404).json({ error: "Form Data Not Provided" });
-    }
-    const newOffer = await Properties.create(formData);
-    return res.status(200).json(newOffer);
-  } catch (error) {
-    return res.status(404).json({ error: error.message });
-  }
-}
-
-// put: http://localhost:3000/api/property/1
-//Updating a specific property based on ID
-async function putOffer(req, res) {
-  try {
-    const { offerId } = req.query;
-    const formData = req.body;
-
-    if (offerId && formData) {
-      const property = await Properties.findByIdAndUpdate(offerId, formData);
-      res.status(200).json(property);
-    } else {
-      res.status(404).json({ error: "Property Not Selected" });
-    }
-  } catch (error) {
-    res.status(404).json({ error: "Error while updating the Offer" });
-  }
-}
-
-// delete: http://localhost:3000/api/property/1
-async function deleteOffer(req, res) {
-  try {
-    const { offerId } = req.query;
-
-    if (offerId) {
-      const property = await Properties.findByIdAndDelete(offerId);
-      return res.status(200).json(property);
-    } else {
-      res.status(404).json({ error: "Property not selected" });
-    }
-  } catch (error) {
-    res.status(404).json({ error: "Error while deleting Offer" });
-  }
-}
-
-async function getOfferFiltered(req, res, filters = {}) {
-  try {
-    let query = {};
-
-    if (filters.term) {
-      query.address = new RegExp(filters.term, "i"); // Assuming the properties have an address field
-    }
-    if (filters.saleType) {
-      query.saletype = filters.saleType;
-    }
-    if (filters.propertyType) {
-      query.propertytype = filters.propertyType;
-    }
-
-    if (filters.priceRange) {
-      const [min, max] = filters.priceRange.split("-").map(Number);
-      query.pricetag = { $gte: min, $lte: max };
-    }
-
-    const property = await Properties.find(query);
-
-    res.status(200).json(property);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-}
-
 module.exports = {
   getUsers: getUsers,
   getUser: getUser,
@@ -382,10 +264,4 @@ module.exports = {
   checkUser: checkUser,
   getUsersFiltered: getUsersFiltered,
   getBrokerProperties: getBrokerProperties,
-  getOffers:getOffers,
-  getOffer:getOffer,
-  addOffer:addOffer,
-  putOffer:putOffer,
-  deleteOffer:deleteOffer,
-  getOfferFiltered:getOfferFiltered,
 };

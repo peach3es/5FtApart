@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body  className={`${inter.className}`}>
-        <div className="main-page flex flex-col h-screen gap-3">
+        <div className="main-page flex flex-col h-screen">
           <NavBar />
           {children}
           <Footer />

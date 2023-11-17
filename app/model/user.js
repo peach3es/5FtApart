@@ -18,12 +18,11 @@ const userSchema = new Schema({
     enum: ["client", "broker", "admin"],
     required: false,
   },
-  offers:[
-    {
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'Offers',
-    }
-  ]
+  // offers:[{
+  //   type:Schema.Types.ObjectId,
+  //   ref: 'Offers'
+  // }],
+  //   _id: ObjectId,
 
 });
 
