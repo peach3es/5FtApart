@@ -1,22 +1,21 @@
-.Header{
-    color:pr;
-    font-size: 32px; 
-    margin: 0; 
-    padding: 24px; 
-    text-align: center; 
-    background: #fff; 
-
-    
-
+.Header {
+  color: pr;
+  font-size: 32px;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
 }
 
+.SubHeader {
+  color: pr;
+  font-size: 32px;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
+}
 
-.SubHeader{
-    color:pr;
-    font-size: 32px; 
-    margin: 0; 
-    padding: 24px; 
-    text-align: center; 
-    background: #fff; 
-
+.calc-container {
+  box-shadow: 11px 11px 22px #dadada, -11px -11px 22px #ffffff;
 }

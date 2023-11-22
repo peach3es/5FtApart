@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Logo from "../../../public/5ftapartbw.png";
+import "@/styles/calculator.css";
 
 export default function Home() {
   const [principal, setPrincipal] = useState(1000000);
@@ -51,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 justify-center bg-w place-self-center w-1/3 rounded-lg mt-4 mb-4">
+    <div className="flex flex-col gap-3 p-3 justify-center bg-w place-self-center w-1/3 rounded-lg my-20 calc-container">
       <div className="flex flex-col  justify-center  items-center gap-2 p-3 mx-auto">
         <Image src={Logo} alt="logo image" width={250} height={325} />
         <h1 className="font-bold">Mortage calculator</h1>
@@ -75,9 +76,9 @@ export default function Home() {
                       ? principal
                       : key === "paymentFrequency"
                       ? paymentFrequency
-                      : key =="interestRate"
-                      ?interestRate
-                      :""
+                      : key == "interestRate"
+                      ? interestRate
+                      : ""
                   }
                   className="mt-2 appearance-none rounded-md shadow-md px-4 py-3 font-semibold text-center"
                   ref={ref}
