@@ -51,7 +51,7 @@ export default function ResultPage() {
       const response = await fetch("/api/users");
       const users = await response.json();
       const userFilters = searchParams.get("brokerselections");
-      console.log(response)
+      console.log(response);
 
       if (userFilters) {
         const results = JSON.parse(userFilters);
@@ -71,9 +71,11 @@ export default function ResultPage() {
 
   if (isLoading)
     return (
-      <div className="rounded-lg m-7 bg-w p-10">
-        <div className="flex text-xl text-center justify-center items-center p-10 m-8 h-full">
-          <CircularProgress label="Loading..." color="secondary" />
+      <div className="h-full">
+        <div className={`rounded-lg m-7 bg-w p-10 ${styles.containershadow}`}>
+          <div className="flex text-xl text-center justify-center items-center p-10 m-8">
+            <CircularProgress label="Loading..." color="secondary" />
+          </div>
         </div>
       </div>
     );
@@ -118,8 +120,8 @@ export default function ResultPage() {
         </Link>
       </div>
       <Divider />
-      <div className="rounded-lg m-7 bg-w p-10">
-        <div className="grid grid-cols-3 gap-y-10 w-full justify-items-center">
+      <div className={`rounded-lg m-7 bg-w p-10 ${styles.containershadow}`}>
+        <div className="grid grid-cols-3 gap-y-10 w-full justify-items-center xl:gap-x-10">
           {props.map((obj: any, index: any) => (
             <BrokerCard {...obj} key={index} />
           ))}

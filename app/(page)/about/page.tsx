@@ -1,5 +1,5 @@
 "use client";
-
+import styles from "@/styles/page.module.css";
 import {
   Card,
   CardBody,
@@ -41,7 +41,7 @@ const rows = [
   {
     key: "5",
     name: "Peizhe Tian",
-    role: "Full Stack Devekloper",
+    role: "Full Stack Developer",
     id: "40191463",
   },
   {
@@ -63,15 +63,17 @@ const columns = [
   },
   {
     key: "id",
-    label: "Studend ID",
+    label: "STUDENT ID",
   },
 ];
 const HomePage = () => {
   return (
     <div className="p-10">
-      <div className="max-w-4xl mx-auto">
+      <div
+        className={`max-w-4xl mx-auto bg-w p-10 rounded-lg ${styles.containershadow}`}
+      >
         <h1 className="mb-6 bold text-3xl font-bold">
-          Happy Rainbow Unicorn - Real Estate Web Application
+          Real Estate Web Application - Happy Rainbow Unicorn
         </h1>
         <Divider />
         <h2 className="text-xl font-bold mt-4 mb-2">
@@ -120,7 +122,14 @@ const HomePage = () => {
         <Divider />
         <h2 className="mb-2 mt-4 text-xl font-bold">Team Members and Roles</h2>
 
-        <Table aria-label="Example table with dynamic content" className="mb-4">
+        <Table
+          aria-label="Example table with dynamic content"
+          className="mb-4"
+          classNames={{
+            th: "bg-pr text-w2 text-sm ",
+            tbody: "text-left",
+          }}
+        >
           <TableHeader columns={columns}>
             {(column) => (
               <TableColumn key={column.key}>{column.label}</TableColumn>

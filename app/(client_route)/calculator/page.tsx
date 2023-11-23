@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Logo from "../../../public/5ftapartbw.png";
 import "@/styles/calculator.css";
+import { Input } from "@nextui-org/input";
 
 export default function Home() {
   const [principal, setPrincipal] = useState(1000000);
@@ -52,10 +53,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-3 justify-center bg-w place-self-center w-1/3 rounded-lg my-20 calc-container">
+    <div className="flex flex-col gap-3 p-3 justify-center bg-w place-self-center w-1/3 rounded-lg my-20 calc-container flex-grow">
       <div className="flex flex-col  justify-center  items-center gap-2 p-3 mx-auto">
         <Image src={Logo} alt="logo image" width={250} height={325} />
-        <h1 className="font-bold">Mortage calculator</h1>
+        <h1 className="font-bold text-2xl mt-5">Mortage calculator</h1>
         <form className="flex flex-col gap-2 p-2" action="#">
           {Object.entries(inputRefs).map(([key, ref]) => (
             <div
@@ -76,7 +77,7 @@ export default function Home() {
                       ? principal
                       : key === "paymentFrequency"
                       ? paymentFrequency
-                      : key == "interestRate"
+                      : key === "interestRate"
                       ? interestRate
                       : ""
                   }
