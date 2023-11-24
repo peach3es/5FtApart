@@ -200,6 +200,9 @@ export default function App() {
                 <DropdownItem key="offers" href="offer">
                   Offers
                 </DropdownItem>
+                <DropdownItem key="wishlist" href="favorite">
+                  Wishlist
+                </DropdownItem>
                 <DropdownItem key="settings">Settings</DropdownItem>
                 <DropdownItem
                   key="logout"

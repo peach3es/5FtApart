@@ -71,13 +71,14 @@ export default function ResultPage() {
 
   if (isLoading)
     return (
-      <div className="h-full">
+      <main className="flex-grow">
+        <h1 className="text-3xl font-bold ml-8 mt-5 mb-10">All Brokers</h1>
         <div className={`rounded-lg m-7 bg-w p-10 ${styles.containershadow}`}>
           <div className="flex text-xl text-center justify-center items-center p-10 m-8">
             <CircularProgress label="Loading..." color="secondary" />
           </div>
         </div>
-      </div>
+      </main>
     );
 
   if (isError)
