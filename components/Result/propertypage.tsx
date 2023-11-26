@@ -56,6 +56,8 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   const [deedOfSaleDateStart, setDeedOfSaleDateStart] = useState("");
   const [deedOfSaleDateEnd, setDeedOfSaleDateStartEnd] = useState("");
   const [brokerBuyerID, setBrokerBuyerID] = useState("");
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("");
 
   useEffect(() => {
     const getProps = async () => {
@@ -71,7 +73,9 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   const handleSubmit = async(e: any) => { 
 
     if (BrokerOwnerData?._id === brokerBuyerID){
-      console.log("You cannot make an offer to your own property")
+      setMessageColor("#FCC603")
+      setMessage("You cannot make an offer to your own property"); 
+      setTimeout(() => setMessage(""), 4000); 
       return
     }
 
@@ -92,7 +96,17 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       broker_buyer: brokerBuyerID,
     }
 
-    await addOffer(model);
+    try {
+      await addOffer(model);
+      setMessageColor("#4CAF50")
+      setMessage("Offer sent successfully!"); 
+      setTimeout(() => setMessage(""), 4000); 
+    } catch (error) {
+      setMessageColor("#FCC603")
+      setMessage("Failed to send the offer.");
+      setTimeout(() => setMessage(""), 4000); 
+    }
+
 
   }
   
@@ -119,6 +133,26 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
 
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
+       {message && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            padding: '10px 20px',
+            borderRadius: '5px',
+            backgroundColor: messageColor, // Green background for success
+            color: 'white',
+            textAlign: 'center',
+            boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.2)',
+            animation: 'fadeInOut 3s ease-in-out',
+          }}
+        >
+          {message}
+        </div>
+      )}
       <div className="w-1/2 ml-20">
         <Image
           src={data.addimg}
