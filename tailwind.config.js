@@ -1,7 +1,8 @@
 import { nextui } from "@nextui-org/theme";
+const { withUt } = require("uploadthing/tw");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withUt({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,6 +20,7 @@ module.exports = {
         dg: "#7d8e9c",
         g: "#bfbec0",
         pr: "#ccb8d6",
+        prs: "#d6c6de",
         dpr: "#B19BBD ",
         w2: "#fefbff",
       },
@@ -45,4 +47,4 @@ module.exports = {
       },
     }),
   ],
-};
+});
