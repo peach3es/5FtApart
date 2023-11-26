@@ -1,9 +1,8 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
-import Logo from "../../../public/5ftapartbw.png";
 import "@/styles/calculator.css";
-import { Input } from "@nextui-org/input";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import Logo from "../../../public/5ftapartbw.png";
 
 export default function Home() {
   const [principal, setPrincipal] = useState(1000000);
@@ -12,10 +11,10 @@ export default function Home() {
   const [monthlyPayment, setMonthlyPayment] = useState(6745.82);
 
   const inputRefs = {
-    principal: useRef<HTMLInputElement>(null),
-    paymentFrequency: useRef<HTMLInputElement>(null),
-    interestRate: useRef<HTMLInputElement>(null),
-    monthlyPayment: useRef<HTMLInputElement>(null),
+    Principal: useRef<HTMLInputElement>(null),
+    'Payment Frequency': useRef<HTMLInputElement>(null),
+    'Interest Rate': useRef<HTMLInputElement>(null),
+    Payments: useRef<HTMLInputElement>(null),
   };
 
   useEffect(() => {
@@ -25,13 +24,13 @@ export default function Home() {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     switch (name) {
-      case "principal":
+      case "Principal":
         setPrincipal(parseFloat(value) || 0);
         break;
-      case "paymentFrequency":
+      case "Payment Frequency":
         setPaymentFrequency(parseInt(value) || 0);
         break;
-      case "interestRate":
+      case "Interest Rate":
         setInterestRate(parseFloat(value) || 0);
         break;
       default:
@@ -47,8 +46,8 @@ export default function Home() {
 
     setMonthlyPayment(payment);
 
-    if (inputRefs.monthlyPayment.current) {
-      inputRefs.monthlyPayment.current.value = payment.toFixed(2);
+    if (inputRefs.Payments.current) {
+      inputRefs.Payments.current.value = payment.toFixed(2);
     }
   };
 
@@ -61,25 +60,25 @@ export default function Home() {
           {Object.entries(inputRefs).map(([key, ref]) => (
             <div
               className={`flex flex-col mt-2 text-center${
-                key === "monthlyPayment"
+                key === "Monthly Payment"
                   ? "row-span-2 col-span-2 text-center mx-auto"
                   : ""
               } `}
               key={key}
             >
-              <div>{key.replace(/^\w/, (c) => c.toUpperCase())}</div>
-              {key !== "monthlyPayment" ? (
+              <div>{key}</div>
+              {key !== "Monthly Payment" ? (
                 <input
                   type="text"
                   name={key}
                   defaultValue={
-                    key === "principal"
+                    key === "Principal"
                       ? principal
-                      : key === "paymentFrequency"
+                      : key === "Payment Frequency"
                       ? paymentFrequency
-                      : key === "interestRate"
+                      : key === "Interest Rate"
                       ? interestRate
-                      : ""
+                      : " "
                   }
                   className="mt-2 appearance-none rounded-md shadow-md px-4 py-3 font-semibold text-center"
                   ref={ref}

@@ -1,21 +1,18 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import styles from "@/styles/page.module.css";
 import {
   Table,
-  TableHeader,
-  TableColumn,
   TableBody,
-  TableRow,
   TableCell,
-  Chip,
+  TableColumn,
+  TableHeader,
+  TableRow
 } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import {
-  getOffers,
-  updateOffer,
-  deleteOffer,
+  getOffers
 } from "../../../backend/lib/helperOffer";
-import { rgb } from "color";
-import styles from "@/styles/page.module.css";
+import Status from "../../../components/Result/offerstatus";
 
 interface Offer {
   _id: string;
@@ -96,7 +93,7 @@ export default function Offer() {
               <TableCell>{offer.deedofSale}</TableCell>
               <TableCell>{offer.occupancy}</TableCell>
               <TableCell>
-                <Chip color="primary">{offer.status}</Chip>
+               <Status/>
               </TableCell>
             </TableRow>
           ))}
