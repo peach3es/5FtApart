@@ -26,14 +26,77 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
+import { useState } from "react";
 import { getProperty } from "../../backend/lib/helperProperties";
 import { getPriority } from "os";
+import { getUser } from "../../backend/lib/helper";
+import { addOffer } from "../../backend/lib/helperOffer";
+import { useQueryClient, useMutation } from "react-query";
+import AddBrokerForm from "../CRUD - Brokers/addBrokerForm";
+import Users from "@/app/model/user";
 
 function PropertyInfo({ propertyId }: { propertyId: any }) {
   const { isLoading, isError, data, error } = useQuery(
     ["properties", propertyId],
     () => getProperty(propertyId) // Modify the getProperties function to accept an ID and fetch a single property
   );
+  const { isLoading: isBrokerOwnerLoading, error: BrokerOwnerError, data: BrokerOwnerData } = useQuery(
+    ['users', data?.userId],
+    () => getUser(data?.userId)
+  );
+  const addMutation = useMutation(addOffer)
+
+  const [brokerOwnerName, setBrokerOwnerName] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
+  const [agency, setAgency] = useState("");
+  const [brokerBuyerName, setBrokerBuyerName] = useState("");
+  const [brokerBuyerAddress, setBrokerBuyerAddress] = useState("");
+  const [brokerBuyerEmailAddress, setBrokerBuyerEmailAddress] = useState("");
+  const [offer, setOffer] = useState("");
+  const [deedOfSaleDateStart, setDeedOfSaleDateStart] = useState("");
+  const [deedOfSaleDateEnd, setDeedOfSaleDateStartEnd] = useState("");
+  const [brokerBuyerID, setBrokerBuyerID] = useState("");
+
+  useEffect(() => {
+    const getProps = async () => {
+      const response = await fetch("/api/auth/session");
+      const users = await response.json();
+      setBrokerBuyerName(users.user.name)
+      setBrokerBuyerEmailAddress(users.user.email)
+      setBrokerBuyerID(users.user.id)
+    };
+    getProps();
+  }, []);
+
+  const handleSubmit = async(e: any) => { 
+
+    if (BrokerOwnerData?._id === brokerBuyerID){
+      console.log("You cannot make an offer to your own property")
+      return
+    }
+
+    
+    const model = {
+      license: licenseNumber,
+      agency: agency, 
+      offer: offer, 
+      deed_of_sale_date_start: deedOfSaleDateStart, 
+      deed_of_sale_date_end: deedOfSaleDateEnd, 
+      broker_buyer_name: brokerBuyerName,
+      broker_buyer_address: brokerBuyerAddress,   
+      broker_buyer_email: brokerBuyerEmailAddress, 
+      status: "pending", 
+      property_address: data?.address,
+      property_id: data?._id,
+      broker_owner: BrokerOwnerData?._id,
+      broker_buyer: brokerBuyerID,
+    }
+
+    await addOffer(model);
+
+  }
+  
+
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
@@ -49,6 +112,10 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       </div>
     );
   if (isError) return <div>Error...</div>;
+
+
+
+
 
   return (
     <div className="flex flex-row justify-center my-5 w-full gap-10">
@@ -147,25 +214,27 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 </p>
 
                 <div className="mb-3 flex flex-row gap-3">
-                  <Input type="faded" label="Broker Full name" />
+                  <Input type="faded" label="Broker Owner Full Name" defaultValue={BrokerOwnerData.name} disabled  readOnly />
                   <Input
                     type="license #"
                     label="license #"
                     classNames={{ input: "border-none" }}
+                    onChange={(e) => setLicenseNumber(e.target.value)}
                   />
-                  <Input type="faded" label="Agency" />
+                  <Input type="faded" label="Agency" onChange={(e) => setAgency(e.target.value)}/>
                 </div>
 
                 <div className="mb-3 flex flex-row gap-3">
-                  <Input type="faded" label="Full Name" />
-                  <Input type="faded" label=" Current Address" />
+                  <Input type="faded" label="Broker Buyer Full Name"  defaultValue={brokerBuyerName} disabled  readOnly/>
+                  <Input type="faded" label=" Current Address" onChange={(e) => setBrokerBuyerAddress(e.target.value)}/>
                   <Input
                     type="email"
                     label="Email"
                     classNames={{ input: "border-none" }}
+                    defaultValue={brokerBuyerEmailAddress}
+                    onChange={(e) => setBrokerBuyerEmailAddress(e.target.value)}
                   />
-                  <Input type="faded" label="Offer" />
-                  <p className="text-base">{data.address}</p>
+                  <Input type="faded" label="Offer" onChange={(e) => setOffer(e.target.value)} isRequired/>
 
                 </div>
 
@@ -174,15 +243,15 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 </div>
 
                 <div className="mb-3 flex flex-row gap-3">
-                  <Input type="date"/>
-                  <Input type="date" />
+                  <Input type="date" onChange={(e) => setDeedOfSaleDateStart(e.target.value)}/>
+                  <Input type="date"  onChange={(e) => setDeedOfSaleDateStartEnd(e.target.value)}/>
                 </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button className="w-1/3  bg-pr  text-w2 " onPress={onClose}>
+                <Button className="w-1/3  bg-pr  text-w2 " onPress={onClose}  onPressEnd={handleSubmit}>
                   Submit
                 </Button>
               </ModalFooter>

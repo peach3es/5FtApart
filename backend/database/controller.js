@@ -1,6 +1,7 @@
 /**Controller */
 const Users = require("../../app/model/user");
 const Properties = require("../../app/model/property");
+const Offers = require("../../app/model/offers")
 const mongoose = require("mongoose")
 
 //---------------------------------------------------------------------------------------------
@@ -169,7 +170,6 @@ async function addProperty(req, res) {
     if (!formData) {
       return res.status(404).json({ error: "Form Data Not Provided" });
     }
-    console.log("here" + formData)
     const newProperty = await Properties.create(formData);
     return res.status(200).json(newProperty);
   } catch (error) {
@@ -239,6 +239,84 @@ async function getPropertiesFiltered(req, res, filters = {}) {
   }
 }
 
+//---------------------------------------------------------------------------------------------
+//Offer database here
+//---------------------------------------------------------------------------------------------
+
+// add Offer
+async function addOffer(req, res) {
+  try {
+    const formData = req.body;
+    if (!formData) {
+      return res.status(404).json({ error: "Form Data Not Provided" });
+    }
+    const newOffer = await Offers.create(formData);
+    return res.status(200).json(newOffer);
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+}
+
+// get the properties for the broker in session
+async function getBrokerOffers(req, res) {
+  try {
+    const { brokerID } = req.params;
+
+    // Ensure brokerID is a valid ObjectId
+    if (!brokerID || !mongoose.Types.ObjectId.isValid(brokerID)) {
+      return res.status(400).json({ error: "Invalid or missing broker ID" });
+    }
+
+    const offers = await Offers.find({ "broker_owner": brokerID });
+    if (offers.length === 0) {
+      return res.status(404).json({ error: "Data not found" });
+    }
+    res.status(200).json(offers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+async function deleteOffer(req, res) {
+  try {
+    const { offerId } = req.query;
+
+    if (offerId) {
+      const offer = await Offers.findByIdAndDelete(offerId);
+      return res.status(200).json(offer);
+    } else {
+      res.status(404).json({ error: "Offer not selected" });
+    }
+  } catch (error) {
+    res.status(404).json({ error: "Error while deleting Offer" });
+  }
+}
+
+
+async function deleteOffersByPropertyId(req, res) {
+  try {
+    const { propertyId } = req.query; // Make sure to pass `propertyId` in the query
+
+    if (propertyId) {
+      // Deletes all offers with the given property_id
+      const result = await Offers.deleteMany({ property_id: propertyId });
+      console.log("Offers deleted: " + result.deletedCount);
+      return res.status(200).json({ message: "Offers deleted successfully", deletedCount: result.deletedCount });
+    } else {
+      return res.status(400).json({ error: "Property ID not provided" });
+    }
+  } catch (error) {
+    console.error("Error while deleting offers: ", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------
+//OTHER 
+//---------------------------------------------------------------------------------------------
+
 async function checkUser(req, res) {
   try {
     const { email } = await req.params;
@@ -264,4 +342,8 @@ module.exports = {
   checkUser: checkUser,
   getUsersFiltered: getUsersFiltered,
   getBrokerProperties: getBrokerProperties,
+  addOffer: addOffer,
+  getBrokerOffers: getBrokerOffers,
+  deleteOffer: deleteOffer,
+  deleteOffersByPropertyId: deleteOffersByPropertyId
 };

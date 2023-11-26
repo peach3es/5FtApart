@@ -5,30 +5,21 @@ const models = mongoose.models;
 
 // will hold properties as objects
 const offerSchema = new Schema({
-  // _id: mongoose.Schema.Types.ObjectId,
-  
-  broker_name:String, 
+
   license: Number,
-  agency: String,
-  client_name:String,
-  currentaddress: String, 
-  email: String,    
+  agency: String,   
   offer: Number, 
-  address: String, 
-  deed_of_sale:String, 
-  occupancy:String,
-  status:String, 
-  // property:
-  // {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Properties',
-  // },
-  // broker:
-  // {
-  //   type:Schema.Types.ObjectId,
-  //   ref:'User',
-  // },
-  
+  deed_of_sale_date_start: String, 
+  deed_of_sale_date_end: String, 
+  broker_buyer_name: String,
+  broker_buyer_address: String, 
+  broker_buyer_email: String,
+  status: String,
+  property_address: String,
+  property_id: String,
+  broker_owner:{ type: mongoose.Schema.Types.ObjectId, ref: "user" }, 
+  broker_buyer:{ type: mongoose.Schema.Types.ObjectId, ref: "user" }, 
+
 });
 
 const Offers = models.offer || model("offer", offerSchema);

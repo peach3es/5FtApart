@@ -19,6 +19,12 @@ const {
   deleteProperty,
   getPropertiesFiltered
 } = require("./controller.js");
+const {
+  addOffer,
+  getBrokerOffers,
+  deleteOffer,
+  deleteOffersByPropertyId
+} = require("./controller.js");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -73,7 +79,6 @@ app.prepare().then(() => {
   });
 
   //---------------------------------------------------------------
-  // Add your Express middleware and routes here
   //For properties
   //---------------------------------------------------------------
   server.get("/api/property", (req, res) => {
@@ -121,6 +126,31 @@ app.prepare().then(() => {
       priceRange,
     });
   });
+
+  //---------------------------------------------------------------
+  //For offers
+  //---------------------------------------------------------------
+
+  server.post("/api/offer", (req, res) => {
+    //res.status(200).json({ method: 'PUT Request' });
+    addOffer(req, res);
+  });
+
+  server.get("/api/brokeroffer/:brokerID", (req, res) => {
+    getBrokerOffers(req, res);
+  });
+
+  server.delete("/api/offersdelete", (req, res) => {
+    deleteOffersByPropertyId(req, res);
+  });
+
+  server.delete("/api/offerdelete", (req, res) => {
+    deleteOffer(req, res);
+  });
+
+  //---------------------------------------------------------------
+  //For tests
+  //---------------------------------------------------------------
 
   server.get('/test', async (req, res) => {
     res.json({message: 'pass!'})
