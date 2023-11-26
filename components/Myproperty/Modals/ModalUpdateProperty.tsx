@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -16,12 +16,9 @@ import Success from "../success";
 import Error from "../error";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import { useDispatch } from "react-redux";
-import {
-  updateProperty,
-  getProperties,
-  getProperty,
-} from "@/backend/lib/helperProperties";
+import { updateProperty, getProperty } from "@/backend/lib/helperProperties";
 import { updateAction } from "@/backend/redux/reducer";
+import { UploadButton } from "@/components/UploadPics/uploadthing";
 
 export default function ModalUpdateProperty({
   isOpen,
@@ -43,7 +40,7 @@ export default function ModalUpdateProperty({
     (newData) => updateProperty(formID, newData),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('properties');
+        queryClient.invalidateQueries("properties");
       },
       onError: () => {
         setIsErrorModalOpen(true);
@@ -174,7 +171,7 @@ export default function ModalUpdateProperty({
                   type="faded"
                   labelPlacement="outside"
                   placeholder="Enter the description of your property"
-                  className={`max-w-xl px-11 mb-3 description ml-12`}
+                  className={`max-w-xl px-10 mb-3 description ml-10`}
                   data-focus="false"
                   classNames={{
                     input: "border-none focus:ring-0",
@@ -182,8 +179,8 @@ export default function ModalUpdateProperty({
                   onChange={setFormData}
                   defaultValue={description}
                 />
-                <div className="addimage px-11 flex flex-col gap-3 max-w-xl ml-12">
-                  <label
+                <div className="addimage px-10 flex justify-start gap-3 max-w-xl ml-10">
+                  {/* <label
                     htmlFor="formFile"
                     className=" inline-block text-neutral-700 dark:text-neutral-200 cursor-pointer"
                   ></label>
@@ -193,6 +190,19 @@ export default function ModalUpdateProperty({
                     id="formFile"
                     name="addimg"
                     onChange={setFormData}
+                  /> */}
+                  <UploadButton
+                    endpoint="propertyPicture"
+                    onClientUploadComplete={(res) => {
+                      // Do something with the response
+                      console.log("Files: ", res);
+                      alert("Upload Completed");
+                    }}
+                    onUploadError={(error: Error) => {
+                      // Do something with the error.
+                      alert(`ERROR! ${error.message}`);
+                    }}
+                    className="relative ut-button:rounded-xl ut-button:bg-pr ut-button:hover:bg-prs ut-button:duration-300"
                   />
                   {/* <input
                     type="file"

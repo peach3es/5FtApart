@@ -1,21 +1,21 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import styles from "@/styles/page.module.css";
 import {
   Table,
-  TableHeader,
-  TableColumn,
   TableBody,
-  TableRow,
   TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   Chip,
-  Button,
+  Button
 } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import {
   getBrokerOffers, deleteOffers, deleteOffer
 } from "../../../backend/lib/helperOffer";
 import {deleteProperty} from "../../../backend/lib/helperProperties"
-import { rgb } from "color";
-import styles from "@/styles/page.module.css";
+import Status from "../../../components/Result/offerstatus";
 import { IoMdCheckmark } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
 

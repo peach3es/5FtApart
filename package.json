@@ -31,6 +31,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/react-redux": "^7.1.28",
+    "@uploadthing/react": "^6.0.2",
     "autoprefixer": "^10.4.15",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
@@ -62,7 +63,8 @@
     "styled-components": "^6.1.0",
     "tailwind-variants": "^0.1.13",
     "tailwindcss": "^3.3.3",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "uploadthing": "^6.0.3"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.23.0",
