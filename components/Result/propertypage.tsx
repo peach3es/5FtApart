@@ -59,6 +59,8 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("");
 
+  const [userRole, setUserRole] = useState("");
+
   useEffect(() => {
     const getProps = async () => {
       const response = await fetch("/api/auth/session");
@@ -66,6 +68,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       setBrokerBuyerName(users.user.name)
       setBrokerBuyerEmailAddress(users.user.email)
       setBrokerBuyerID(users.user.id)
+      setUserRole(users.user.role)
     };
     getProps();
   }, []);
@@ -75,6 +78,13 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
     if (BrokerOwnerData?._id === brokerBuyerID){
       setMessageColor("#FCC603")
       setMessage("You cannot make an offer to your own property"); 
+      setTimeout(() => setMessage(""), 4000); 
+      return
+    }
+
+    if (userRole === 'client' || userRole === 'admin') {
+      setMessageColor("#FCC603")
+      setMessage("You cannot make an offer as a client/admin"); 
       setTimeout(() => setMessage(""), 4000); 
       return
     }
