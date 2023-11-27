@@ -49,19 +49,21 @@ describe('API Tests', () => {
     });
   });
 
+   // Update user data
+   const updatedUserData = {
+    name: 'Updated name',
+    email: 'updated.email@example.com',
+    avatar: 'updated-avatar-url',
+    password: 'updated-password',
+    date: '2023-11-20',
+    activeListings: 1,
+  };
+
+
   it('PUT /api/users should update the created user', () => {
     // Ensure originalUserId is defined
     expect(originalUserId).to.not.be.undefined;
 
-    // Update user data
-    const updatedUserData = {
-      name: 'Updated name',
-      email: 'updated.email@example.com',
-      avatar: 'updated-avatar-url',
-      password: 'updated-password',
-      date: '2023-11-20',
-      activeListings: 1,
-    };
 
     // Send a request to update the user
     cy.request('PUT', `${Cypress.env("baseUrl")}/api/users/?userID=${originalUserId}`, updatedUserData).then((response) => {
@@ -76,6 +78,43 @@ describe('API Tests', () => {
       expect(response.body.password).to.equal(updatedUserData.password);
     });
   });
+
+
+
+
+
+
+
+
+  it('GET /api/userfilter should retrieve the specific user based on filters', () => {
+    const filters = { term: 'Updated name' }; // Adjust the filters based on your test data
+  
+    cy.request('GET', `${Cypress.env("baseUrl")}/api/userfilter`, { qs: filters })
+      .then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body).to.be.an('array');
+  
+        // Example: Check if the array contains a user that matches the filtering criteria
+        const matchingUser = response.body.find((updatedUserData: { name: string; }) => updatedUserData.name.toLowerCase().includes(filters.term.toLowerCase()));
+        expect(matchingUser).to.exist;
+  
+        // Additional assertions based on the expected response structure
+        expect(matchingUser.email).to.eq(updatedUserData.email);
+        expect(matchingUser.avatar).to.eq(updatedUserData.avatar);
+        // Add more assertions as needed
+      })
+      .its('status')
+      .should('not.equal', 500); // Ensure the status is not 500 (Internal Server Error)
+  });
+
+
+
+
+
+
+
+
+
 
   it('DELETE /api/users should delete the created user', () => {
     // Ensure originalUserId is defined
@@ -97,6 +136,10 @@ describe('API Tests', () => {
       expect(deletedUser).to.be.undefined;
     });
   });
+
+
+
+  
 
   it('POST /api/property should create a new property', () => {
     const newProperty = {
@@ -140,11 +183,6 @@ describe('API Tests', () => {
     });
   });
 
-  it('PUT /api/property should update the created property', () => {
-    // Ensure originalPropertyId and originalUserId are defined
-    expect(originalPropertyId).to.not.be.undefined;
-
-    // Update property data
     const updatedPropertyData = {
       addimg: 'updated-image-url',
       address: 'Updated Address',
@@ -157,6 +195,12 @@ describe('API Tests', () => {
       saletype: 'Rent',
       propertytype: 'Updated Property Type',
     };
+
+  it('PUT /api/property should update the created property', () => {
+    // Ensure originalPropertyId and originalUserId are defined
+    expect(originalPropertyId).to.not.be.undefined;
+
+    // Update property data
 
     // Send a request to update the property
     cy.request('PUT', `${Cypress.env("baseUrl")}/api/property/?propertyId=${originalPropertyId}`, updatedPropertyData).then((response) => {
@@ -172,6 +216,43 @@ describe('API Tests', () => {
       expect(response.body).to.not.deep.equal(createdProperty);
     });
   });
+
+
+
+  it('GET /api/propertyfilter should retrieve the specific property based on filters', () => {
+    const filters = {
+      term: 'Updated Address',  // Adjust the filters based on your test data
+      saleType: 'Rent',
+      propertytype: 'Updated Property Type',
+      pricetag: '150000', // Adjust the price range based on your test data
+    };
+  
+    cy.request('GET', `${Cypress.env("baseUrl")}/api/propertyfilter`, { qs: filters })
+      .then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body).to.be.an('array');
+  
+        // Example: Check if the array contains a property that matches the filtering criteria
+        const matchingProperty = response.body.find((updatedPropertyData: {
+          propertytype: any; address: string; saletype: string; bedrooms: string; pricetag: number; 
+}) =>
+          updatedPropertyData.address.toLowerCase().includes(filters.term.toLowerCase()) &&
+          updatedPropertyData.saletype === filters.saleType &&
+          updatedPropertyData.propertytype === filters.propertytype &&
+          updatedPropertyData.pricetag >= 100000 && updatedPropertyData.pricetag <= 200000
+        );
+        expect(matchingProperty).to.exist;
+  
+        // Additional assertions based on the expected response structure
+        expect(matchingProperty.addimg).to.eq(updatedPropertyData.addimg);
+        // Add more assertions as needed
+      })
+      .its('status')
+      .should('not.equal', 500); // Ensure the status is not 500 (Internal Server Error)
+  });
+
+
+
 
 
   it('DELETE /api/property should delete the created property', () => {

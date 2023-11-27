@@ -75,7 +75,7 @@ export const getEmailUser = async (email: any) => {
   return {};
 };
 
-// Get filtered properties
+// Get filtered user
 export const getUsersFiltered = async (filters = {}) => {
   const response = await fetch(
     `${BASE_URL}/api/userfilter?${new URLSearchParams(filters)}`
