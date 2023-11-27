@@ -46,12 +46,12 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   );
   const addMutation = useMutation(addOffer)
 
-  const [brokerOwnerName, setBrokerOwnerName] = useState("");
+  const [clientName, setClientName] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
   const [agency, setAgency] = useState("");
   const [brokerBuyerName, setBrokerBuyerName] = useState("");
-  const [brokerBuyerAddress, setBrokerBuyerAddress] = useState("");
-  const [brokerBuyerEmailAddress, setBrokerBuyerEmailAddress] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [clientEmailAddress, setClientEmailAddress] = useState("");
   const [offer, setOffer] = useState("");
   const [deedOfSaleDateStart, setDeedOfSaleDateStart] = useState("");
   const [deedOfSaleDateEnd, setDeedOfSaleDateStartEnd] = useState("");
@@ -66,7 +66,6 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       const response = await fetch("/api/auth/session");
       const users = await response.json();
       setBrokerBuyerName(users.user.name)
-      setBrokerBuyerEmailAddress(users.user.email)
       setBrokerBuyerID(users.user.id)
       setUserRole(users.user.role)
     };
@@ -94,11 +93,12 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       license: licenseNumber,
       agency: agency, 
       offer: offer, 
+      client_name: clientName,
       deed_of_sale_date_start: deedOfSaleDateStart, 
       deed_of_sale_date_end: deedOfSaleDateEnd, 
       broker_buyer_name: brokerBuyerName,
-      broker_buyer_address: brokerBuyerAddress,   
-      broker_buyer_email: brokerBuyerEmailAddress, 
+      client_address: clientAddress,   
+      client_email: clientEmailAddress, 
       status: "pending", 
       property_address: data?.address,
       property_id: data?._id,
@@ -258,7 +258,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 </p>
 
                 <div className="mb-3 flex flex-row gap-3">
-                  <Input type="faded" label="Broker Owner Full Name" defaultValue={BrokerOwnerData.name} disabled  readOnly />
+                  <Input type="faded" label="Broker Buyer Full Name" defaultValue={brokerBuyerName} disabled  readOnly />
                   <Input
                     type="license #"
                     label="license #"
@@ -269,14 +269,13 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
                 </div>
 
                 <div className="mb-3 flex flex-row gap-3">
-                  <Input type="faded" label="Broker Buyer Full Name"  defaultValue={brokerBuyerName} disabled  readOnly/>
-                  <Input type="faded" label=" Current Address" onChange={(e) => setBrokerBuyerAddress(e.target.value)}/>
+                  <Input type="faded" label="Client Full Name" onChange={(e) => setClientName(e.target.value)}/>
+                  <Input type="faded" label="Client Address" onChange={(e) => setClientAddress(e.target.value)}/>
                   <Input
                     type="email"
                     label="Email"
                     classNames={{ input: "border-none" }}
-                    defaultValue={brokerBuyerEmailAddress}
-                    onChange={(e) => setBrokerBuyerEmailAddress(e.target.value)}
+                    onChange={(e) => setClientEmailAddress(e.target.value)}
                   />
                   <Input type="faded" label="Offer" onChange={(e) => setOffer(e.target.value)} isRequired/>
 

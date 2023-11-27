@@ -24,9 +24,10 @@ import { CgClose } from "react-icons/cg";
 interface Offer {
   _id: string;
   broker_buyer_name: string;
-  broker_buyer_address: string;
-  broker_buyer_email: string;
+  client_address: string;
+  client_email: string;
   broker_owner: string;
+  client_name: string
   agency: string;
   offer: string;
   status: string;
@@ -142,11 +143,12 @@ export default function Offer() {
         classNames={{ wrapper: "bg-w", th: "bg-b text-w2 text-sm text-center" }}
       >
         <TableHeader>
-          <TableColumn>Broker Name (Client)</TableColumn>
+          <TableColumn>Broker Buyer Name</TableColumn>
+          <TableColumn>Client Name</TableColumn>
+          <TableColumn>Client Email</TableColumn>
+          <TableColumn>Client Address</TableColumn>
           <TableColumn>License #</TableColumn>
           <TableColumn>Agency</TableColumn>
-          <TableColumn>Current Address</TableColumn>
-          <TableColumn>Email</TableColumn>
           <TableColumn>Offer</TableColumn>
           <TableColumn>Property Address</TableColumn>
           <TableColumn>Deed Of Sale</TableColumn>
@@ -157,13 +159,14 @@ export default function Offer() {
           {offers.map((offer) => (
             <TableRow key={offer._id}>
               <TableCell className="text-center">{offer.broker_buyer_name}</TableCell>
+              <TableCell className="text-center">{offer.client_name}</TableCell>
+              <TableCell className="text-center">{offer.client_email}</TableCell>
+              <TableCell className="text-center">{offer.client_address}</TableCell>
               <TableCell className="text-center">{offer.license}</TableCell>
               <TableCell className="text-center">{offer.agency}</TableCell>
-              <TableCell className="text-center">{offer.broker_buyer_address}</TableCell>
-              <TableCell className="text-center">{offer.broker_buyer_email}</TableCell>
               <TableCell className="text-center">{offer.offer}</TableCell>
               <TableCell className="text-center">{offer.property_address}</TableCell>
-              <TableCell className="text-center">{offer.deed_of_sale_date_start}</TableCell>
+              <TableCell className="text-center">{offer.deed_of_sale_date_start} {offer.deed_of_sale_date_end != null ? (<> / {offer.deed_of_sale_date_end}</>) : (null)}</TableCell>
               <TableCell className="text-center">
                 <Chip className="text-white" color={statusColorMap[offer.status] as "default" | "success" | "danger" | "warning" | "primary" | "secondary"}>{offer.status}</Chip>
               </TableCell>
