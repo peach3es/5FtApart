@@ -1,39 +1,31 @@
 "uses client";
-import React from "react";
-import FormData from "../../components/Myproperty/AddProperty";
-import { useQuery } from "react-query";
-import { getProperties } from "../../backend/lib/helperProperties";
-import { useEffect } from "react";
-import "../../backend/lib/helper";
-import { HeartIcon } from "../Navbar/hearticon";
-import { BiSolidHomeHeart } from "react-icons/bi";
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   CircularProgress,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
+import { useEffect } from "react";
+import { BiSolidHomeHeart } from "react-icons/bi";
+import { useQuery } from "react-query";
+import "../../backend/lib/helper";
 
 import {
+  Button,
   Image,
+  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   useDisclosure,
-  Button,
-  Input,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { getProperty } from "../../backend/lib/helperProperties";
-import { getPriority } from "os";
+import { useMutation } from "react-query";
 import { getUser } from "../../backend/lib/helper";
 import { addOffer } from "../../backend/lib/helperOffer";
-import { useQueryClient, useMutation } from "react-query";
-import AddBrokerForm from "../CRUD - Brokers/addBrokerForm";
-import Users from "@/app/model/user";
+import { getProperty } from "../../backend/lib/helperProperties";
 
 function PropertyInfo({ propertyId }: { propertyId: any }) {
   const { isLoading, isError, data, error } = useQuery(
@@ -190,7 +182,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
           Submit an Offer
         </Button>
 
-        <Link href="/favorite">
+        
           <Popover placement="right">
             <PopoverTrigger>
               <Button isIconOnly color="danger" aria-label="Like">
@@ -205,7 +197,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
               </div>
             </PopoverContent>
           </Popover>
-        </Link>
+        
        </div>
 
     
