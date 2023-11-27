@@ -63,7 +63,7 @@ export default function Home() {
         />
       </div>
       <div className="flex place-self-center justify-center absolute w-full">
-        <div className=" w-1/3 p-3 bg-w rounded-lg my-20">
+        <div className=" w-1/4 p-3 bg-w rounded-lg my-20">
           <div className="flex flex-col justify-center  items-center gap-2 p-3 mx-auto">
             <Image src={Logo} alt="logo image" width={250} height={325} />
             <h1 className="font-bold text-2xl mt-5">Mortage calculator</h1>
