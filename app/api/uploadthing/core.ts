@@ -26,7 +26,7 @@ export const ourFileRouter = {
       console.log("file url", file.url);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userId };
+      return { fileUrl: file.url };
     }),
   profilePicture: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(({ req }) => auth(req))

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { updateProperty, getProperty } from "@/backend/lib/helperProperties";
 import { updateAction } from "@/backend/redux/reducer";
 import { UploadButton } from "@/components/UploadPics/uploadthing";
+import Link from "next/link";
 
 export default function ModalUpdateProperty({
   isOpen,
@@ -81,6 +82,14 @@ export default function ModalUpdateProperty({
       onClose();
     }
   };
+
+  //images
+  // const [images, setImages] = useState<
+  //   UploadFileResponse<{
+  //     fileUrl: string;
+  //     userId: string;
+  //   }>[]
+  // >([]);
 
   return (
     <>
@@ -195,14 +204,14 @@ export default function ModalUpdateProperty({
                     endpoint="propertyPicture"
                     onClientUploadComplete={(res) => {
                       // Do something with the response
+
                       console.log("Files: ", res);
-                      alert("Upload Completed");
                     }}
                     onUploadError={(error: Error) => {
                       // Do something with the error.
                       alert(`ERROR! ${error.message}`);
                     }}
-                    className="relative ut-button:rounded-xl ut-button:bg-pr ut-button:hover:bg-prs ut-button:duration-300"
+                    className="relative ut-button:rounded-xl ut-button:bg-pr ut-button:hover:bg-prs ut-button:duration-300 ut-button:active:scale-95 ut-button:ring-transparent"
                   />
                   {/* <input
                     type="file"
