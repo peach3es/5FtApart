@@ -1,9 +1,9 @@
 "use client";
+import pic from "@/public/pictures/calculator/pic1.jpg";
 import "@/styles/calculator.css";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Logo from "../../../public/5ftapartbw.png";
-import pic from "@/public/pictures/calculator/pic1.jpg";
 
 export default function Home() {
   const [principal, setPrincipal] = useState(1000000);
@@ -70,15 +70,15 @@ export default function Home() {
             <form className="flex flex-col gap-2 p-2" action="#">
               {Object.entries(inputRefs).map(([key, ref]) => (
                 <div
-                  className={`flex flex-col mt-2 text-center${
-                    key === "Monthly Payment"
-                      ? "row-span-2 col-span-2 text-center mx-auto"
+                  className={`flex flex-col mt-2 text-center bg-transparent ${
+                    key === "Payments"
+                      ? "row-span-2 col-span-2 text-center mx-auto bg-b"
                       : ""
                   } `}
                   key={key}
                 >
                   <div>{key}</div>
-                  {key !== "Monthly Payment" ? (
+                  {key !== "Payments" ? (
                     <input
                       type="text"
                       name={key}
@@ -96,12 +96,12 @@ export default function Home() {
                       onChange={handleInputChange}
                     />
                   ) : (
-                    <div
+                    <input
+                      readOnly={true}
                       className="mt-2 rounded-md bg-transparent px-4 py-3 text-lg font-bold text-center"
-                      ref={ref}
-                    >
-                      {monthlyPayment.toFixed(2)}
-                    </div>
+                      value={monthlyPayment.toFixed(2)}
+                      ref={inputRefs.Payments}
+                    />
                   )}
                 </div>
               ))}
