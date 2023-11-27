@@ -166,7 +166,7 @@ export default function Offer() {
               <TableCell className="text-center">{offer.agency}</TableCell>
               <TableCell className="text-center">{offer.offer}</TableCell>
               <TableCell className="text-center">{offer.property_address}</TableCell>
-              <TableCell className="text-center">{offer.deed_of_sale_date_start} {offer.deed_of_sale_date_end != null ? (<> / {offer.deed_of_sale_date_end}</>) : (null)}</TableCell>
+              <TableCell className="text-center">{offer.deed_of_sale_date_start} {offer.deed_of_sale_date_end !== "" ? (<> / {offer.deed_of_sale_date_end}</>) : (null)}</TableCell>
               <TableCell className="text-center">
                 <Chip className="text-white" color={statusColorMap[offer.status] as "default" | "success" | "danger" | "warning" | "primary" | "secondary"}>{offer.status}</Chip>
               </TableCell>
