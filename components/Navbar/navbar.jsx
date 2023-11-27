@@ -197,9 +197,10 @@ export default function App() {
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{session.user.email}</p>
                 </DropdownItem>
-                <DropdownItem key="offers" onPress={() => router.push('/offer')}>
+                {session?.user?.role === "broker" ?
+                (<DropdownItem key="offers" onPress={() => router.push('/offer')}>
                   Offers
-                </DropdownItem>
+                </DropdownItem>) : (null)}
                 <DropdownItem key="wishlist" href="favorite">
                   Wishlist
                 </DropdownItem>
