@@ -20,6 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     calculateMonthlyPayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [principal, paymentFrequency, interestRate]);
 
   const handleInputChange = (e: any) => {
@@ -66,13 +67,13 @@ export default function Home() {
         <div className=" w-1/4 p-3 bg-w rounded-lg my-20">
           <div className="flex flex-col justify-center  items-center gap-2 p-3 mx-auto">
             <Image src={Logo} alt="logo image" width={250} height={325} />
-            <h1 className="font-bold text-2xl mt-5">Mortage calculator</h1>
+            <h1 className="font-bold text-2xl mt-5n">Mortage calculator</h1>
             <form className="flex flex-col gap-2 p-2" action="#">
               {Object.entries(inputRefs).map(([key, ref]) => (
                 <div
                   className={`flex flex-col mt-2 text-center bg-transparent ${
                     key === "Payments"
-                      ? "row-span-2 col-span-2 text-center mx-auto bg-b"
+                      ? "row-span-2 col-span-2 text-center mx-auto"
                       : ""
                   } `}
                   key={key}
@@ -91,14 +92,14 @@ export default function Home() {
                           ? interestRate
                           : " "
                       }
-                      className="mt-2 appearance-none rounded-md shadow-md px-4 py-3 font-semibold text-center"
+                      className="mt-2 appearance-none rounded-md shadow-md px-4 py-3  text-center"
                       ref={ref}
                       onChange={handleInputChange}
                     />
                   ) : (
                     <input
                       readOnly={true}
-                      className="mt-2 rounded-md bg-transparent px-4 py-3 text-lg font-bold text-center"
+                      className="mt-2 rounded-lg bg-transparent px-4 py-3 text-lg font-semibold text-center"
                       value={monthlyPayment.toFixed(2)}
                       ref={inputRefs.Payments}
                     />
