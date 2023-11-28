@@ -20,6 +20,7 @@ import {
 } from "@/components/Search/searchoptions";
 import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
+import { IoHeart, IoHeartDislike } from "react-icons/io5";
 import { properties } from "@/components/Result/propertylistresult";
 
 const FavoritePage = () => {
@@ -46,20 +47,13 @@ const FavoritePage = () => {
     window.location.href = "/result/property";
   };
 
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <main className={`${styles.main} flex-grow`}>
-   
-      <Divider className="px-5" />
-      {/* <div className="flex justify-center mt-5"> pagination aren't in sync yet so we're only using one of them
-        <Pagination
-          isCompact
-          showControls
-          total={Math.ceil(properties.length / itemsPerPage)}
-          initialPage={1}
-          color="warning"
-          onChange={handlePageChange}
-        />
-      </div> */}
+      <h1 className="text-3xl font-bold ml-72 mt-5 mb-8">Favourite List</h1>
+
+      {/* <Divider className="px-5" /> */}
 
       <div className="result-content p-5 grid grid-cols-3 gap-x-4 gap-y-8 mx-72">
         {currentProperties.map((item, index) => (
@@ -81,12 +75,32 @@ const FavoritePage = () => {
             </CardBody>
             <CardFooter className="text-small justify-between">
               <b>{item.title}</b>
-              <p className="text-default-500">{item.price}</p>
+              <div className="flex flex-row align-middle gap-3">
+                <p className="text-default-500 place-self-center">
+                  {item.price}
+                </p>
+                <div className="place-self-center justify-center rounded-lg ">
+                  <Button
+                    isIconOnly
+                    suppressHydrationWarning={true}
+                    className="bg-danger w-10"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    {isHovered ? (
+                      <IoHeartDislike className="w-4 h-4" /> // Icon for hover state
+                    ) : (
+                      <IoHeart className="w-4 h-4" /> // Default icon
+                    )}
+                  </Button>
+                </div>
+              </div>
             </CardFooter>
           </Card>
         ))}
       </div>
       <div className="flex justify-center mb-5">
+        3
         <Pagination
           isCompact
           showControls
