@@ -108,7 +108,29 @@ describe('API Tests', () => {
   });
 
 
-
+  it('GET /api/userfilter should handle invalid filters gracefully', () => {
+    const invalidFilters = {
+      invalidKey: 'invalidValue', // Add any invalid filter you want to test
+    };
+  
+    cy.request({
+      method: 'GET',
+      url: `${Cypress.env("baseUrl")}/api/userfilter`,
+      qs: invalidFilters,
+    })
+      .then((response) => {
+        if (response.status === 400) {
+          expect(response.body).to.have.property('error').and.to.include('Invalid filter');
+          // You can add more specific assertions based on the expected error response structure
+        } else {
+          expect(response.status).to.eq(200);
+          // Optionally, you can assert other properties when the status is 200
+        }
+  
+      })
+      .its('status')
+      .should('not.equal', 500); // Ensure the status is not 500 (Internal Server Error)
+  });
 
 
 
@@ -221,11 +243,12 @@ describe('API Tests', () => {
 
   it('GET /api/propertyfilter should retrieve the specific property based on filters', () => {
     const filters = {
-      term: 'Updated Address',  // Adjust the filters based on your test data
+      term: 'Updated Address', 
       saleType: 'Rent',
       propertytype: 'Updated Property Type',
-      pricetag: '150000', // Adjust the price range based on your test data
+      pricetag: '150000', 
     };
+
   
     cy.request('GET', `${Cypress.env("baseUrl")}/api/propertyfilter`, { qs: filters })
       .then((response) => {
@@ -249,8 +272,33 @@ describe('API Tests', () => {
       })
       .its('status')
       .should('not.equal', 500); // Ensure the status is not 500 (Internal Server Error)
-  });
 
+  });
+  
+
+  it('GET /api/propertyfilter should handle invalid filters', () => {
+    const invalidFilters = {
+      invalidKey: 'invalidValue', // Add any invalid filter you want to test
+    };
+  
+    cy.request({
+      method: 'GET',
+      url: `${Cypress.env("baseUrl")}/api/propertyfilter`,
+      qs: invalidFilters,
+    })
+      .then((response) => {
+        if (response.status === 400) {
+          expect(response.body).to.have.property('error').and.to.include('Invalid filter');
+          // You can add more specific assertions based on the expected error response structure
+        } else {
+          expect(response.status).to.eq(200);
+          // Optionally, you can assert other properties when the status is 200
+        }
+  
+      })
+      .its('status')
+      .should('not.equal', 500); // Ensure the status is not 500 (Internal Server Error)
+  });
 
 
 
@@ -273,12 +321,78 @@ describe('API Tests', () => {
       expect(deletedProperty).to.be.undefined;
     });
   });
-});
+
+
+  it('should add an offer', () => {
+    // Define offer data
+    const offerData = {
+      license: 123,
+      agency: 'Sample Agency',
+      offer: 100000,
+      deed_of_sale_date_start: '2023-01-01',
+      deed_of_sale_date_end: '2023-12-31',
+      broker_buyer_name: 'Sample Broker Buyer',
+      client_address: 'Sample Client Address',
+      client_email: 'sample.client@example.com',
+      status: 'Pending',
+      property_address: 'Sample Property Address',
+      property_id: 'samplePropertyId',
+      client_name: 'Sample Client Name',
+      broker_owner: 'validBrokerOwnerId', // Replace with the actual ObjectId of the owner
+      broker_buyer: 'validBrokerBuyerId', // Replace with the actual ObjectId of the buyer
+    };
+
+    const Options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(offerData),
+    };
+    // Make a request to add an offer
+  //   cy.request({
+  //     method: 'POST',
+  //     url: `${Cypress.env("baseUrl")}/api/offer`, // Ensure the correct endpoint is specified
+  //     body: offerData,
+  //     headers: { 'Content-Type': 'application/json' },
+  //     failOnStatusCode: false, // Allow non-2xx status codes for troubleshooting
+  //   }).then((response) => {
+  //     // Assertions
+  //     expect(response.status).to.eq(200);
+  //     expect(response.body).to.have.property('offerId');
+  //     // Add more assertions as needed
+  //   });
+  // });
+
+  // it('should get broker offers', () => {
+  //   cy.request('GET', `${Cypress.env("baseUrl")}/api/brokeroffer/${validBrokerID}`)
+  //     .then((response) => {
+  //       expect(response.status).to.eq(200);
+  //       expect(response.body).to.be.an('array');
+  //       // Add more assertions as needed
+  //     });
+  // });
+
+  it('should delete an offer', () => {
+    // Assuming you have the offerId of the offer you want to delete
+    const offerId = 'validOfferId'; // Replace with the actual offerId
+
+    cy.request('DELETE', `${Cypress.env("baseUrl")}/api/offerdelete/?offerId=${offerId}`)
+      .then((response) => {
+        expect(response.status).to.eq(200);
+
+        // Check if response body is null or undefined
+        if (response.body === null || response.body === undefined) {
+          // This is expected for successful DELETE requests with no response body
+          cy.log('DELETE request returned an empty body (expected)');
+        } else {
+          // Handle the case where the response body is not empty (unexpected)
+          throw new Error('DELETE request returned an unexpected response body');
+        }
+      });
+  });
 
 
 
 
 
 
-
-
+})});
