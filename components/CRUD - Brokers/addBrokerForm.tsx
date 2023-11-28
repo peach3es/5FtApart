@@ -51,6 +51,7 @@ function AddBrokerForm({
       password,
       date,
       activeListings,
+      role: "broker"
     };
 
     addMutation.mutate(model);
