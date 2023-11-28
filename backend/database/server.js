@@ -26,6 +26,11 @@ const {
   deleteOffersByPropertyId
 } = require("./controller.js");
 
+const {
+  addPropertyToList,
+  removePropertyFromList
+} = require("./controller.js");
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -147,6 +152,19 @@ app.prepare().then(() => {
   server.delete("/api/offerdelete", (req, res) => {
     deleteOffer(req, res);
   });
+
+    //---------------------------------------------------------------
+  //For favorites
+  //---------------------------------------------------------------
+
+  server.post("/api/favoritelist", (req, res) => {
+    addPropertyToList(req, res);
+  });
+
+  server.post("/api/removefavoritelist", (req, res) => {
+    removePropertyFromList(req, res);
+  });
+
 
   //---------------------------------------------------------------
   //For tests

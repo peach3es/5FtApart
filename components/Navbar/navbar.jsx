@@ -201,7 +201,7 @@ export default function App() {
                 (<DropdownItem key="offers" onPress={() => router.push('/offer')}>
                   Offers
                 </DropdownItem>) : (null)}
-                <DropdownItem key="wishlist" href="favorite">
+                <DropdownItem key="wishlist"onPress={() => router.push('/favorite')}>
                   Wishlist
                 </DropdownItem>
                 <DropdownItem key="settings">Settings</DropdownItem>

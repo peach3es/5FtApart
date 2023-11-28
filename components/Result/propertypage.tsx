@@ -31,9 +31,11 @@ import { getProperty } from "../../backend/lib/helperProperties";
 import { getPriority } from "os";
 import { getUser } from "../../backend/lib/helper";
 import { addOffer } from "../../backend/lib/helperOffer";
+import { addPropertyToList } from "../../backend/lib/helperFavorite";
 import { useQueryClient, useMutation } from "react-query";
 import AddBrokerForm from "../CRUD - Brokers/addBrokerForm";
 import Users from "@/app/model/user";
+import { userAgentFromString } from "next/server";
 
 function PropertyInfo({ propertyId }: { propertyId: any }) {
   const { isLoading, isError, data, error } = useQuery(
@@ -58,22 +60,31 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   const [brokerBuyerID, setBrokerBuyerID] = useState("");
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("");
-
+  const [favoriteMessage, setFavoriteMessage] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [userID, setUserID] = useState("");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isUserInSession, setIsUserInSession] = useState(false);
 
   useEffect(() => {
     const getProps = async () => {
       const response = await fetch("/api/auth/session");
       const users = await response.json();
-      setBrokerBuyerName(users.user.name)
-      setBrokerBuyerID(users.user.id)
-      setUserRole(users.user.role)
+      if (users && users.user){
+        setBrokerBuyerName(users.user.name)
+        setBrokerBuyerID(users.user.id)
+        setUserID(users.user.id)
+        setUserRole(users.user.role)
+        setIsUserInSession(true)
+      }
+      else {
+        setIsUserInSession(false);
+      }
     };
     getProps();
   }, []);
 
   const handleSubmit = async(e: any) => { 
-
     if (BrokerOwnerData?._id === brokerBuyerID){
       setMessageColor("#FCC603")
       setMessage("You cannot make an offer to your own property"); 
@@ -117,9 +128,39 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       setTimeout(() => setMessage(""), 4000); 
     }
 
-
   }
-  
+
+
+  const handleAddFavorite = async(e: any) => {
+    if (isUserInSession) {
+      try {
+        const user = await getUser(userID)
+
+        if (!user.favoritePropertyIds.includes(propertyId) && BrokerOwnerData?._id  !== userID) {
+          await addPropertyToList(userID, propertyId);
+          setFavoriteMessage("Added to your favorites!")
+        }
+        else if (BrokerOwnerData?._id  === userID){
+          setFavoriteMessage("Cannot add your own property to favorites!")
+        }
+
+        else {
+          setFavoriteMessage("Already in your favorites!")
+        }
+
+        setIsPopoverOpen(true);
+        setTimeout(() => setIsPopoverOpen(false), 2500);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    else {
+      setFavoriteMessage("You must be logged in to add favorites!")
+      setIsPopoverOpen(true);
+      setTimeout(() => setIsPopoverOpen(false), 2500);
+    }
+  }
 
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -128,6 +169,16 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
     onOpen: onOffer,
     onOpenChange: onOfferChange,
   } = useDisclosure();
+
+  const handleOfferClick = () => {
+    if (isUserInSession) {
+      onOffer();
+    } else {
+      setMessageColor("#FCC603")
+      setMessage("You must be logged in to make a offer");
+      setTimeout(() => setMessage(""), 4000); 
+    }
+  };
 
   if (isLoading)
     return (
@@ -186,26 +237,25 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
           Request Visit
         </Button>
 
-        <Button className="w-1/3  bg-pr  text-w2 " onPress={onOffer}>
+        <Button className="w-1/3  bg-pr  text-w2 " onPress={handleOfferClick}>
           Submit an Offer
         </Button>
 
-        <Link href="/favorite">
-          <Popover placement="right">
+          <Popover placement="right" isOpen={isPopoverOpen}>
             <PopoverTrigger>
-              <Button isIconOnly color="danger" aria-label="Like">
+            <Button isIconOnly color="danger" aria-label="Like" onPressEnd={handleAddFavorite}>
                 <BiSolidHomeHeart />
               </Button>
             </PopoverTrigger>
             <PopoverContent>
               <div className="px-1 py-2">
                 <div className="text-small font-bold">
-                  Added to your favorites!
+                  {favoriteMessage}
                 </div>
               </div>
             </PopoverContent>
           </Popover>
-        </Link>
+
        </div>
 
     

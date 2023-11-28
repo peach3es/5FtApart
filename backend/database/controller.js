@@ -2,7 +2,7 @@
 const Users = require("../../app/model/user");
 const Properties = require("../../app/model/property");
 const Offers = require("../../app/model/offers")
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 //---------------------------------------------------------------------------------------------
 //User database here
@@ -312,6 +312,50 @@ async function deleteOffersByPropertyId(req, res) {
   }
 }
 
+//---------------------------------------------------------------------------------------------
+//Favorite database here
+//---------------------------------------------------------------------------------------------
+
+async function addPropertyToList(req, res) {
+  try {
+    const data = req.body;
+
+    
+    if (!data) {
+      return res.status(404).json({ error: "Data Not Provided" });
+    }
+    const { user_id, property_id } = data;
+    const propertyListItem = await Users.findOneAndUpdate(
+      { _id: user_id },
+      { $addToSet: { favoritePropertyIds: property_id } }, // Use $addToSet to ensure no duplicates
+      { new: true } 
+    );
+    return res.status(200).json(propertyListItem);
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+}
+
+async function removePropertyFromList(req, res) {
+  try {
+    const data = req.body;
+
+    
+    if (!data) {
+      return res.status(404).json({ error: "Data Not Provided" });
+    }
+    const { user_id, property_id } = data;
+    const propertyListItem = await Users.findOneAndUpdate(
+      { _id: user_id },
+      { $pull: { favoritePropertyIds: property_id } },
+      { new: true }
+    );
+    return res.status(200).json(propertyListItem);
+  } catch (error) {
+    return res.status(404).json({ error: error.message });
+  }
+}
+
 
 //---------------------------------------------------------------------------------------------
 //OTHER 
@@ -345,5 +389,7 @@ module.exports = {
   addOffer: addOffer,
   getBrokerOffers: getBrokerOffers,
   deleteOffer: deleteOffer,
-  deleteOffersByPropertyId: deleteOffersByPropertyId
+  deleteOffersByPropertyId: deleteOffersByPropertyId,
+  addPropertyToList: addPropertyToList,
+  removePropertyFromList: removePropertyFromList
 };

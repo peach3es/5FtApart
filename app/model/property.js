@@ -4,7 +4,7 @@ const model = mongoose.model;
 const models = mongoose.models;
 
 const propertySchema = new Schema({
-  // _id: mongoose.Schema.Types.ObjectId,
+
   addimg: String,
   address: String,
   pricetag: Number,
@@ -19,5 +19,18 @@ const propertySchema = new Schema({
 
 });
 
+propertySchema.post("findOneAndDelete", async function (doc, next) {
+  if (doc) {
+    const propertyId = doc._id;
+
+    // Use the `updateMany` method to remove the propertyId from all favorites
+    // that reference this propertyId
+    await mongoose.model("user").updateMany({}, {
+      $pull: { favoritePropertyIds: propertyId }
+    });
+  }
+
+  next();
+});
 const Properties = models.property || model("property", propertySchema);
 module.exports = Properties;

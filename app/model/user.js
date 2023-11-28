@@ -1,9 +1,8 @@
-const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 const models = mongoose.models;
-const ObjecId = mongoose.ObjecId;
+
 
 
 const userSchema = new Schema({
@@ -18,12 +17,7 @@ const userSchema = new Schema({
     enum: ["client", "broker", "admin"],
     required: false,
   },
-  // offers:[{
-  //   type:Schema.Types.ObjectId,
-  //   ref: 'Offers'
-  // }],
-  //   _id: ObjectId,
-
+  favoritePropertyIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "property" }]
 });
 
 const Users = models.user || model("user", userSchema);
