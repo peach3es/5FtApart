@@ -40,7 +40,8 @@ interface Favorite {
   postalcode: string,
   city: string,
   sale_type: string,
-  property_type:string
+  property_type:string,
+  addimg: string
 
 }
 const FavoritePage = () => {
@@ -131,7 +132,8 @@ const FavoritePage = () => {
                 shadow="sm"
                 radius="lg"
                 width="100%"
-                alt={item.address}
+                src={item.addimg}
+                alt={"Property Image"}
                 className="w-full object-cover h-[240px]"
               />
             </CardBody>
