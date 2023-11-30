@@ -35,14 +35,3 @@
 //     }
 //   }
 // }
-
-declare namespace Cypress {
-    interface Chainable {
-      /**
-       * Custom command to interact with iframes
-       * @example
-       * cy.iframe().find('#some-element').should('have.text', 'Hello World')
-       */
-      iframe(): Chainable<Element>;
-    }
-  }
