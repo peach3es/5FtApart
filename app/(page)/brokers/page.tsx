@@ -29,7 +29,7 @@ const formReducer = (state: any, event: any) => {
   };
 };
 
-export default function ResultPage() {
+export default function BrokerSearch() {
   //Search function
   const [props, setUsers] = useState([]);
 
