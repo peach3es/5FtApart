@@ -85,21 +85,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   }, []);
 
   const handleSubmit = async(e: any) => { 
-    if (BrokerOwnerData?._id === brokerBuyerID){
-      setMessageColor("#FCC603")
-      setMessage("You cannot make an offer to your own property"); 
-      setTimeout(() => setMessage(""), 4000); 
-      return
-    }
 
-    if (userRole === 'client' || userRole === 'admin') {
-      setMessageColor("#FCC603")
-      setMessage("You cannot make an offer as a client/admin"); 
-      setTimeout(() => setMessage(""), 4000); 
-      return
-    }
-
-    
     const model = {
       license: licenseNumber,
       agency: agency, 
@@ -172,7 +158,21 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
 
   const handleOfferClick = () => {
     if (isUserInSession) {
-      onOffer();
+      if (BrokerOwnerData?._id === brokerBuyerID){
+        setMessageColor("#FCC603")
+        setMessage("You cannot make an offer to your own property"); 
+        setTimeout(() => setMessage(""), 4000); 
+      } 
+  
+      else if (userRole === 'client' || userRole === 'admin') {
+        setMessageColor("#FCC603")
+        setMessage("You cannot make an offer as a client/admin"); 
+        setTimeout(() => setMessage(""), 4000); 
+      }
+      else {
+        onOffer();
+      }
+
     } else {
       setMessageColor("#FCC603")
       setMessage("You must be logged in to make a offer");
