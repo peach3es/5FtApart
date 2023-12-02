@@ -11,6 +11,32 @@ export const saletypes = [
   },
 ];
 
+export const statusTypes = [
+  {
+    label: "Active",
+    value: "active",
+    description: "active properties",
+  },
+  {
+    label: "Inactive",
+    value: "inactive",
+    description: "inactive properties",
+  },
+];
+
+export const saleStatusTypes = [
+  {
+    label: "Sold",
+    value: "sold",
+    description: "sold properties",
+  },
+  {
+    label: "Available",
+    value: "available",
+    description: "available properties",
+  },
+];
+
 export const propertytypes = [
   {
     label: "House",
