@@ -42,8 +42,8 @@ export default function BrokerSearch() {
 
   const handleSearch = async (filters: any) => {
     const filteredProps = await getUsersFiltered(filters);
-    console.log(filteredProps);
-    setUsers(filteredProps);
+    const brokers = filteredProps.filter((user: { role: string }) => user.role === 'broker');;
+    setUsers(brokers);
   };
 
   useEffect(() => {
