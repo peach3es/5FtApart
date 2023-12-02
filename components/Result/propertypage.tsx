@@ -25,6 +25,8 @@ import {
   useDisclosure,
   Button,
   Input,
+  Chip,
+  Divider,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { getProperty } from "../../backend/lib/helperProperties";
@@ -225,21 +227,21 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       </div>
 
       <div className="w-1/2 flex flex-col gap-2">
-        <h2 className="text-4xl font-bold ">{data.address}</h2>
-        <p className="text-lg">{data.city}</p>
-        <p className="text-lg">{data.postalcode}</p>
-        <p className="text-lg">{data.saletype}</p>
-        <p className="text-lg">{data.pricetag}</p>
-        <h3 className="text-2xl font-bold">Want to visit the Estate?</h3>
+        <h2 className="text-4xl font-bold ">Address: {data.address}</h2>
+        <p className="text-lg">City: {data.city}</p>
+        <p className="text-lg">Postal Code: {data.postalcode}</p>
+        <p className="text-lg">Sale Type: {data.saletype}</p>
+        {data.saletype === "for-sale" ? (<p className="text-lg">Price Tag: ${new Intl.NumberFormat("en-US").format(data.pricetag)}</p>) : (<p className="text-lg">Price/Month: ${new Intl.NumberFormat("en-US").format(data.pricetag)}</p>)}
+        {data.salestatus === "sold" ?  (<Chip color="danger" size="lg">SOLD</Chip>): (<div><Divider className="my-4" /><h3 className="text-2xl font-bold">Want to visit the Estate?</h3></div>)}
        
-       <div className="mb-3 flex flex-row gap-3">
+        {data.salestatus !== "sold" ? ( <div className="mb-3 flex flex-row gap-3">
        <Button className="w-1/3  bg-pr  text-w2 " onPress={onOpen}>
           Request Visit
         </Button>
 
-        <Button className="w-1/3  bg-pr  text-w2 " onPress={handleOfferClick}>
+          {data.saletype !== "for-rent" ? (<Button className="w-1/3  bg-pr  text-w2 " onPress={handleOfferClick}>
           Submit an Offer
-        </Button>
+        </Button>): (null)}
 
           <Popover placement="right" isOpen={isPopoverOpen}>
             <PopoverTrigger>
@@ -256,9 +258,8 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
             </PopoverContent>
           </Popover>
 
-       </div>
-
-    
+       </div>):(null)}
+      
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="xl">
         <ModalContent>

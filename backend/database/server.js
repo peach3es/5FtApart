@@ -23,7 +23,8 @@ const {
   addOffer,
   getBrokerOffers,
   deleteOffer,
-  deleteOffersByPropertyId
+  deleteOffersByPropertyId,
+  putOffer
 } = require("./controller.js");
 
 const {
@@ -149,8 +150,12 @@ app.prepare().then(() => {
     deleteOffersByPropertyId(req, res);
   });
 
-  server.delete("/api/offerdelete", (req, res) => {
+  server.delete("/api/offer", (req, res) => {
     deleteOffer(req, res);
+  });
+
+  server.put("/api/offer", (req, res) => {
+    putOffer(req, res);
   });
 
     //---------------------------------------------------------------

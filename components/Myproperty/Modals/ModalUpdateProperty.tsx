@@ -11,7 +11,7 @@ import {
   SelectItem,
   Textarea,
 } from "@nextui-org/react";
-import { propertytypes, saletypes } from "@/components/Search/searchoptions";
+import { propertytypes, saletypes, statusTypes, saleStatusTypes } from "@/components/Search/searchoptions";
 import Success from "../success";
 import Error from "../error";
 import { useQuery, useQueryClient, useMutation } from "react-query";
@@ -61,6 +61,8 @@ export default function ModalUpdateProperty({
     postalcode,
     city,
     description,
+    status,
+    salestatus
   } = data;
 
   const cancelUpdateHandler = async () => {
@@ -163,6 +165,36 @@ export default function ModalUpdateProperty({
                     onChange={setFormData}
                     defaultValue={pricetag}
                   />
+                   <Select
+                    isRequired
+                    label="Status"
+                    className="status-select col-span-3"
+                    radius="sm"
+                    name="status"
+                    onChange={setFormData}
+                    defaultSelectedKeys={[status]}
+                  >
+                    {statusTypes.map((status) => (
+                      <SelectItem key={status.value} value={status.value}>
+                        {status.label}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                  {saletype === "for-sale" ? (<Select
+                    isRequired
+                    label="Sale Status"
+                    className="sale-status-select col-span-3"
+                    radius="sm"
+                    name="salestatus"
+                    onChange={setFormData}
+                    defaultSelectedKeys={[salestatus]}
+                  >
+                    {saleStatusTypes.map((salestatus) => (
+                      <SelectItem key={salestatus.value} value={salestatus.value}>
+                        {salestatus.label}
+                      </SelectItem>
+                    ))}
+                  </Select>):(null)}
                 </div>
                 <Textarea
                   label="Description"
