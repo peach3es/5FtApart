@@ -296,11 +296,15 @@ async function deleteOffer(req, res) {
 
 async function deleteOffersByPropertyId(req, res) {
   try {
-    const { propertyId } = req.query; // Make sure to pass `propertyId` in the query
+    const {propertyId, excludeOfferId} = req.query;
 
     if (propertyId) {
-      // Deletes all offers with the given property_id
-      const result = await Offers.deleteMany({ property_id: propertyId });
+      const deleteCondition = {
+        property_id: propertyId,
+        _id: { $ne: excludeOfferId }
+      };
+
+      const result = await Offers.deleteMany(deleteCondition);
       console.log("Offers deleted: " + result.deletedCount);
       return res.status(200).json({ message: "Offers deleted successfully", deletedCount: result.deletedCount });
     } else {
@@ -309,6 +313,22 @@ async function deleteOffersByPropertyId(req, res) {
   } catch (error) {
     console.error("Error while deleting offers: ", error);
     return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+
+async function putOffer(req, res) {
+  try {
+    const { offerId } = req.query;
+    const status = req.body;
+    if (offerId && status) {
+      const user = await Offers.findByIdAndUpdate(offerId, status);
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: "User Not Selected" });
+    }
+  } catch (error) {
+    res.status(404).json({ error: "Error while updating the Data" });
   }
 }
 
@@ -391,5 +411,6 @@ module.exports = {
   deleteOffer: deleteOffer,
   deleteOffersByPropertyId: deleteOffersByPropertyId,
   addPropertyToList: addPropertyToList,
-  removePropertyFromList: removePropertyFromList
+  removePropertyFromList: removePropertyFromList,
+  putOffer: putOffer
 };

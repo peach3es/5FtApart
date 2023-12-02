@@ -12,6 +12,7 @@ import {
   CardFooter,
   Image,
   Pagination,
+  Chip,
 } from "@nextui-org/react";
 import {
   saletypes,
@@ -44,7 +45,8 @@ const ResultPage = () => {
   const handleSearch = async (filters: any) => {
     const filteredProps = await getPropertiesFiltered(filters);
     console.log(filteredProps);
-    setProps(filteredProps);
+    const activeProps = filteredProps.filter((prop: { status: string }) => prop.status !== "inactive");
+    setProps(activeProps);
   };
 
   useEffect(() => {
@@ -185,9 +187,10 @@ const ResultPage = () => {
             </CardBody>
             <CardFooter className="text-small justify-between">
               <b>{item.address}</b>
-              <p className="text-default-500">
+                {item.salestatus === "sold" ? 
+                (<Chip color="danger">SOLD</Chip>):(<p className="text-default-500">
                 ${new Intl.NumberFormat("en-US").format(item.pricetag)}
-              </p>
+              </p>)}
             </CardFooter>
           </Card>
         ))}
