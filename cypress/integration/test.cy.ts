@@ -177,7 +177,7 @@ describe('API Tests', () => {
       postalcode: '12345',
       city: 'Test City',
       saletype: 'for-sale',
-      status: "inactive"
+      status: "inactive",
       propertytype: 'Test Property Type',
     };
 
