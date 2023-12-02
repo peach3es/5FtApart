@@ -11,7 +11,7 @@ import {
   SelectItem,
   Textarea,
 } from "@nextui-org/react";
-import { propertytypes, saletypes, statusTypes } from "@/components/Search/searchoptions";
+import { propertytypes, saletypes } from "@/components/Search/searchoptions";
 import Success from "./success";
 import Error from "./error";
 
@@ -136,20 +136,6 @@ export default function AddProperty({ isOpen, onClose }: any) {
                   }}
                   onChange={setFormData}
                 />
-                                  <Select
-                    isRequired
-                    label="Status"
-                    className="status-select"
-                    radius="sm"
-                    name="statustype"
-                    onChange={setFormData}
-                  >
-                    {statusTypes.map((statustype) => (
-                      <SelectItem key={statustype.value} value={statustype.value}>
-                        {statustype.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
                 <div className="addimage px-20 flex flex-col gap-3 max-w-xl">
                   <input
                     type="file"

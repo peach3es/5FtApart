@@ -25,8 +25,6 @@ import {
   useDisclosure,
   Button,
   Input,
-  Chip,
-  Divider,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { getProperty } from "../../backend/lib/helperProperties";
@@ -87,7 +85,21 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
   }, []);
 
   const handleSubmit = async(e: any) => { 
+    if (BrokerOwnerData?._id === brokerBuyerID){
+      setMessageColor("#FCC603")
+      setMessage("You cannot make an offer to your own property"); 
+      setTimeout(() => setMessage(""), 4000); 
+      return
+    }
 
+    if (userRole === 'client' || userRole === 'admin') {
+      setMessageColor("#FCC603")
+      setMessage("You cannot make an offer as a client/admin"); 
+      setTimeout(() => setMessage(""), 4000); 
+      return
+    }
+
+    
     const model = {
       license: licenseNumber,
       agency: agency, 
@@ -160,21 +172,7 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
 
   const handleOfferClick = () => {
     if (isUserInSession) {
-      if (BrokerOwnerData?._id === brokerBuyerID){
-        setMessageColor("#FCC603")
-        setMessage("You cannot make an offer to your own property"); 
-        setTimeout(() => setMessage(""), 4000); 
-      } 
-  
-      else if (userRole === 'client' || userRole === 'admin') {
-        setMessageColor("#FCC603")
-        setMessage("You cannot make an offer as a client/admin"); 
-        setTimeout(() => setMessage(""), 4000); 
-      }
-      else {
-        onOffer();
-      }
-
+      onOffer();
     } else {
       setMessageColor("#FCC603")
       setMessage("You must be logged in to make a offer");
@@ -227,21 +225,21 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
       </div>
 
       <div className="w-1/2 flex flex-col gap-2">
-        <h2 className="text-4xl font-bold ">Address: {data.address}</h2>
-        <p className="text-lg">City: {data.city}</p>
-        <p className="text-lg">Postal Code: {data.postalcode}</p>
-        <p className="text-lg">Sale Type: {data.saletype}</p>
-        {data.saletype === "for-sale" ? (<p className="text-lg">Price Tag: ${new Intl.NumberFormat("en-US").format(data.pricetag)}</p>) : (<p className="text-lg">Price/Month: ${new Intl.NumberFormat("en-US").format(data.pricetag)}</p>)}
-        {data.salestatus === "sold" ?  (<Chip color="danger" size="lg">SOLD</Chip>): (<div><Divider className="my-4" /><h3 className="text-2xl font-bold">Want to visit the Estate?</h3></div>)}
+        <h2 className="text-4xl font-bold ">{data.address}</h2>
+        <p className="text-lg">{data.city}</p>
+        <p className="text-lg">{data.postalcode}</p>
+        <p className="text-lg">{data.saletype}</p>
+        <p className="text-lg">{data.pricetag}</p>
+        <h3 className="text-2xl font-bold">Want to visit the Estate?</h3>
        
-        {data.salestatus !== "sold" ? ( <div className="mb-3 flex flex-row gap-3">
+       <div className="mb-3 flex flex-row gap-3">
        <Button className="w-1/3  bg-pr  text-w2 " onPress={onOpen}>
           Request Visit
         </Button>
 
-          {data.saletype !== "for-rent" ? (<Button className="w-1/3  bg-pr  text-w2 " onPress={handleOfferClick}>
+        <Button className="w-1/3  bg-pr  text-w2 " onPress={handleOfferClick}>
           Submit an Offer
-        </Button>): (null)}
+        </Button>
 
           <Popover placement="right" isOpen={isPopoverOpen}>
             <PopoverTrigger>
@@ -258,8 +256,9 @@ function PropertyInfo({ propertyId }: { propertyId: any }) {
             </PopoverContent>
           </Popover>
 
-       </div>):(null)}
-      
+       </div>
+
+    
       </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="xl">
         <ModalContent>

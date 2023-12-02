@@ -11,7 +11,7 @@ import {
   SelectItem,
   Textarea,
 } from "@nextui-org/react";
-import { propertytypes, saletypes, statusTypes } from "@/components/Search/searchoptions";
+import { propertytypes, saletypes } from "@/components/Search/searchoptions";
 import Success from "../success";
 import Error from "../error";
 import { useQueryClient, useMutation } from "react-query";
@@ -82,12 +82,11 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
         city,
         saletype,
         propertytype,
-        status
       } = formData;
 
       const model = {
         userId,
-        addimg: "/pictures/myproperty/template.png",
+        addimg,
         address,
         pricetag,
         description,
@@ -95,7 +94,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
         city,
         saletype,
         propertytype,
-        status
       };
       addMutation.mutate(model); //addMutation.mutate({}) is the request
     }
@@ -211,20 +209,6 @@ export default function ModalAddProperty({ isOpen, onClose }: any) {
                       input: "border-none focus:ring-0",
                     }}
                   />
-                  <Select
-                    isRequired
-                    label="Status"
-                    className="status-select col-span-3"
-                    radius="sm"
-                    name="status"
-                    onChange={setFormData}
-                  >
-                    {statusTypes.map((status) => (
-                      <SelectItem key={status.value} value={status.value}>
-                        {status.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
                 </div>
                 <Textarea
                   label="Description"

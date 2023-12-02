@@ -176,8 +176,7 @@ describe('API Tests', () => {
       description: 'Test Description',
       postalcode: '12345',
       city: 'Test City',
-      saletype: 'for-sale',
-      status: "inactive",
+      saletype: 'Sale',
       propertytype: 'Test Property Type',
     };
 
@@ -218,8 +217,7 @@ describe('API Tests', () => {
     description: 'Updated Description',
     postalcode: '54321',
     city: 'Updated City',
-    saletype: 'for-rent',
-    status: "inactive",
+    saletype: 'Rent',
     propertytype: 'Updated Property Type',
   };
 
@@ -249,7 +247,7 @@ describe('API Tests', () => {
   it('GET /api/propertyfilter should retrieve the specific property based on filters', () => {
     const filters = {
       term: 'Updated Address',
-      saleType: 'for-rent',
+      saleType: 'Rent',
       propertytype: 'Updated Property Type',
       pricetag: '150000',
     };

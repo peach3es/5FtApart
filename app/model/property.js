@@ -13,40 +13,11 @@ const propertySchema = new Schema({
   description: String,
   postalcode: String,
   city: String,
-  saletype: {
-    type: String,
-    enum: ["for-sale", "for-rent"]
-  },
+  saletype: String,
   propertytype: String,
-  status: {
-    type: String,
-    enum: ["active", "inactive"],
-    required: true
-  },
-  salestatus: {
-    type: String,
-    enum: ["sold", "available"],
-    default: "available",
-    required: false 
-  },
   userId: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 
 });
-
-propertySchema.pre('save', function(next) {
-
-  if (this.saletype === 'for-rent') {
-    this.salestatus = undefined;
-  }
-
-  if (this.isModified('saletype') && this.saletype === 'for-rent') {
-    delete this._doc.salestatus;
-  }
-
-  next();
-});
-
-
 
 propertySchema.post("findOneAndDelete", async function (doc, next) {
   if (doc) {

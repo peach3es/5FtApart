@@ -27,14 +27,14 @@ export const getBrokerOffers = async (brokerID: any) => {
 };
 
 // Reject/Delete a offer
-export async function deleteOffers(propertyid: any, offerid: any) {
+export async function deleteOffers(propertyid: any) {
   const Options = {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   };
 
   const response = await fetch(
-    `${BASE_URL}/api/offersdelete/?propertyId=${propertyid}&excludeOfferId=${offerid}`,
+    `${BASE_URL}/api/offersdelete/?propertyId=${propertyid}`,
     Options
   );
   const json = await response.json();
@@ -48,24 +48,7 @@ export async function deleteOffer(offerId: any) {
   };
 
   const response = await fetch(
-    `${BASE_URL}/api/offer/?offerId=${offerId}`,
-    Options
-  );
-  const json = await response.json();
-  return json;
-}
-
-
-// Update a new Property
-export async function updateOffer(offerId: any, status: any) {
-  const Options = {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(status),
-  };
-
-  const response = await fetch(
-    `${BASE_URL}/api/offer/?offerId=${offerId}`,
+    `${BASE_URL}/api/offerdelete/?offerId=${offerId}`,
     Options
   );
   const json = await response.json();
