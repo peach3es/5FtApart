@@ -1,6 +1,6 @@
 {
-  "name": "5ftapart",
-  "version": "1.0.0",
+  "name": "next-app-template",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "node backend//database//server.js",
@@ -35,7 +35,6 @@
     "autoprefixer": "^10.4.15",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.0.0",
-    "dotenv": "^16.3.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "eslint-plugin-react-hooks": "^5.0.0-canary-ce2bc58a9-20231102",

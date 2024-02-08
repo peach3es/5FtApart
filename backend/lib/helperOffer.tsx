@@ -1,4 +1,4 @@
-const BASE_URL = "https://5ftapart.vercel.app";
+const BASE_URL = "http://localhost:3000";
 
 // creating a new Offer
 export async function addOffer(offerData: any) {
@@ -54,6 +54,7 @@ export async function deleteOffer(offerId: any) {
   const json = await response.json();
   return json;
 }
+
 
 // Update a new Property
 export async function updateOffer(offerId: any, status: any) {

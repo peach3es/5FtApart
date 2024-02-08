@@ -1,4 +1,4 @@
-const BASE_URL = "https://5ftapart.vercel.app";
+const BASE_URL = "http://localhost:3000";
 
 // Get all properties
 export const getProperties = async () => {
